@@ -3,6 +3,7 @@ import First from '../organisms/First'
 import Second from '../organisms/Second'
 import Promo_mes from '../organisms/Promo_mes'
 import Reserva_Form from '../organisms/Reserva_Form'
+import Foorter from '../organisms/Foorter'
 
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
     <Second/>
     <Promo_mes/>
     <Reserva_Form/>
+    <Foorter/>
     </>
   )
 }
