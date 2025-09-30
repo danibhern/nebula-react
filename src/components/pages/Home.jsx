@@ -3,7 +3,7 @@ import First from '../organisms/First'
 import Second from '../organisms/Second'
 import Promo_mes from '../organisms/Promo_mes'
 import Reserva_Form from '../organisms/Reserva_Form'
-import Foorter from '../organisms/Foorter'
+import Foorter from '../organisms/Footer'
 
 
 export default function Home() {
