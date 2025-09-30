@@ -45,7 +45,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #09f;
+  color: rgb(236, 131, 225);
 }
 nav a:focus {
   background-color: rgba(255, 255, 255, 0.25);
@@ -306,6 +306,7 @@ footer {
   font-weight: 700;
   color: #ffffff;
 }
+
 
 .footer-section ul {
   list-style: none;
