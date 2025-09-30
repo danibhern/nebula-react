@@ -26,7 +26,7 @@ nav {
   padding: 0.3rem 2rem;
   height: 70px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   z-index: 10;
 }
@@ -71,4 +71,273 @@ nav a:focus {
   height: 300px;
   object-fit: cover;
   flex-shrink: 0;
+}
+
+.promo-mes {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 1rem 2rem;
+  background-color: #b85390;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  display: block;
+}
+
+.promo-mes h2 {
+  text-align: center;
+  font-weight: 700;
+  padding-left: 25%;
+  margin-bottom: 1.5rem;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.promo-mes:hover {
+  box-shadow: 0 8px 20px rgba(163, 67, 170, 0.5);
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+.promo-mes article {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.promo-mes img {
+  border-radius: 12px;
+  max-width: 300px;
+  flex: 1 1 300px;
+  margin-top: -50px;
+  transition: transform 0.4s ease;
+}
+
+.promo-mes img:hover {
+  transform: scale(1.05);
+}
+
+.producto-info {
+  flex: 2 1 400px;
+  color: white;
+}
+
+.producto-info h3 {
+  margin-top: 0;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.producto-info p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.contenedor-reserva-blog {
+  max-width: 965px;
+  margin: 2rem auto;
+  display: flex;
+  gap: 2rem;
+}
+
+/* -------------------- Reservación -------------------- */
+.reservacion {
+  flex: 1;
+  height: 700px; /* no mover el tamaño, si se mueve no se ven los mensajes de error*/
+  box-sizing: border-box;
+  background-color: #b788bd;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.reservacion h2 {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+  max-width: 80%;
+  margin: 0 auto;
+  width: 80%;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+input,
+select {
+  padding: 7px 10px;
+  border: 2px solid #b85390;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline-offset: 2px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: white url('data:image/svg+xml;utf8,<svg fill="none" height="24" stroke="%23747878" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"/></svg>') no-repeat right 10px center;
+  background-size: 12px;
+}
+
+input:focus,
+select:focus {
+  border-color: #f697fa;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: white;
+}
+
+.reservacion button[type="submit"] {
+  background-color: #b85390;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.reservacion button[type="submit"]:hover,
+.reservacion button[type="submit"]:focus {
+  background-color: #bf729e;
+  box-shadow: 0 10px 20px rgba(222, 71, 207, 0.6);
+  transform: translateY(-3px);
+  outline: none;
+}
+
+/* -------------------- Blog Nebula (Instagram) -------------------- */
+.blog-nebula {
+  flex: 1;
+  height: 700px;
+  box-sizing: border-box;
+  background-color: #b788bd;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  color: white;
+  overflow-y: auto;
+}
+
+.blog-nebula h2 {
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.blog-nebula h2 i {
+  font-size: 1.8rem;
+  color: #e4405f; 
+}
+
+.blog-nebula a.instagram-handle {
+  color: #f2b7c2;
+  text-decoration: none;
+}
+
+.blog-nebula a.instagram-handle:hover {
+  text-decoration: underline;
+}
+
+.instagram-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.instagram-grid a img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.instagram-grid a img:hover {
+  transform: scale(1.05);
+}
+
+/* -------------------- Footer -------------------- */
+footer {
+  background-color: #b85390;
+  color: #f0eee9;
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-section {
+  min-width: 200px;
+}
+
+.footer-section h3 {
+  border-bottom: 1.5px solid #b85390;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+footer .footer-section ul li,
+footer .footer-section ul li a,
+footer .footer-section ul li i {
+  color: #e1cdda;
+}
+
+footer .footer-section ul li a {
+  color: #f0d9e8;
+}
+
+footer .footer-section ul li a:hover,
+footer .footer-section ul li a:focus {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+  margin-right: 8px;
+  vertical-align: middle;
+  font-size: 1.1rem;
+  min-width: 20px;
+}
+
+.footer-section a {
+  transition: color 0.3s ease;
 }
