@@ -325,7 +325,7 @@ footer .footer-section ul li i {
 
 footer .footer-section ul li a {
   color: #f0d9e8;
-  text-decoration: none;   /* 👈 elimina las líneas blancas */
+  text-decoration: none;   
   margin-right: 8px;
   vertical-align: middle;
   font-size: 1.1rem;
