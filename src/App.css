@@ -73,6 +73,7 @@ nav a:focus {
   flex-shrink: 0;
 }
 
+/* -------------------- Promo del Mes -------------------- */
 .promo-mes {
   max-width: 900px;
   margin: 3rem auto;
@@ -133,6 +134,7 @@ nav a:focus {
   line-height: 1.5;
 }
 
+/* -------------------- Contenedor reserva y blog -------------------- */
 .contenedor-reserva-blog {
   max-width: 965px;
   margin: 2rem auto;
@@ -224,6 +226,7 @@ input[type="date"] {
   transform: translateY(-3px);
   outline: none;
 }
+
 /* -------------------- Blog Nebula (Instagram) -------------------- */
 .blog-nebula {
   flex: 1;
@@ -280,6 +283,7 @@ input[type="date"] {
 .instagram-grid a img:hover {
   transform: scale(1.05);
 }
+
 /* -------------------- Footer -------------------- */
 footer {
   background-color: #b85390;
@@ -303,22 +307,6 @@ footer {
   color: #ffffff;
 }
 
-footer .footer-section ul li,
-footer .footer-section ul li a,
-footer .footer-section ul li i {
-  color: #e1cdda;
-}
-
-footer .footer-section ul li a {
-  color: #f0d9e8;
-}
-
-footer .footer-section ul li a:hover,
-footer .footer-section ul li a:focus {
-  color: #ffffff;
-  text-decoration: underline;
-}
-
 .footer-section ul {
   list-style: none;
   padding: 0;
@@ -329,13 +317,42 @@ footer .footer-section ul li a:focus {
   margin-bottom: 0.8rem;
 }
 
-.footer-section ul li a {
+footer .footer-section ul li,
+footer .footer-section ul li a,
+footer .footer-section ul li i {
+  color: #e1cdda;
+}
+
+footer .footer-section ul li a {
+  color: #f0d9e8;
+  text-decoration: none;   /* 👈 elimina las líneas blancas */
   margin-right: 8px;
   vertical-align: middle;
   font-size: 1.1rem;
   min-width: 20px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+footer .footer-section ul li a:hover,
+footer .footer-section ul li a:focus {
+  color: #ffffff;          /* cambia a blanco en hover */
+  text-decoration: none;   /* no vuelve a aparecer subrayado */
+  transform: translateX(3px); 
 }
 
 .footer-section a {
   transition: color 0.3s ease;
+}
+
+
+/* -------------------- Errores -------------------- */
+.error {
+  outline: 1px rgb(248, 157, 172) solid !important;
+  background-color: #ad3c80 !important;
+}
+
+#errores p {
+  display: flex;
+  color: white;
+  margin: 5px 0;
 }

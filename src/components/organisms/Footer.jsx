@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaFacebookF, FaInstagram, FaTwitter, FaMapMarkerAlt, FaFileAlt, FaShieldAlt } from 'react-icons/fa';
 
-export default function Reserva_Form() {
+export default function Footer() {
   return (
     <footer>
       <div className="footer-section">
