@@ -1,16 +1,17 @@
 import React from 'react';
 import { HashLink } from 'react-router-hash-link';
-import nebulaImg from '../img/nebula.png'; // ajusta la ruta si es necesario
 
 export default function First() {
   return (
     <section id="first">
       <nav>
         <div className="logo">
-          <img src={nebulaImg} alt="Nebula" />
+          <img src="/img/nebula.png" alt="Nebula" />
         </div>
         <HashLink smooth to="#first">Home</HashLink>
         <HashLink smooth to="#second">Quienes Somos</HashLink>
+        <HashLink smooth to="#second">Menu</HashLink>
+        <HashLink smooth to="#second">Pedidos</HashLink>
       </nav>
     </section>
   );
