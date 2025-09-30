@@ -34,7 +34,7 @@ export default function Reserva_Form() {
     </section>
 
     <section className="blog-nebula">
-      <h2><i className="fab fa-instagram" aria-hidden="true"></i> Síguenos en <a href="https://www.instagram.com/nebula-cafe" target="_blank" rel="noopener noreferrer" className="instagram-handle">@nebula-cafe</a></h2>
+      <h2><i class="fab fa-instagram" aria-hidden="true"></i> Síguenos en <a href="https://www.instagram.com/nebula-cafe" target="_blank" rel="noopener noreferrer" class="instagram-handle">@nebula-cafe</a></h2>
       <div className="instagram-grid">
         <a href="#" target="_blank" rel="noopener noreferrer"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO05Pqzb_Xf_U6Mcx2vX-wRpNRrAwfvUTGug&s" alt="Instagram photo 1" /></a>
         <a href="#" target="_blank" rel="noopener noreferrer"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQln2k7AzZua3qO5IdumU4J9a6AUCCwEwSItg&s" alt="Instagram photo 2" /></a>
