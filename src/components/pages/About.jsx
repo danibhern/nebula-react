@@ -1,6 +1,6 @@
 import React from 'react'
 import First from '../organisms/First'
-import Quienes_Somos from '../organisms/QuienesSomos'
+import '../../styles/QuienesSomos.css'
 import Footer from '../organisms/Footer'
 import QuienesSomos from '../organisms/QuienesSomos'
 
