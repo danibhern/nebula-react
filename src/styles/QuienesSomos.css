@@ -1,0 +1,288 @@
+/* -------------------- Estilos Globales -------------------- */
+body, html {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e3c0d5 0%, #bb8fca 100%);
+    color: #4a2542;
+
+    background-image:
+    repeating-linear-gradient(
+        to bottom,
+        rgba(285, 285, 285, 0.05), 
+        rgba(285, 285, 285, 0.05) 3px, 
+        transparent 4px,
+        transparent 14px 
+    ),
+    linear-gradient(135deg, #e3c0d5 0%, #bb8fca 100%);
+    background-repeat: repeat, no-repeat;
+    background-size: auto, cover;
+    background-position: center center;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+nav {
+    background: linear-gradient(90deg, #b85390, #b788bd);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 2rem;
+    height: 70px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    /* position: sticky; */
+    top: 0;
+    z-index: 10;
+}
+
+
+.barra-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+
+.barra-nav img {
+    max-height: 140px; 
+    width: auto;      
+    display: block;
+}
+
+
+.nav-links {
+    display: flex;
+    gap: 1.6rem;
+}
+.nav-links a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.nav-links a:hover,
+.nav-links a:focus {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+.boton-login {
+    background-color: #b85390;
+    color: white;
+    font-weight: 700;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.boton-login:hover,
+.boton-login:focus {
+    background-color: #ffaf00;
+    color: #fff;
+    outline: none;
+}
+
+/* ===== Sección Quiénes Somos ===== */
+.quienes-somos {
+  padding: 50px 30px;
+  color: #4a2542;
+  text-align: center;
+}
+
+.quienes-somos h2 {
+  font-size: 3rem;
+  margin-bottom: 40px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Intro */
+.contenedor {
+  background: linear-gradient(135deg, #b788bd, #c79ed3);
+  max-width: 800px;
+  margin: 0 auto 50px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* Bloques Misión y Visión */
+.bloques {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.caja {
+  flex: 1 1 300px;
+  background: #b788bd;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.caja:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.caja h3 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #4a2542;
+  text-align: center;
+}
+
+/* ===== Galería ===== */
+.galeria {
+  margin-bottom: 50px;
+}
+
+.galeria h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.imagenes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.imagenes img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.imagenes img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== Reseñas ===== */
+.reseñas h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.grid-reseñas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.reseña {
+  background: #ffcaea;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.reseña:hover {
+  transform: translateY(-5px);
+}
+
+.reseña blockquote {
+  font-style: italic;
+  margin: 10px 0;
+  color: #333;
+}
+
+.reseña cite {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* -------------------- Footer -------------------- */
+footer {
+  background-color: #b85390;
+  color: #f0eee9;
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+
+.footer-section {
+  min-width: 200px;
+}
+
+
+.footer-section h3 {
+  border-bottom: 1.5px solid #b85390;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #ffffff; 
+}
+
+
+footer .footer-section ul li,
+footer .footer-section ul li a,
+footer .footer-section ul li i {
+  color: #e1cdda; 
+}
+
+
+footer .footer-section ul li a {
+  color: #f0d9e8;
+}
+
+
+footer .footer-section ul li a:hover,
+footer .footer-section ul li a:focus {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.footer-section li {
+  margin-bottom: 0.8rem;
+}
+
+
+.footer-section ul li a  {
+  margin-right: 8px;
+  vertical-align: middle;
+  font-size: 1.1rem;
+  min-width: 20px;
+}
+
+
+.footer-section a {
+  transition: color 0.3s ease;
+}
+
+

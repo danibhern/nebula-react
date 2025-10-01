@@ -1,17 +1,24 @@
 import React from 'react';
-import { HashLink } from 'react-router-hash-link';
+import { Link } from 'react-router-dom';
 
 export default function First() {
   return (
     <section id="first">
       <nav>
-        <div className="logo">
-          <img src="/img/nebula.png" alt="Nebula" />
+        <div className="barra-nav">
+          <div className="logo">
+            <img src="/img/nebula.png" alt="nebula" />
+          </div>
+          <div className="nav-links">
+            <Link to="/">Home</Link>
+            <Link to="/about">Quienes Somos</Link>
+            <Link to="/menu">Menú</Link>
+            <Link to="/pedidos">Pedidos</Link>
+          </div>
         </div>
-        <HashLink smooth to="#first">Home</HashLink>
-        <HashLink smooth to="#second">Quienes Somos</HashLink>
-        <HashLink smooth to="#second">Menu</HashLink>
-        <HashLink smooth to="#second">Pedidos</HashLink>
+        <Link to="/inicio_sesion">
+          <button className="boton-login">Iniciar sesión</button>
+        </Link>
       </nav>
     </section>
   );
