@@ -37,23 +37,24 @@ export default function QuienesSomos(){
 
         <div className="reseñas">
             <h3>Lo que dicen nuestros clientes</h3>
-            <div class="grid-reseñas">
-                <div class="reseña">
+            <div className="grid-reseñas">
+                <div className="reseña">
                 <p>⭐️⭐️⭐️⭐️⭐️</p>
                 <blockquote>“El mejor café que he probado. ¡Volveré siempre!”</blockquote>
                 <cite>- Paula R.</cite>
                 </div>
-                <div class="reseña">
+                <div className="reseña">
                 <p>⭐️⭐️⭐️⭐️</p>
                 <blockquote>“Un lugar acogedor y tranquilo, perfecto para estudiar o trabajar.”</blockquote>
                 <cite>- Diego M.</cite>
                 </div>
-                <div class="reseña">
+                <div className="reseña">
                 <p>⭐️⭐️⭐️⭐️⭐️</p>
                 <blockquote>“Los postres son increíbles y la atención aún mejor.”</blockquote>
                 <cite>- Sofía A.</cite>
                 </div>
             </div>
+            <button className="dejar-reseña">Deja tu Reseña</button>
         </div> 
     </section>
     );

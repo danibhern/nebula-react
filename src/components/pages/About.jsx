@@ -8,7 +8,7 @@ export default function About() {
   return (
     <>
       <First/>
-      < QuienesSomos/>
+      <QuienesSomos/>
       <Footer/>
     </>
   )
