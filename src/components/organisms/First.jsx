@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AtomLink from '../atoms/AtomLink';
+import AtomLogo from '../atoms/AtomLogo';
+import AtomButton from '../atoms/AtomButton';
 
 export default function First() {
   return (
@@ -7,18 +10,18 @@ export default function First() {
       <nav>
         <div className="barra-nav">
           <div className="logo">
-            <img src="/img/nebula.png" alt="nebula" />
+              <AtomLogo />
           </div>
           <div className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/about">Quienes Somos</Link>
-            <Link to="/menu">Menú</Link>
-            <Link to="/pedidos">Pedidos</Link>
+            <AtomLink to="/">Home</AtomLink>
+            <AtomLink to="/about">Quienes Somos</AtomLink>
+            <AtomLink to="/menu">Menú</AtomLink>
+            <AtomLink to="/pedidos">Pedidos</AtomLink>
           </div>
         </div>
-        <Link to="/inicio_sesion">
-          <button className="boton-login">Iniciar sesión</button>
-        </Link>
+        <AtomLink to="/inicio_sesion">
+          <AtomButton className="boton-login">Iniciar sesión</AtomButton>
+        </AtomLink>
       </nav>
     </section>
   );
