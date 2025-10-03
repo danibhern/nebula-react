@@ -3,7 +3,7 @@ import React from 'react'
 export default function Promo_mes(){
     return (
         <section className="promo-mes">
-            <h2>Promo por el mes de Septiembre</h2>
+            <h2>Promo por el mes de Octubre</h2>
             <article>
             <img src="https://template.canva.com/EAE7TAO6TzU/3/0/1600w-eix57AHCv_k.jpg" alt="Producto del mes: Espresso" />
             <div className="producto-info">
