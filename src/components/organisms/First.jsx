@@ -17,6 +17,7 @@ export default function First() {
             <AtomLink to="/about">Quienes Somos</AtomLink>
             <AtomLink to="/menu">Menú</AtomLink>
             <AtomLink to="/pedidos">Pedidos</AtomLink>
+            <AtomLink to ="/resenas">Reseñas</AtomLink>
           </div>
         </div>
         <AtomLink to="/inicio_sesion">

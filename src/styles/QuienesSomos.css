@@ -216,23 +216,6 @@ nav {
   color: #666;
 }
 
-.dejar-reseña {
-    background-color: #b85390;
-    color: white;
-    font-size: 900;
-    padding: 10px 12px;
-    border: none;
-    cursor: pointer;
-    margin-top: 39px;
-    border-radius: 20px;
-}
-.dejar-reseña:hover,
-.dejar-reseña:focus {
-    background-color: #ffaf00;
-    color: #fff;
-    outline: none;
-}
-
 /* -------------------- Footer -------------------- */
 footer {
   background-color: #b85390;
