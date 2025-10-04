@@ -54,7 +54,6 @@ export default function QuienesSomos(){
                 <cite>- Sofía A.</cite>
                 </div>
             </div>
-            <button className="dejar-reseña">Deja tu Reseña</button>
         </div> 
     </section>
     );

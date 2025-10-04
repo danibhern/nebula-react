@@ -40,7 +40,7 @@ function DejaResena() {
 
   return (
     <div className="resenas-container">
-      <h2>⭐ Deja tu reseña ⭐</h2>
+      <h2>Deja tu reseña </h2>
 
       <form onSubmit={handleSubmit} className="resena-form">
         <input
@@ -57,7 +57,7 @@ function DejaResena() {
         <button type="submit">Enviar reseña</button>
       </form>
 
-      <h3>📌 Reseñas</h3>
+      <h3>Reseñas</h3>
       {resenas.length === 0 ? (
         <p className="sin-resenas">No hay reseñas todavía</p>
       ) : (
