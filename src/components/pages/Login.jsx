@@ -1,7 +1,14 @@
 import React from 'react';
 import { FaFacebookF, FaInstagram, FaTwitter, FaMapMarkerAlt, FaFileAlt, FaShieldAlt } from 'react-icons/fa';
+import AtomLink from '../atoms/AtomLink';
+import AtomButton from '../atoms/AtomButton';
 
 export default function LoginPage() {
+  const handleSubmit = e => {
+    e.preventDefault();
+    // Lógica para autenticar
+  };
+
   return (
     <>
       <nav>
@@ -10,21 +17,21 @@ export default function LoginPage() {
             <img src="/images/nebula.png" alt="nebula" />
           </div>
           <div className="nav-links">
-            <a href="/index.html">Home</a>
-            <a href="#">Quienes Somos</a>
-            <a href="/menu-nebula.pdf" target="_blank" rel="noopener noreferrer">Menú</a>
-            <a href="/pedido.html">Pedidos</a>
+            <AtomLink to="/">Home</AtomLink>
+            <AtomLink to="/about">Quienes Somos</AtomLink>
+            <AtomLink to="/menu">Menú</AtomLink>
+            <AtomLink to="/pedidos">Pedidos</AtomLink>
           </div>
         </div>
-        <a href="/inicio_sesion.html">
-          <button className="boton-login">Iniciar sesión</button>
-        </a>
+        <AtomLink to="/inicio_sesion">
+          <AtomButton className="boton-login">Iniciar sesión</AtomButton>
+        </AtomLink>
       </nav>
 
       <main>
         <section id="container">
           <img src="/images/nebula.png" alt="Logo Nebula Café" className="logo-ini" />
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={handleSubmit}>
             <div className="row">
               <label htmlFor="nombre">Usuario</label>
               <input type="text" name="nombre" id="nombre" placeholder="Usuario" />
@@ -33,10 +40,10 @@ export default function LoginPage() {
               <label htmlFor="email">Contraseña</label>
               <input type="password" name="email" id="email" placeholder="Contraseña" />
             </div>
-            <button type="submit">Iniciar Sesion</button>
+            <AtomButton type="submit">Iniciar Sesion</AtomButton>
             <div className="links-container">
-              <a href="/registro.html">Registrarse</a>
-              <a href="/olvido_contraseña.html">Olvidé mi contraseña</a>
+              <AtomLink to="/registro">Registrarse</AtomLink>
+              <AtomLink to="/olvido_contraseña">Olvidé mi contraseña</AtomLink>
             </div>
           </form>
         </section>
@@ -46,18 +53,18 @@ export default function LoginPage() {
         <div className="footer-section">
           <h3>Redes Sociales</h3>
           <ul>
-            <li><a href="#" aria-label="Facebook"><FaFacebookF /> Facebook</a></li>
-            <li><a href="#" aria-label="Instagram"><FaInstagram /> Instagram</a></li>
-            <li><a href="#" aria-label="Twitter"><FaTwitter /> Twitter</a></li>
+            <li><AtomLink to="#" aria-label="Facebook"><FaFacebookF /> Facebook</AtomLink></li>
+            <li><AtomLink to="#" aria-label="Instagram"><FaInstagram /> Instagram</AtomLink></li>
+            <li><AtomLink to="#" aria-label="Twitter"><FaTwitter /> Twitter</AtomLink></li>
           </ul>
         </div>
         <div className="footer-section">
           <h3>Sucursales</h3>
           <ul>
             <li>
-              <a href="https://www.google.com/maps/search/?api=1&query=Calle+Serrano+1105,+Melipilla" target="_blank" rel="noopener noreferrer" aria-label="Abrir ubicación en Google Maps">
+              <AtomLink to="https://www.google.com/maps/search/?api=1&query=Calle+Serrano+1105,+Melipilla" target="_blank" rel="noopener noreferrer" aria-label="Abrir ubicación en Google Maps">
                 <FaMapMarkerAlt /> Calle Serrano 1105, Melipilla
-              </a>
+              </AtomLink>
             </li>
             <li><FaMapMarkerAlt /> Avenida Central 456, Villarica</li>
             <li><FaMapMarkerAlt /> Bulevar 789, Copiapó</li>
@@ -66,8 +73,8 @@ export default function LoginPage() {
         <div className="footer-section">
           <h3>Políticas</h3>
           <ul>
-            <li><a href="#"><FaFileAlt /> Políticas de Envío</a></li>
-            <li><a href="#"><FaShieldAlt /> Términos y Condiciones</a></li>
+            <li><AtomLink to="#"><FaFileAlt /> Políticas de Envío</AtomLink></li>
+            <li><AtomLink to="#"><FaShieldAlt /> Términos y Condiciones</AtomLink></li>
           </ul>
         </div>
       </footer>
