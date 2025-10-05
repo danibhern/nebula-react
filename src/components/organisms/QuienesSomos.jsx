@@ -33,28 +33,6 @@ export default function QuienesSomos(){
                 <img src="https://media.timeout.com/images/105932519/750/562/image.jpg" alt="Clientes disfrutando"/>
             </div>
         </div>
-
-
-        <div className="reseñas">
-            <h3>Lo que dicen nuestros clientes</h3>
-            <div className="grid-reseñas">
-                <div className="reseña">
-                <p>⭐️⭐️⭐️⭐️⭐️</p>
-                <blockquote>“El mejor café que he probado. ¡Volveré siempre!”</blockquote>
-                <cite>- Paula R.</cite>
-                </div>
-                <div className="reseña">
-                <p>⭐️⭐️⭐️⭐️</p>
-                <blockquote>“Un lugar acogedor y tranquilo, perfecto para estudiar o trabajar.”</blockquote>
-                <cite>- Diego M.</cite>
-                </div>
-                <div className="reseña">
-                <p>⭐️⭐️⭐️⭐️⭐️</p>
-                <blockquote>“Los postres son increíbles y la atención aún mejor.”</blockquote>
-                <cite>- Sofía A.</cite>
-                </div>
-            </div>
-        </div> 
     </section>
     );
 }
