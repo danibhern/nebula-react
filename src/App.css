@@ -383,13 +383,21 @@ footer .footer-section ul li a:focus {
 
 
 /* -------------------- Errores -------------------- */
-.error {
-  outline: 1px rgb(248, 157, 172) solid !important;
-  background-color: #ad3c80 !important;
+/* 🔴 Input con error */
+.input-error {
+  border: 2px solid #fb05b5;
+  background-color: #fb7fc1;
+  outline: none;
 }
 
-#errores p {
-  display: flex;
+/* 🔴 Contenedor general de errores (debajo del botón) */
+#errores-globales {
   color: white;
+}
+
+/* 🔴 Cada mensaje */
+#errores-globales p {
   margin: 5px 0;
+  font-weight: 400;
+  font-size:  0.87rem;
 }
