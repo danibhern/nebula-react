@@ -16,7 +16,7 @@ body::before {
   right: 0;
   bottom: 0;
   
-  background-image: url('../images/fondo-inicio-sesion.jpg');
+  background-image: url('/public/img/fondo-inicio-sesion.JPG'); 
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -236,7 +236,7 @@ footer .footer-section ul li a:focus {
   transition: color 0.3s ease;
 }
 
-/* Media Queries para Responsividad */
+
 @media (max-width: 1024px) {
   #container {
     width: 50%;

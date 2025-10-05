@@ -2,6 +2,9 @@ import React from 'react';
 import { FaFacebookF, FaInstagram, FaTwitter, FaMapMarkerAlt, FaFileAlt, FaShieldAlt } from 'react-icons/fa';
 import AtomLink from '../atoms/AtomLink';
 import AtomButton from '../atoms/AtomButton';
+import '../../styles/Login.css';  
+
+
 
 export default function LoginPage() {
   const handleSubmit = e => {
@@ -14,7 +17,7 @@ export default function LoginPage() {
       <nav>
         <div className="barra-nav">
           <div className="logo">
-            <img src="/images/nebula.png" alt="nebula" />
+            <img src="/img/nebula.png" alt="nebula" />
           </div>
           <div className="nav-links">
             <AtomLink to="/">Home</AtomLink>
@@ -30,7 +33,7 @@ export default function LoginPage() {
 
       <main>
         <section id="container">
-          <img src="/images/nebula.png" alt="Logo Nebula Café" className="logo-ini" />
+          <img src="/img/nebula.png" alt="Logo Nebula Café" className="logo-ini" />
           <form onSubmit={handleSubmit}>
             <div className="row">
               <label htmlFor="nombre">Usuario</label>
