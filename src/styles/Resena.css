@@ -1,102 +1,153 @@
 .resenas-container {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: #b788bd;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   text-align: center;
-  font-family: "Arial", sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  margin-bottom: 4rem;
+  font-family: 'Inter', sans-serif;
 }
 
 .resena-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 25px;
+  background: #fdf2f8; /* Rosa muy suave */
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin-bottom: 4rem;
 }
 
-.resena-form input,
-.resena-form textarea {
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #831843;
+}
+
+.form-group input, 
+.form-group textarea {
+  width: 95%;
+  padding: 9px;
+  border: 2px solid #fbcfe8;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
   outline: none;
-  transition: 0.3s;
+  border-color: #ec4899;
+  box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
 }
 
-.resena-form input:focus,
-.resena-form textarea:focus {
-  border-color: #ff80e8;
-  box-shadow: 0 0 5px rgba(74,144,226,0.5);
+.star-rating {
+  margin-bottom: 1.5rem;
 }
 
-.resena-form button {
-  padding: 12px;
-  background: #ae3099;
+.star-rating label {
+  display: block;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #831843;
+}
+
+.stars-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 1rem 0;
+}
+
+.star {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #fbcfe8; /* Color de estrella vacía */
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.star.filled {
+  color: #ec4899; /* Color de estrella llena */
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.error {
+  color: #dc2626;
+  font-size: 0.875rem;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.error-field {
+  border-color: #e65151 !important;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #ec4899, #db2777);
   color: white;
   border: none;
+  padding: 12px 24px;
   border-radius: 8px;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
-.resena-form button:hover {
-  background: #ffaf00;
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.3);
+}
+
+.resenas-list {
+  margin-top: 2rem;
 }
 
 .resena-card {
-   background: #ae3099;
-  border: 0.5px solid #313131;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: left;
-  margin-bottom: 15px;
-  transition: 0.3s;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-left: 4px solid #ec4899;
 }
 
-.resena-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+.resena-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
 }
 
-.resena-card strong {
-  color: #333;
-  font-size: 16px;
+.fecha {
+  color: #9ba8c0;
+  font-size: 0.875rem;
 }
 
-.resena-card p {
-  margin: 5px 0 0;
-  font-size: 14px;
-  color: #1c1c1c;
+.rating-display {
+  color: #ec4899;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.rating-text {
+  font-size: 1rem;
+  color: #a7b4cc;
+  margin-left: 0.5rem;
 }
 
 .sin-resenas {
-  color: #000000;
+  text-align: center;
+  color: #4f5258;
   font-style: italic;
-}
-.rating-radio {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-}
-
-.rating-radio input {
-  display: none;
-}
-
-.rating-radio span {
-  font-size: 28px;
-  color: #ccc;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.rating-radio input:checked ~ span,
-.rating-radio label:hover ~ label span,
-.rating-radio label:hover span {
-  color: gold;
 }

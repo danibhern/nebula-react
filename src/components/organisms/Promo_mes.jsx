@@ -1,6 +1,6 @@
 import React from 'react'
-
 export default function Promo_mes(){
+
     return (
         <section className="promo-mes">
             <h2>Promo por el mes de Octubre</h2>
