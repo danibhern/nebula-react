@@ -4,8 +4,8 @@ import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import Resenas from "./components/pages/Resenas";
 import LoginPage from "./components/pages/Login";
-import Pedidos from "./components/pages/Pedido";
-import Pedido from "./components/pages/Pedido";
+import Pedidos from "./components/pages/Catalogo";
+import Pedido from "./components/pages/Catalogo";
 
 
 function App() {

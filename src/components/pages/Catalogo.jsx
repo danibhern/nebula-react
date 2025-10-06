@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AtomLink from '../atoms/AtomLink';
 import AtomButton from '../atoms/AtomButton';
-import "../../styles/Pedidos.css";
+import "../../styles/Catalogo.css";
 
 const productos = [
   {
