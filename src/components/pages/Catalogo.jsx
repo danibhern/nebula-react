@@ -227,15 +227,17 @@ function ProductosList({ productos, onAddToCart }) {
   return (
     <>
       {productos.map((producto, index) => (
-        <div className="producto" key={index} data-nombre={producto.nombre} data-precio={producto.precio}>
+        <div className="producto" key={index}>
           <div className="img">
             <img src={producto.img} alt={producto.nombre} />
           </div>
           <div className="text">
             <h3>{producto.nombre}</h3>
             <h5>{producto.descripcion}</h5>
-            <p>${producto.precio.toLocaleString()}</p>
-            <button className="agregar" onClick={() => onAddToCart(producto)}>Añadir al carrito</button>
+            <p>${producto.precio.toLocaleString('es-CL')}</p>
+            <button className="agregar" onClick={() => onAddToCart(producto)}>
+              Añadir al carrito
+            </button>
           </div>
         </div>
       ))}
@@ -247,14 +249,16 @@ function InsumosList({ insumos, onAddToCart }) {
   return (
     <>
       {insumos.map((insumo, index) => (
-        <div className="insumo" key={index} data-nombre={insumo.nombre} data-precio={insumo.precio}>
+        <div className="insumo" key={index}>
           <div className="im">
             <img src={insumo.img} alt={insumo.nombre} />
           </div>
           <div className="text">
             <h3>{insumo.nombre}</h3>
-            <p>${insumo.precio.toLocaleString()}</p>
-            <button className="agregar" onClick={() => onAddToCart(insumo)}>Añadir al carrito</button>
+            <p>${insumo.precio.toLocaleString('es-CL')}</p>
+            <button className="agregar" onClick={() => onAddToCart(insumo)}>
+              Añadir al carrito
+            </button>
           </div>
         </div>
       ))}
@@ -262,19 +266,28 @@ function InsumosList({ insumos, onAddToCart }) {
   );
 }
 
-export default function Pedido() {
-  const [searchTerm, setSearchTerm] = React.useState('');
-  const [minPrice, setMinPrice] = React.useState('');
-  const [maxPrice, setMaxPrice] = React.useState('');
-  const [carrito, setCarrito] = React.useState(() => {
-    const stored = localStorage.getItem('carrito');
-    return stored ? JSON.parse(stored) : [];
+export default function Catalogo() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [carrito, setCarrito] = useState(() => {
+    try {
+      const stored = localStorage.getItem('carrito');
+      return stored ? JSON.parse(stored) : [];
+    } catch (error) {
+      console.error('Error loading cart from localStorage:', error);
+      return [];
+    }
   });
 
   const [mensajeConfirmacion, setMensajeConfirmacion] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('carrito', JSON.stringify(carrito));
+    try {
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+    } catch (error) {
+      console.error('Error saving cart to localStorage:', error);
+    }
   }, [carrito]);
 
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
@@ -283,15 +296,17 @@ export default function Pedido() {
 
   const agregarAlCarrito = (producto) => {
     setCarrito(prev => [...prev, producto]);
-    setMensajeConfirmacion(`Producto "${producto.nombre}" añadido al carrito`);
+    setMensajeConfirmacion(`¡${producto.nombre} añadido al carrito!`);
 
     setTimeout(() => {
       setMensajeConfirmacion('');
     }, 2000);
   };
 
-  const eliminarDelCarrito = (index) => {
-    setCarrito(prev => prev.filter((_, i) => i !== index));
+  const limpiarFiltros = () => {
+    setSearchTerm('');
+    setMinPrice('');
+    setMaxPrice('');
   };
 
   const productosFiltrados = productos.filter(producto => {
@@ -308,7 +323,7 @@ export default function Pedido() {
     return nombreMatch && minOk && maxOk;
   });
 
-  const total = carrito.reduce((acc, item) => acc + item.precio, 0);
+  const totalProductos = productosFiltrados.length + insumosFiltrados.length;
 
   return (
     <>
@@ -321,77 +336,93 @@ export default function Pedido() {
             <AtomLink to="/">Home</AtomLink>
             <AtomLink to="/about">Quienes Somos</AtomLink>
             <AtomLink to="/menu">Menú</AtomLink>
-            <AtomLink to="/pedidos">Pedidos</AtomLink>
+            <AtomLink to="/pedidos">Catalogo</AtomLink>
           </div>
         </div>
         <AtomLink to="/inicio_sesion">
           <AtomButton className="boton-login">Iniciar sesión</AtomButton>
         </AtomLink>
-        <div id="carrito-icono" style={{ position: 'relative' }}>
+        <div id="carrito-icono">
           🛒 <span id="contador">{carrito.length}</span>
           <AtomLink to="/carrito">Ver Carrito</AtomLink>
-
-          {mensajeConfirmacion && (
-            <div style={{
-              position: 'absolute',
-              top: '2.5rem',
-              left: 0,
-              backgroundColor: '#b8539050',
-              padding: '8px 12px',
-              borderRadius: '6px',
-              color: 'white',
-              fontWeight: '600',
-              whiteSpace: 'nowrap',
-              zIndex: 20,
-              pointerEvents: 'none'
-            }}>
-              {mensajeConfirmacion}
-            </div>
-          )}
         </div>
       </nav>
 
-      <div className="barra-busqueda">
-        <input type="text" placeholder="Buscar..." value={searchTerm} onChange={handleSearchChange} />
-        <AtomButton onClick={() => { }}>🔍</AtomButton>
+      {mensajeConfirmacion && (
+        <div className="mensaje-confirmacion">
+          {mensajeConfirmacion}
+        </div>
+      )}
+
+      <div className="catalogo-header">
+        <h1 className="catalogo-title">Nuestro Catálogo</h1>
+        <p className="catalogo-subtitle">Descubre los mejores cafés e insumos para tu experiencia perfecta</p>
       </div>
 
-      <div className="filtro-precio">
-        <input type="number" placeholder="Precio mínimo" value={minPrice} onChange={handleMinPriceChange} min="0" />
-        <input type="number" placeholder="Precio máximo" value={maxPrice} onChange={handleMaxPriceChange} min="0" />
-        <AtomButton onClick={() => { }}>Filtrar</AtomButton>
+      <div className="filtros-container">
+        <div className="barra-busqueda">
+          <input 
+            type="text" 
+            placeholder="Buscar productos..." 
+            value={searchTerm} 
+            onChange={handleSearchChange} 
+          />
+          <AtomButton onClick={() => {}}>🔍 Buscar</AtomButton>
+        </div>
+
+        <div className="filtro-precio">
+          <input 
+            type="number" 
+            placeholder="Precio mínimo" 
+            value={minPrice} 
+            onChange={handleMinPriceChange} 
+            min="0" 
+          />
+          <input 
+            type="number" 
+            placeholder="Precio máximo" 
+            value={maxPrice} 
+            onChange={handleMaxPriceChange} 
+            min="0" 
+          />
+          <AtomButton onClick={limpiarFiltros}>Limpiar Filtros</AtomButton>
+        </div>
       </div>
 
-      <section id="container">
-        <h1>Pedidos de Café</h1>
-        {productosFiltrados.length === 0 ? <p>No se encontraron productos.</p> :
-          <ProductosList productos={productosFiltrados} onAddToCart={agregarAlCarrito} />
-        }
-      </section>
+      <div className="catalogo-grid">
+        <div className="categoria-section">
+          <h2 className="categoria-title">Cafés Premium</h2>
+          {productosFiltrados.length === 0 ? (
+            <div className="vacio-mensaje">
+              {searchTerm || minPrice || maxPrice 
+                ? "No se encontraron productos con los filtros aplicados." 
+                : "Cargando productos..."}
+            </div>
+          ) : (
+            <div className="catalogo-grid"> {
 
-      <section id="container2">
-        <h1>Insumos de Café</h1>
-        {insumosFiltrados.length === 0 ? <p>No se encontraron insumos.</p> :
-          <InsumosList insumos={insumosFiltrados} onAddToCart={agregarAlCarrito} />
-        }
-      </section>
+            }
+              <ProductosList productos={productosFiltrados} onAddToCart={agregarAlCarrito} />
+            </div>
+          )}
+        </div>
 
-      <aside id="lista-carrito">
-        <h2>Carrito</h2>
-        {carrito.length === 0 ? <p>No hay productos aún.</p> : (
-          <ul>
-            {carrito.map((item, i) => (
-              <li key={i} className="item-carrito">
-                <img src={item.img} alt={item.nombre} className="img-carrito" />
-                <span>{item.nombre} - ${item.precio.toLocaleString()}</span>
-                <button onClick={() => eliminarDelCarrito(i)} className="btn-eliminar">❌</button>
-              </li>
-            ))}
-          </ul>
-        )}
-        <p>Total: ${total.toLocaleString()}</p>
-        <button id="checkout">Finalizar Compra</button>
-      </aside>
+        <div className="categoria-section">
+          <h2 className="categoria-title">Insumos de Café</h2>
+          {insumosFiltrados.length === 0 ? (
+            <div className="vacio-mensaje">
+              {searchTerm || minPrice || maxPrice 
+                ? "No se encontraron insumos con los filtros aplicados." 
+                : "Cargando insumos..."}
+            </div>
+          ) : (
+            <div className="catalogo-grid"> {
+            }
+              <InsumosList insumos={insumosFiltrados} onAddToCart={agregarAlCarrito} />
+            </div>
+          )}
+        </div>
+      </div>
 
       <footer>
         <div className="footer-section">
