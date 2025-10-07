@@ -12,7 +12,7 @@ export default function Reserva_Form() {
   const [fieldErrors, setFieldErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // 🔍 Validaciones
+  // Validaciones
   const validateField = (name, value) => {
     switch (name) {
       case 'nombre':
