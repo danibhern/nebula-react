@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { FaFacebookF, FaInstagram, FaTwitter, FaMapMarkerAlt, FaFileAlt, FaShieldAlt } from 'react-icons/fa';
+import React, { useState, useEffect, useRef } from 'react';
 import AtomLink from '../atoms/AtomLink';
 import AtomButton from '../atoms/AtomButton';
+import Footer from '../organisms/Footer.jsx';
 import "../../styles/Catalogo.css";
 import "../../styles/Carrito.css";
 
 export default function Carrito() {
     const [carrito, setCarrito] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [region, setRegion] = useState('metropolitana');
+    const [region, setRegion] = useState('');
     const [direccion, setDireccion] = useState('');
     const [mostrarFormEnvio, setMostrarFormEnvio] = useState(false);
+    const [cargandoDireccion, setCargandoDireccion] = useState(false);
+    const autocompleteRef = useRef(null);
+    const inputRef = useRef(null);
+    const [scriptCargado, setScriptCargado] = useState(false);
 
     useEffect(() => {
         try {
@@ -35,6 +39,151 @@ export default function Carrito() {
             localStorage.setItem('carrito', JSON.stringify(carrito));
         }
     }, [carrito, loading]);
+
+    // Inicializar Google Places Autocomplete
+    useEffect(() => {
+        if (mostrarFormEnvio && !scriptCargado) {
+            loadGooglePlacesScript();
+        }
+        
+        if (scriptCargado && mostrarFormEnvio && inputRef.current) {
+            // Pequeño delay para asegurar que el DOM esté listo
+            setTimeout(() => {
+                initAutocomplete();
+            }, 100);
+        }
+        
+        return () => {
+            // Limpiar el autocomplete cuando el componente se desmonte
+            if (autocompleteRef.current) {
+                window.google.maps.event.clearInstanceListeners(autocompleteRef.current);
+            }
+        };
+    }, [mostrarFormEnvio, scriptCargado]);
+
+    const loadGooglePlacesScript = () => {
+        if (document.getElementById('google-places-script')) {
+            setScriptCargado(true);
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.id = 'google-places-script';
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAq3Wf3dbr2AOv05JQ21lToka1zUrYnN98&libraries=places&callback=initGoogleMaps`;
+        script.async = true;
+        script.defer = true;
+        
+        // Función callback global
+        window.initGoogleMaps = () => {
+            setScriptCargado(true);
+        };
+        
+        script.onerror = () => {
+            console.error('Error cargando Google Places API');
+        };
+        
+        document.head.appendChild(script);
+    };
+
+    const initAutocomplete = () => {
+        if (!inputRef.current || !window.google) {
+            console.log('Google Maps no está disponible');
+            return;
+        }
+
+        try {
+            autocompleteRef.current = new window.google.maps.places.Autocomplete(
+                inputRef.current,
+                {
+                    types: ['address'],
+                    componentRestrictions: { country: 'cl' },
+                    fields: ['formatted_address', 'address_components', 'geometry']
+                }
+            );
+
+            autocompleteRef.current.addListener('place_changed', () => {
+                setCargandoDireccion(true);
+                const place = autocompleteRef.current.getPlace();
+                
+                if (place && place.formatted_address) {
+                    setDireccion(place.formatted_address);
+                    const regionDetectada = detectarRegionDesdePlace(place);
+                    setRegion(regionDetectada);
+                    console.log('Dirección seleccionada:', place.formatted_address);
+                    console.log('Región detectada:', regionDetectada);
+                } else {
+                    console.log('No se pudo obtener la dirección');
+                }
+                setCargandoDireccion(false);
+            });
+
+            console.log('Autocomplete inicializado correctamente');
+        } catch (error) {
+            console.error('Error inicializando autocomplete:', error);
+        }
+    };
+
+    // Función para detectar región desde el objeto de Google Places
+    const detectarRegionDesdePlace = (place) => {
+        if (!place || !place.address_components) return 'desconocida';
+
+        const address = place.formatted_address.toLowerCase();
+        const addressComponents = place.address_components;
+
+        // Buscar la región en los componentes de la dirección
+        const regionComponent = addressComponents.find(component => 
+            component.types.includes('administrative_area_level_1')
+        );
+
+        if (regionComponent) {
+            const regionName = regionComponent.long_name.toLowerCase();
+            
+            if (regionName.includes('metropolitana')) {
+                return 'metropolitana';
+            } else if (regionName.includes('arica') || regionName.includes('tarapacá') || 
+                       regionName.includes('antofagasta') || regionName.includes('atacama') || 
+                       regionName.includes('coquimbo')) {
+                return 'norte';
+            } else if (regionName.includes('valparaíso') || regionName.includes('libertador')) {
+                return 'centro';
+            } else if (regionName.includes('maule') || regionName.includes('ñuble') ||
+                       regionName.includes('biobío') || regionName.includes('la araucanía') ||
+                       regionName.includes('los ríos') || regionName.includes('los lagos')) {
+                return 'sur';
+            } else if (regionName.includes('aysén') || regionName.includes('magallanes')) {
+                return 'austral';
+            }
+        }
+
+        // Detección por palabras clave en la dirección completa
+        if (address.includes('santiago') || address.includes('providencia') || 
+            address.includes('las condes') || address.includes('ñuñoa') ||
+            address.includes('macul') || address.includes('la florida') ||
+            address.includes('puente alto') || address.includes('maipú') ||
+            address.includes('san bernardo') || address.includes('estación central')) {
+            return 'metropolitana';
+        } else if (address.includes('arica') || address.includes('iquique') || 
+                   address.includes('antofagasta') || address.includes('calama') ||
+                   address.includes('copiapó') || address.includes('la serena') ||
+                   address.includes('coquimbo') || address.includes('ovalle')) {
+            return 'norte';
+        } else if (address.includes('valparaíso') || address.includes('viña del mar') ||
+                   address.includes('quilpué') || address.includes('rancagua') ||
+                   address.includes('san fernando') || address.includes('curicó') ||
+                   address.includes('talca') || address.includes('línares')) {
+            return 'centro';
+        } else if (address.includes('concepción') || address.includes('talcahuano') ||
+                   address.includes('chillán') || address.includes('los ángeles') ||
+                   address.includes('temuco') || address.includes('valdivia') ||
+                   address.includes('osorno') || address.includes('puerto montt')) {
+            return 'sur';
+        } else if (address.includes('coyhaique') || address.includes('puerto aysén') ||
+                   address.includes('punta arenas') || address.includes('puerto natales')) {
+            return 'austral';
+        }
+        
+        return 'desconocida';
+    };
 
     const calcularCostoEnvio = () => {
         const subtotal = calcularTotal();
@@ -113,6 +262,11 @@ export default function Carrito() {
             return;
         }
 
+        if (region === 'desconocida') {
+            alert('Por favor selecciona una dirección válida de Chile para calcular el envío');
+            return;
+        }
+
         const resumenCompra = `
             ¡Compra realizada con éxito!
             
@@ -133,6 +287,7 @@ export default function Carrito() {
         
         vaciarCarrito();
         setDireccion('');
+        setRegion('');
         setMostrarFormEnvio(false);
     };
     
@@ -142,7 +297,8 @@ export default function Carrito() {
             'norte': 'Norte de Chile',
             'centro': 'Zona Centro',
             'sur': 'Sur de Chile', 
-            'austral': 'Zona Austral'
+            'austral': 'Zona Austral',
+            'desconocida': 'Por verificar'
         };
         return regiones[region] || region;
     };
@@ -167,7 +323,7 @@ export default function Carrito() {
                         <AtomLink to="/">Home</AtomLink>
                         <AtomLink to="/about">Quienes Somos</AtomLink>
                         <AtomLink to="/menu">Menú</AtomLink>
-                        <AtomLink to="/pedidos">Catálogo</AtomLink>
+                        <AtomLink to="/catalogo">Catálogo</AtomLink>
                     </div>
                 </div>
                 <AtomLink to="/inicio_sesion">
@@ -194,7 +350,7 @@ export default function Carrito() {
                         <div className="carrito-vacio-icon">🛒</div>
                         <h2>No hay productos en tu carrito</h2>
                         <p>¡Descubre nuestros deliciosos cafés e insumos!</p>
-                        <AtomLink to="/pedidos">
+                        <AtomLink to="/catalogo">
                             <AtomButton className="btn-seguir-comprando">
                                 Seguir Comprando
                             </AtomButton>
@@ -272,40 +428,39 @@ export default function Carrito() {
                                     <span>${calcularTotalFinal().toLocaleString('es-CL')}</span>
                                 </div>
 
-                                {/* Formulario de envío */}
+                                {/* Formulario de envío con autocompletado */}
                                 <div className={`form-envio ${mostrarFormEnvio ? 'mostrar' : ''}`}>
                                     <h4>Información de Envío</h4>
                                     
                                     <div className="form-group">
-                                        <label>Región:</label>
-                                        <select 
-                                            value={region} 
-                                            onChange={(e) => setRegion(e.target.value)}
-                                        >
-                                            <option value="metropolitana">Región Metropolitana</option>
-                                            <option value="norte">Norte de Chile</option>
-                                            <option value="centro">Zona Centro</option>
-                                            <option value="sur">Sur de Chile</option>
-                                            <option value="austral">Zona Austral</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="form-group">
-                                        <label>Dirección completa:</label>
+                                        <label>Dirección completa en Chile:</label>
                                         <input
+                                            ref={inputRef}
                                             type="text"
-                                            placeholder="Calle, número, departamento, comuna"
+                                            placeholder="Comienza a escribir tu dirección..."
                                             value={direccion}
                                             onChange={(e) => setDireccion(e.target.value)}
+                                            disabled={cargandoDireccion}
                                         />
+                                        <small>El sistema detectará automáticamente tu región</small>
+                                        {cargandoDireccion && <div className="cargando-direccion">Detectando región...</div>}
                                     </div>
 
-                                    <div className="info-envio">
-                                        <p><strong>Empresa de envío:</strong> {getEmpresaEnvio()}</p>
-                                        <p><strong>Costo de envío:</strong> {
-                                            calcularCostoEnvio() === 0 ? 'GRATIS' : `$${calcularCostoEnvio().toLocaleString('es-CL')}`
-                                        }</p>
-                                    </div>
+                                    {direccion && (
+                                        <div className="info-envio">
+                                            <p><strong>Región detectada:</strong> {getNombreRegion()}</p>
+                                            <p><strong>Empresa de envío:</strong> {getEmpresaEnvio()}</p>
+                                            <p><strong>Costo de envío:</strong> {
+                                                calcularCostoEnvio() === 0 ? 'GRATIS' : `$${calcularCostoEnvio().toLocaleString('es-CL')}`
+                                            }</p>
+                                        </div>
+                                    )}
+
+                                    {region === 'desconocida' && direccion && (
+                                        <div className="alerta-region">
+                                            <p>⚠️ No pudimos detectar tu región. Por favor selecciona una dirección válida en Chile.</p>
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="carrito-acciones">
@@ -327,14 +482,14 @@ export default function Carrito() {
                                         <AtomButton 
                                             className="btn-pagar" 
                                             onClick={procesarPago}
-                                            disabled={!direccion.trim()}
+                                            disabled={!direccion.trim() || region === 'desconocida'}
                                         >
                                             💳 Pagar ${calcularTotalFinal().toLocaleString('es-CL')}
                                         </AtomButton>
                                     )}
                                 </div>
 
-                                <AtomLink to="/pedidos">
+                                <AtomLink to="/catalogo">
                                     <AtomButton className="btn-seguir-comprando">
                                         Seguir Comprando
                                     </AtomButton>
@@ -345,35 +500,7 @@ export default function Carrito() {
                 )}
             </div>
 
-            <footer>
-                        <div className="footer-section">
-                          <h3>Redes Sociales</h3>
-                          <ul>
-                            <li><a href="#" aria-label="Facebook"><FaFacebookF /> Facebook</a></li>
-                            <li><a href="#" aria-label="Instagram"><FaInstagram /> Instagram</a></li>
-                            <li><a href="#" aria-label="Twitter"><FaTwitter /> Twitter</a></li>
-                          </ul>
-                        </div>
-                        <div className="footer-section">
-                          <h3>Sucursales</h3>
-                          <ul>
-                            <li>
-                              <a href="https://www.google.com/maps/search/?api=1&query=Calle+Serrano+1105,+Melipilla" target="_blank" rel="noopener noreferrer" aria-label="Abrir ubicación en Google Maps">
-                                <FaMapMarkerAlt /> Calle Serrano 1105, Melipilla
-                              </a>
-                            </li>
-                            <li><FaMapMarkerAlt /> Avenida Central 456, Villarica</li>
-                            <li><FaMapMarkerAlt /> Bulevar 789, Copiapó</li>
-                          </ul>
-                        </div>
-                        <div className="footer-section">
-                          <h3>Políticas</h3>
-                          <ul>
-                            <li><a href="#"><FaFileAlt /> Políticas de Envío</a></li>
-                            <li><a href="#"><FaShieldAlt /> Términos y Condiciones</a></li>
-                          </ul>
-                        </div>
-            </footer>
+            <Footer />
         </>
     );
 }

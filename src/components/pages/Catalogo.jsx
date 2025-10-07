@@ -347,7 +347,7 @@ export default function Catalogo() {
             <AtomLink to="/">Home</AtomLink>
             <AtomLink to="/about">Quienes Somos</AtomLink>
             <AtomLink to="/menu">Menú</AtomLink>
-            <AtomLink to="/pedidos">Catalogo</AtomLink>
+            <AtomLink to="/catalogo">Catalogo</AtomLink>
           </div>
         </div>
         <div id="carrito-icono">
