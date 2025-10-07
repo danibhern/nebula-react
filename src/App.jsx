@@ -6,6 +6,7 @@ import Resenas from "./components/pages/Resenas";
 import LoginPage from "./components/pages/Login";
 import Pedido from "./components/pages/Catalogo";
 import Carrito from "./components/pages/Carrito"; 
+import AdminDashboard from "./components/organisms/AdminDashboard";
 
 
 function App() {
@@ -16,8 +17,9 @@ function App() {
         <Route path="/about" element={<About />} /> 
         <Route path="/resenas" element={<Resenas/>}/>
         <Route path="/inicio_sesion" element={<LoginPage />} />
+        <Route path="admin" element={<AdminDashboard/>} />
         <Route path="/Pedidos" element={<Pedido/>} />
-         <Route path="/carrito" element={<Carrito/>} />
+        <Route path="/carrito" element={<Carrito/>} />
       </Routes>
     </BrowserRouter>
   );
