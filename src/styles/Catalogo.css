@@ -73,12 +73,14 @@ nav {
 .boton-login {
     background-color: #b85390;
     color: white;
-    font-weight: 700;
+    font-weight: bold;
+    font-size: 0.9rem;
     padding: 8px 16px;
     border: none;
     border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
+    margin-right: 1rem;
 }
 
 .boton-login:hover,
@@ -92,19 +94,23 @@ nav {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
     color: #fff;
-    position: relative;
+    position:relative;
+    margin-left: 22rem;
+    
 }
 
 #carrito-icono a {
-    font-size: 1rem;  
-    font-weight: 600;
+    font-size: 0.9rem;  
+    font-weight: bold;
     background-color: #b85390;
     padding: 6px 12px;
     border-radius: 8px;
     transition: background 0.3s ease;
+
+    
 }
 
 #carrito-icono a:hover {
@@ -232,6 +238,71 @@ nav {
     box-shadow: 0 6px 20px rgba(184, 83, 144, 0.5);
 }
 
+.categorias-botones {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    max-width: 1200px;
+}
+
+.btn-categoria {
+    background: linear-gradient(135deg, #b85390, #b788bd) !important;
+    color: white !important;
+    padding: 15px 30px !important;
+    border: none !important;
+    border-radius: 15px !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 6px 20px rgba(184, 83, 144, 0.3) !important;
+    min-width: 200px;
+}
+
+.btn-categoria:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 30px rgba(184, 83, 144, 0.5) !important;
+}
+
+.btn-categoria.activo {
+    background: linear-gradient(135deg, #ffaf00, #b85390) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(255, 175, 0, 0.4) !important;
+}
+
+/* CONTENIDO DEL CATÁLOGO */
+.catalogo-contenido {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* MENSAJE DE SELECCIÓN DE CATEGORÍA */
+.seleccion-categoria {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.seleccion-mensaje {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.seleccion-mensaje h3 {
+    color: #4a2542;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.seleccion-mensaje p {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
 /* CONTENEDORES DE PRODUCTOS INNOVADORES */
 .catalogo-grid {
     display: grid;
@@ -277,7 +348,10 @@ nav {
     flex-direction: column;
     height: 380px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.12),
+        0 8px 20px rgba(0, 0, 0, 0.06),
+        0 0 0 1px rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
     position: relative;
@@ -583,5 +657,47 @@ footer .footer-section ul li a:focus {
     
     .filtro-precio input {
         width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .categorias-botones {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    .btn-categoria {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px 20px !important;
+    }
+
+    .catalogo-contenido {
+        padding: 0 1rem;
+    }
+
+    .seleccion-mensaje {
+        padding: 2rem 1rem;
+    }
+
+    .seleccion-mensaje h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .categorias-botones {
+        margin: 1rem auto;
+    }
+
+    .btn-categoria {
+        font-size: 1rem !important;
+        padding: 10px 15px !important;
+    }
+
+    .seleccion-categoria {
+        padding: 2rem 1rem;
     }
 }

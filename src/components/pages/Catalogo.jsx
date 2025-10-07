@@ -282,6 +282,7 @@ export default function Catalogo() {
   });
 
   const [mensajeConfirmacion, setMensajeConfirmacion] = useState('');
+  const [categoriaActiva, setCategoriaActiva] = useState(''); // 'cafes', 'insumos', o ''
 
   useEffect(() => {
     try {
@@ -308,6 +309,15 @@ export default function Catalogo() {
     setSearchTerm('');
     setMinPrice('');
     setMaxPrice('');
+    setCategoriaActiva('');
+  };
+
+  const mostrarCafes = () => {
+    setCategoriaActiva('cafes');
+  };
+
+  const mostrarInsumos = () => {
+    setCategoriaActiva('insumos');
   };
 
   const productosFiltrados = productos.filter(producto => {
@@ -340,13 +350,13 @@ export default function Catalogo() {
             <AtomLink to="/pedidos">Catalogo</AtomLink>
           </div>
         </div>
-        <AtomLink to="/inicio_sesion">
-          <AtomButton className="boton-login">Iniciar sesión</AtomButton>
-        </AtomLink>
         <div id="carrito-icono">
           🛒 <span id="contador">{carrito.length}</span>
           <AtomLink to="/carrito">Ver Carrito</AtomLink>
         </div>
+        <AtomLink to="/inicio_sesion">
+        <AtomButton className="boton-login">Iniciar sesión</AtomButton>
+        </AtomLink>
       </nav>
 
       {mensajeConfirmacion && (
@@ -390,70 +400,91 @@ export default function Catalogo() {
         </div>
       </div>
 
-      <div className="catalogo-grid">
-        <div className="categoria-section">
-          <h2 className="categoria-title">Cafés Premium</h2>
-          {productosFiltrados.length === 0 ? (
-            <div className="vacio-mensaje">
-              {searchTerm || minPrice || maxPrice 
-                ? "No se encontraron productos con los filtros aplicados." 
-                : "Cargando productos..."}
-            </div>
-          ) : (
-            <div className="catalogo-grid"> {
+      {/* BOTONES DE CATEGORÍAS */}
+      <div className="categorias-botones">
+        <AtomButton 
+          className={`btn-categoria ${categoriaActiva === 'cafes' ? 'activo' : ''}`}
+          onClick={mostrarCafes}
+        >
+          ☕ Ver Cafés Premium
+        </AtomButton>
+        
+        <AtomButton 
+          className={`btn-categoria ${categoriaActiva === 'insumos' ? 'activo' : ''}`}
+          onClick={mostrarInsumos}
+        >
+          🛠️ Ver Insumos de Café
+        </AtomButton>
+      </div>
 
-            }
-              <ProductosList productos={productosFiltrados} onAddToCart={agregarAlCarrito} />
-            </div>
-          )}
-        </div>
+      {/* CONTENIDO DE CATEGORÍAS */}
+      <div className="catalogo-contenido">
+        {/* CAFÉS PREMIUM */}
+        {(categoriaActiva === 'cafes' || categoriaActiva === '') && (
+          <div className="categoria-section">
+            <h2 className="categoria-title">Cafés Premium</h2>
+            {productosFiltrados.length === 0 ? (
+              <div className="vacio-mensaje">
+                {searchTerm || minPrice || maxPrice 
+                  ? "No se encontraron productos con los filtros aplicados." 
+                  : "No hay productos para mostrar. Usa los filtros de búsqueda."}
+              </div>
+            ) : (
+              <div className="catalogo-grid">
+                <ProductosList productos={productosFiltrados} onAddToCart={agregarAlCarrito} />
+              </div>
+            )}
+          </div>
+        )}
 
-        <div className="categoria-section">
-          <h2 className="categoria-title">Insumos de Café</h2>
-          {insumosFiltrados.length === 0 ? (
-            <div className="vacio-mensaje">
-              {searchTerm || minPrice || maxPrice 
-                ? "No se encontraron insumos con los filtros aplicados." 
-                : "Cargando insumos..."}
-            </div>
-          ) : (
-            <div className="catalogo-grid"> {
-            }
-              <InsumosList insumos={insumosFiltrados} onAddToCart={agregarAlCarrito} />
-            </div>
-          )}
-        </div>
+        {/* INSUMOS DE CAFÉ */}
+        {(categoriaActiva === 'insumos' || categoriaActiva === '') && (
+          <div className="categoria-section">
+            <h2 className="categoria-title">Insumos de Café</h2>
+            {insumosFiltrados.length === 0 ? (
+              <div className="vacio-mensaje">
+                {searchTerm || minPrice || maxPrice 
+                  ? "No se encontraron insumos con los filtros aplicados." 
+                  : "No hay insumos para mostrar. Usa los filtros de búsqueda."}
+              </div>
+            ) : (
+              <div className="catalogo-grid">
+                <InsumosList insumos={insumosFiltrados} onAddToCart={agregarAlCarrito} />
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <footer>
-            <div className="footer-section">
-              <h3>Redes Sociales</h3>
-              <ul>
-                <li><a href="#" aria-label="Facebook"><FaFacebookF /> Facebook</a></li>
-                <li><a href="#" aria-label="Instagram"><FaInstagram /> Instagram</a></li>
-                <li><a href="#" aria-label="Twitter"><FaTwitter /> Twitter</a></li>
-              </ul>
-            </div>
-            <div className="footer-section">
-              <h3>Sucursales</h3>
-              <ul>
-                <li>
-                  <a href="https://www.google.com/maps/search/?api=1&query=Calle+Serrano+1105,+Melipilla" target="_blank" rel="noopener noreferrer" aria-label="Abrir ubicación en Google Maps">
-                    <FaMapMarkerAlt /> Calle Serrano 1105, Melipilla
-                  </a>
-                </li>
-                <li><FaMapMarkerAlt /> Avenida Central 456, Villarica</li>
-                <li><FaMapMarkerAlt /> Bulevar 789, Copiapó</li>
-              </ul>
-            </div>
-            <div className="footer-section">
-              <h3>Políticas</h3>
-              <ul>
-                <li><a href="#"><FaFileAlt /> Políticas de Envío</a></li>
-                <li><a href="#"><FaShieldAlt /> Términos y Condiciones</a></li>
-              </ul>
-            </div>
-          </footer>
+        <div className="footer-section">
+          <h3>Redes Sociales</h3>
+          <ul>
+            <li><a href="#" aria-label="Facebook"><FaFacebookF /> Facebook</a></li>
+            <li><a href="#" aria-label="Instagram"><FaInstagram /> Instagram</a></li>
+            <li><a href="#" aria-label="Twitter"><FaTwitter /> Twitter</a></li>
+          </ul>
+        </div>
+        <div className="footer-section">
+          <h3>Sucursales</h3>
+          <ul>
+            <li>
+              <a href="https://www.google.com/maps/search/?api=1&query=Calle+Serrano+1105,+Melipilla" target="_blank" rel="noopener noreferrer" aria-label="Abrir ubicación en Google Maps">
+                <FaMapMarkerAlt /> Calle Serrano 1105, Melipilla
+              </a>
+            </li>
+            <li><FaMapMarkerAlt /> Avenida Central 456, Villarica</li>
+            <li><FaMapMarkerAlt /> Bulevar 789, Copiapó</li>
+          </ul>
+        </div>
+        <div className="footer-section">
+          <h3>Políticas</h3>
+          <ul>
+            <li><a href="#"><FaFileAlt /> Políticas de Envío</a></li>
+            <li><a href="#"><FaShieldAlt /> Términos y Condiciones</a></li>
+          </ul>
+        </div>
+      </footer>
     </>
   );
 }

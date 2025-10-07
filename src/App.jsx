@@ -4,8 +4,8 @@ import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import Resenas from "./components/pages/Resenas";
 import LoginPage from "./components/pages/Login";
-import Pedido from "./components/pages/Catalogo";
 import Carrito from "./components/pages/Carrito"; 
+import Catalogo from "./components/pages/Catalogo";
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Route path="/about" element={<About />} /> 
         <Route path="/resenas" element={<Resenas/>}/>
         <Route path="/inicio_sesion" element={<LoginPage />} />
-        <Route path="/Pedidos" element={<Pedido/>} />
+        <Route path="/catalogo" element={<Catalogo/>} />
          <Route path="/carrito" element={<Carrito/>} />
       </Routes>
     </BrowserRouter>
