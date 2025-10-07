@@ -1,5 +1,6 @@
 import AtomLink from "../atoms/AtomLink";
 import AtomButton from '../atoms/AtomButton';
+import AdminDashboard from '../organisms/AdminDashboard'; // Ajusta la ruta según tu estructura
 import { useState } from "react";
 export default function InicioSesion () {
     const [isLoggedIn, setLoggedIn] = useState(false);
