@@ -433,7 +433,6 @@ export default function Carrito() {
                                     <h4>Información de Envío</h4>
                                     
                                     <div className="form-group">
-                                        <label>Dirección completa en Chile:</label>
                                         <input
                                             ref={inputRef}
                                             type="text"
@@ -442,13 +441,11 @@ export default function Carrito() {
                                             onChange={(e) => setDireccion(e.target.value)}
                                             disabled={cargandoDireccion}
                                         />
-                                        <small>El sistema detectará automáticamente tu región</small>
                                         {cargandoDireccion && <div className="cargando-direccion">Detectando región...</div>}
                                     </div>
 
                                     {direccion && (
                                         <div className="info-envio">
-                                            <p><strong>Región detectada:</strong> {getNombreRegion()}</p>
                                             <p><strong>Empresa de envío:</strong> {getEmpresaEnvio()}</p>
                                             <p><strong>Costo de envío:</strong> {
                                                 calcularCostoEnvio() === 0 ? 'GRATIS' : `$${calcularCostoEnvio().toLocaleString('es-CL')}`
@@ -476,7 +473,7 @@ export default function Carrito() {
                                             className="btn-continuar"
                                             onClick={() => setMostrarFormEnvio(true)}
                                         >
-                                            Continuar con el Envío
+                                            Pagar
                                         </AtomButton>
                                     ) : (
                                         <AtomButton 
