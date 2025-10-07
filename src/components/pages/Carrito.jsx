@@ -12,13 +12,11 @@ export default function Carrito() {
     const [direccion, setDireccion] = useState('');
     const [mostrarFormEnvio, setMostrarFormEnvio] = useState(false);
 
-    // Cargar carrito desde localStorage
     useEffect(() => {
         try {
             const storedCarrito = localStorage.getItem('carrito');
             if (storedCarrito) {
                 const carritoData = JSON.parse(storedCarrito);
-                // Asegurar que cada item tenga cantidad
                 const carritoConCantidad = carritoData.map(item => ({
                     ...item,
                     cantidad: item.cantidad || 1
@@ -32,23 +30,19 @@ export default function Carrito() {
         }
     }, []);
 
-    // Guardar carrito en localStorage cuando cambie
     useEffect(() => {
         if (!loading) {
             localStorage.setItem('carrito', JSON.stringify(carrito));
         }
     }, [carrito, loading]);
 
-    // Calcular costo de envío
     const calcularCostoEnvio = () => {
         const subtotal = calcularTotal();
         
-        // Envío gratis sobre $15.000
         if (subtotal >= 15000) {
             return 0;
         }
         
-        // Calcular costo según región
         switch(region) {
             case 'metropolitana':
                 return 2990;
@@ -62,7 +56,6 @@ export default function Carrito() {
         }
     };
 
-    // Obtener nombre de la empresa de envío
     const getEmpresaEnvio = () => {
         if (calcularTotal() >= 15000) {
             return "Envío Gratis";
@@ -70,14 +63,12 @@ export default function Carrito() {
         return region === 'metropolitana' ? "Paket" : "Bluexpress";
     };
 
-    // Incrementar cantidad de un producto
     const incrementarCantidad = (index) => {
         setCarrito(prev => prev.map((item, i) => 
             i === index ? { ...item, cantidad: (item.cantidad || 1) + 1 } : item
         ));
     };
 
-    // Decrementar cantidad de un producto
     const decrementarCantidad = (index) => {
         setCarrito(prev => prev.map((item, i) => 
             i === index && (item.cantidad || 1) > 1 
@@ -86,37 +77,30 @@ export default function Carrito() {
         ));
     };
 
-    // Eliminar producto del carrito
     const eliminarDelCarrito = (index) => {
         setCarrito(prev => prev.filter((_, i) => i !== index));
     };
 
-    // Vaciar todo el carrito
     const vaciarCarrito = () => {
         setCarrito([]);
     };
 
-    // Calcular subtotal de un producto
     const calcularSubtotal = (item) => {
         return (item.precio * (item.cantidad || 1));
     };
 
-    // Calcular subtotal del carrito (sin envío)
     const calcularTotal = () => {
         return carrito.reduce((total, item) => total + calcularSubtotal(item), 0);
     };
 
-    // Calcular total final (con envío)
     const calcularTotalFinal = () => {
         return calcularTotal() + calcularCostoEnvio();
     };
 
-    // Calcular cantidad total de productos
     const calcularCantidadTotal = () => {
         return carrito.reduce((total, item) => total + (item.cantidad || 1), 0);
     };
 
-    // Procesar pago
     const procesarPago = () => {
         if (carrito.length === 0) {
             alert('El carrito está vacío');
@@ -129,7 +113,6 @@ export default function Carrito() {
             return;
         }
 
-        // Simular proceso de pago
         const resumenCompra = `
             ¡Compra realizada con éxito!
             
@@ -148,13 +131,11 @@ export default function Carrito() {
 
         alert(resumenCompra);
         
-        // Vaciar carrito después de la compra
         vaciarCarrito();
         setDireccion('');
         setMostrarFormEnvio(false);
     };
-
-    // Obtener nombre legible de la región
+    
     const getNombreRegion = () => {
         const regiones = {
             'metropolitana': 'Región Metropolitana',
