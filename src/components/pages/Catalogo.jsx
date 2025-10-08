@@ -4,6 +4,7 @@ import AtomLink from '../atoms/AtomLink';
 import AtomButton from '../atoms/AtomButton';
 import "../../styles/Catalogo.css";
 
+
 const productos = [
   {
     nombre: "Café Daroma",

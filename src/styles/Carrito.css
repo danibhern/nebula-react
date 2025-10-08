@@ -214,7 +214,7 @@
     margin-top: 1rem;
 }
 
-/* BOTONES DEL CARRITO */
+/* BOTONES DEL CARRITO - ESTILOS MÁS ESPECÍFICOS */
 .carrito-acciones {
     display: flex;
     flex-direction: column;
@@ -222,22 +222,58 @@
     margin: 2rem 0;
 }
 
-.btn-vaciar {
-    background: linear-gradient(135deg, #6c757d, #495057) !important;
+/* Estilo base para todos los botones del carrito */
+.carrito-acciones button,
+.carrito-acciones .btn-vaciar,
+.carrito-acciones .btn-pagar,
+.carrito-acciones .btn-comprar,
+.carrito-acciones .btn-seguir-comprando {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-vaciar,
+.carrito-acciones .btn-vaciar {
+    background: linear-gradient(135deg, #b85390, #b788bd) !important;
     color: white !important;
     padding: 12px 20px !important;
     border: none !important;
     border-radius: 12px !important;
     font-weight: 700 !important;
-    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(184, 83, 144, 0.3) !important;
 }
 
-.btn-vaciar:hover {
+.btn-vaciar:hover,
+.carrito-acciones .btn-vaciar:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4) !important;
+    box-shadow: 0 6px 20px rgba(184, 83, 144, 0.4) !important;
 }
 
-.btn-comprar {
+.btn-pagar,
+.carrito-acciones .btn-pagar {
+    background: linear-gradient(135deg, #b85390, #b788bd) !important;
+    color: white !important;
+    padding: 12px 20px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 15px rgba(184, 83, 144, 0.3) !important;
+}
+
+.btn-pagar:hover,
+.carrito-acciones .btn-pagar:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(184, 83, 144, 0.4) !important;
+}
+
+.btn-comprar,
+.carrito-acciones .btn-comprar {
     background: linear-gradient(135deg, #28a745, #20c997) !important;
     color: white !important;
     padding: 15px 20px !important;
@@ -245,28 +281,47 @@
     border-radius: 12px !important;
     font-weight: 700 !important;
     font-size: 1.1rem !important;
-    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3) !important;
 }
 
-.btn-comprar:hover {
+.btn-comprar:hover,
+.carrito-acciones .btn-comprar:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4) !important;
 }
 
-.btn-pagar {
+.btn-seguir-comprando,
+.carrito-acciones .btn-seguir-comprando {
     background: linear-gradient(135deg, #b85390, #b788bd) !important;
     color: white !important;
     padding: 12px 20px !important;
     border: none !important;
     border-radius: 12px !important;
     font-weight: 700 !important;
-    width: 100% !important;
-    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(184, 83, 144, 0.3) !important;
 }
 
-.btn-seguir-comprando:hover {
+.btn-seguir-comprando:hover,
+.carrito-acciones .btn-seguir-comprando:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 6px 20px rgba(184, 83, 144, 0.4) !important;
+}
+
+/* Reset para estados de botones */
+.carrito-acciones button:focus,
+.carrito-acciones button:active,
+.carrito-acciones .btn-vaciar:focus,
+.carrito-acciones .btn-vaciar:active,
+.carrito-acciones .btn-pagar:focus,
+.carrito-acciones .btn-pagar:active,
+.carrito-acciones .btn-comprar:focus,
+.carrito-acciones .btn-comprar:active,
+.carrito-acciones .btn-seguir-comprando:focus,
+.carrito-acciones .btn-seguir-comprando:active {
+    outline: none !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(184, 83, 144, 0.3) !important;
+    transform: translateY(0) !important;
 }
 
 /* CARGANDO */
