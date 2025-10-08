@@ -19,8 +19,8 @@ export default function LoginPage() {
             <AtomLink to="/">Home</AtomLink>
             <AtomLink to="/about">Quienes Somos</AtomLink>
             <AtomLink to="/menu">Menú</AtomLink>
-            <AtomLink to="/pedidos">Pedidos</AtomLink>
-            <AtomLink to="/resenas">Reseñas</AtomLink>
+            <AtomLink to="/catalogo">Catalogo</AtomLink>
+            <AtomLink to ="/resenas">Reseñas</AtomLink>
           </div>
         </div>
         <AtomLink to="/inicio_sesion">

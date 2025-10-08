@@ -101,6 +101,7 @@ export default function AdminDashboard({ user, onLogout }) {
     { id: 'products', label: 'Productos', icon: FaBoxes },
     { id: 'categories', label: 'Categorías', icon: FaTags },
     { id: 'users', label: 'Usuarios', icon: FaUsers },
+    { id: 'emp', label: 'Empleados', icon: FaUsers },
     { id: 'reports', label: 'Reportes', icon: FaChartBar }
   ];
 
@@ -126,7 +127,7 @@ export default function AdminDashboard({ user, onLogout }) {
         </div>
         
         <div className="session-section">
-          <h3>Contra Sesión</h3>
+          <h3>Sesión</h3>
           <div className="user-info">
             <div className="user-avatar">
               <FaUser />
