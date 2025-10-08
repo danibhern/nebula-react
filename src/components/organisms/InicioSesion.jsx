@@ -40,7 +40,7 @@ export default function InicioSesionForm() {
                         <input type="password" name="pass" id="pass" placeholder="Contraseña" required />
                     </div>
                     {error && <div className="error-message">{error}</div>}
-                    <AtomButton type="submit">Iniciar Sesion</AtomButton>
+                    <AtomButton type="submit" className="button">Iniciar Sesion</AtomButton>
                     <div className="links-container">
                         <AtomLink to="/registro">Registrarse</AtomLink>
                         <AtomLink to="/olvido_contraseña">Olvidé mi contraseña</AtomLink>

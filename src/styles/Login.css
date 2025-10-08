@@ -155,7 +155,7 @@ input {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-button[type="submit"] {
+.button{
   background-color: #b85390;
   color: white;
   font-weight: 700;
@@ -169,8 +169,8 @@ button[type="submit"] {
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover,
-button[type="submit"]:focus {
+.button [type="submit"]:hover,
+.button [type="submit"]:focus {
   background-color: #b85390;
   text-decoration: none !important;
 }

@@ -181,7 +181,7 @@ nav {
 /* -------------------- Reservación -------------------- */
 .reservacion {
   flex: 1;
-  height: 700px; /* no mover el tamaño, si se mueve no se ven los mensajes de error*/
+  height: fit-content; /* no mover el tamaño, si se mueve no se ven los mensajes de error*/
   box-sizing: border-box;
   background-color: #b788bd;
   border-radius: 12px;
