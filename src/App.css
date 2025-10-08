@@ -111,7 +111,7 @@ nav {
 
 /* -------------------- Promo del Mes -------------------- */
 .promo-mes {
-  max-width: 900px;
+  max-width: 965px;
   margin: 3rem auto;
   padding: 1rem 2rem;
   background-color: #b85390;
@@ -266,7 +266,7 @@ input[type="date"] {
 /* -------------------- Blog Nebula (Instagram) -------------------- */
 .blog-nebula {
   flex: 1;
-  height: 700px;
+  height: 643spx;
   box-sizing: border-box;
   background-color: #b788bd;
   border-radius: 12px;
@@ -301,7 +301,7 @@ input[type="date"] {
 }
 
 .instagram-grid {
-  margin-top: 60px;
+  margin-top: 63px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;

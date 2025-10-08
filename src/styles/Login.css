@@ -160,19 +160,20 @@ input {
   color: white;
   font-weight: 700;
   height: 40px;
-  line-height: 40px;
+  line-height: 30px;
   font-size: 1rem;
   border: none;
   padding: 8px 10px;
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  
 }
 
-.button [type="submit"]:hover,
-.button [type="submit"]:focus {
-  background-color: #b85390;
-  text-decoration: none !important;
+.button:hover,
+.button:focus {
+  background-color: #ffaf00;
+  text-decoration: none ;
 }
 
 footer {
