@@ -8,6 +8,7 @@ import Carrito from "./components/pages/Carrito";
 import Catalogo from "./components/pages/Catalogo";
 import AdminDashboard from "./components/organisms/AdminDashboard";
 import PortalPagos from "../src/components/pages/PortalPagos";
+import Perfil from "../src/components/pages/Perfil";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/resenas" element={<Resenas />} />
         <Route path="/inicio_sesion" element={<LoginPage />} />
         <Route path="/admin" element={<AdminDashboard/>}/>
+        <Route path="/perfil" element={<Perfil />} />
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/pagos" element={<PortalPagos />} />
