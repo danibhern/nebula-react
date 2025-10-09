@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // 👈 Importa useNavigate
 import AtomLink from '../atoms/AtomLink';
 import AtomButton from '../atoms/AtomButton';
 import Footer from '../organisms/Footer.jsx';
@@ -10,11 +11,13 @@ export default function Carrito() {
     const [loading, setLoading] = useState(true);
     const [region, setRegion] = useState('');
     const [direccion, setDireccion] = useState('');
+    const [comuna, setComuna] = useState(''); // 👈 Nueva variable para comuna
     const [mostrarFormEnvio, setMostrarFormEnvio] = useState(false);
     const [cargandoDireccion, setCargandoDireccion] = useState(false);
     const autocompleteRef = useRef(null);
     const inputRef = useRef(null);
     const [scriptCargado, setScriptCargado] = useState(false);
+    const navigate = useNavigate(); // 👈 Hook para navegación
 
     useEffect(() => {
         try {
@@ -107,10 +110,12 @@ export default function Carrito() {
                 
                 if (place && place.formatted_address) {
                     setDireccion(place.formatted_address);
-                    const regionDetectada = detectarRegionDesdePlace(place);
+                    const { regionDetectada, comunaDetectada } = detectarRegionYComunaDesdePlace(place);
                     setRegion(regionDetectada);
+                    setComuna(comunaDetectada);
                     console.log('Dirección seleccionada:', place.formatted_address);
                     console.log('Región detectada:', regionDetectada);
+                    console.log('Comuna detectada:', comunaDetectada);
                 } else {
                     console.log('No se pudo obtener la dirección');
                 }
@@ -123,9 +128,9 @@ export default function Carrito() {
         }
     };
 
-    // Función para detectar región desde el objeto de Google Places
-    const detectarRegionDesdePlace = (place) => {
-        if (!place || !place.address_components) return 'desconocida';
+    // Función para detectar región y comuna desde el objeto de Google Places
+    const detectarRegionYComunaDesdePlace = (place) => {
+        if (!place || !place.address_components) return { regionDetectada: 'desconocida', comunaDetectada: 'desconocida' };
 
         const address = place.formatted_address.toLowerCase();
         const addressComponents = place.address_components;
@@ -135,23 +140,32 @@ export default function Carrito() {
             component.types.includes('administrative_area_level_1')
         );
 
+        // Buscar la comuna
+        const comunaComponent = addressComponents.find(component => 
+            component.types.includes('locality') || 
+            component.types.includes('sublocality_level_1')
+        );
+
+        let regionDetectada = 'desconocida';
+        let comunaDetectada = comunaComponent ? comunaComponent.long_name : 'desconocida';
+
         if (regionComponent) {
             const regionName = regionComponent.long_name.toLowerCase();
             
             if (regionName.includes('metropolitana')) {
-                return 'metropolitana';
+                regionDetectada = 'metropolitana';
             } else if (regionName.includes('arica') || regionName.includes('tarapacá') || 
                        regionName.includes('antofagasta') || regionName.includes('atacama') || 
                        regionName.includes('coquimbo')) {
-                return 'norte';
+                regionDetectada = 'norte';
             } else if (regionName.includes('valparaíso') || regionName.includes('libertador')) {
-                return 'centro';
+                regionDetectada = 'centro';
             } else if (regionName.includes('maule') || regionName.includes('ñuble') ||
                        regionName.includes('biobío') || regionName.includes('la araucanía') ||
                        regionName.includes('los ríos') || regionName.includes('los lagos')) {
-                return 'sur';
+                regionDetectada = 'sur';
             } else if (regionName.includes('aysén') || regionName.includes('magallanes')) {
-                return 'austral';
+                regionDetectada = 'austral';
             }
         }
 
@@ -161,28 +175,28 @@ export default function Carrito() {
             address.includes('macul') || address.includes('la florida') ||
             address.includes('puente alto') || address.includes('maipú') ||
             address.includes('san bernardo') || address.includes('estación central')) {
-            return 'metropolitana';
+            regionDetectada = 'metropolitana';
         } else if (address.includes('arica') || address.includes('iquique') || 
                    address.includes('antofagasta') || address.includes('calama') ||
                    address.includes('copiapó') || address.includes('la serena') ||
                    address.includes('coquimbo') || address.includes('ovalle')) {
-            return 'norte';
+            regionDetectada = 'norte';
         } else if (address.includes('valparaíso') || address.includes('viña del mar') ||
                    address.includes('quilpué') || address.includes('rancagua') ||
                    address.includes('san fernando') || address.includes('curicó') ||
                    address.includes('talca') || address.includes('línares')) {
-            return 'centro';
+            regionDetectada = 'centro';
         } else if (address.includes('concepción') || address.includes('talcahuano') ||
                    address.includes('chillán') || address.includes('los ángeles') ||
                    address.includes('temuco') || address.includes('valdivia') ||
                    address.includes('osorno') || address.includes('puerto montt')) {
-            return 'sur';
+            regionDetectada = 'sur';
         } else if (address.includes('coyhaique') || address.includes('puerto aysén') ||
                    address.includes('punta arenas') || address.includes('puerto natales')) {
-            return 'austral';
+            regionDetectada = 'austral';
         }
         
-        return 'desconocida';
+        return { regionDetectada, comunaDetectada };
     };
 
     const calcularCostoEnvio = () => {
@@ -250,7 +264,8 @@ export default function Carrito() {
         return carrito.reduce((total, item) => total + (item.cantidad || 1), 0);
     };
 
-    const procesarPago = () => {
+    // 👈 NUEVA FUNCIÓN: Redirigir al portal de pagos
+    const redirigirAPortalPagos = () => {
         if (carrito.length === 0) {
             alert('El carrito está vacío');
             return;
@@ -267,30 +282,19 @@ export default function Carrito() {
             return;
         }
 
-        const resumenCompra = `
-            ¡Compra realizada con éxito!
-            
-            📦 Resumen del Pedido:
-            Productos: $${calcularTotal().toLocaleString('es-CL')}
-            Envío: ${calcularCostoEnvio() === 0 ? 'GRATIS' : `$${calcularCostoEnvio().toLocaleString('es-CL')}`}
-            Total: $${calcularTotalFinal().toLocaleString('es-CL')}
-            
-            🚚 Información de Envío:
-            Región: ${getNombreRegion()}
-            Dirección: ${direccion}
-            Empresa: ${getEmpresaEnvio()}
-            
-            ¡Gracias por tu compra!
-        `;
-
-        alert(resumenCompra);
-        
-        vaciarCarrito();
-        setDireccion('');
-        setRegion('');
-        setMostrarFormEnvio(false);
+        // Navegar al portal de pagos con los datos necesarios
+        navigate('/pagos', { 
+            state: { 
+                montoTotal: calcularTotalFinal(),
+                datosEnvio: { 
+                    direccion, 
+                    region: getNombreRegion(),
+                    comuna 
+                }
+            }
+        });
     };
-    
+
     const getNombreRegion = () => {
         const regiones = {
             'metropolitana': 'Región Metropolitana',
@@ -450,6 +454,9 @@ export default function Carrito() {
                                             <p><strong>Costo de envío:</strong> {
                                                 calcularCostoEnvio() === 0 ? 'GRATIS' : `$${calcularCostoEnvio().toLocaleString('es-CL')}`
                                             }</p>
+                                            {comuna !== 'desconocida' && (
+                                                <p><strong>Comuna:</strong> {comuna}</p>
+                                            )}
                                         </div>
                                     )}
 
@@ -462,26 +469,26 @@ export default function Carrito() {
 
                                 <div className="carrito-acciones">
                                     <AtomButton 
-                                        className="btn-vaciar" 
+                                        className="btn-vaciar"
                                         onClick={vaciarCarrito}
                                     >
-                                        Vaciar Carrito
+                                        🗑️ Vaciar Carrito
                                     </AtomButton>
-                                    
+    
                                     {!mostrarFormEnvio ? (
                                         <AtomButton 
-                                            className="btn-continuar"
+                                            className="btn-pagar"
                                             onClick={() => setMostrarFormEnvio(true)}
                                         >
-                                            Pagar
+                                            💳 Continuar a Pago
                                         </AtomButton>
                                     ) : (
                                         <AtomButton 
                                             className="btn-pagar" 
-                                            onClick={procesarPago}
+                                            onClick={redirigirAPortalPagos} // 👈 Cambiado a la nueva función
                                             disabled={!direccion.trim() || region === 'desconocida'}
                                         >
-                                            💳 Pagar ${calcularTotalFinal().toLocaleString('es-CL')}
+                                            💳 Ir a Pagar ${calcularTotalFinal().toLocaleString('es-CL')}
                                         </AtomButton>
                                     )}
                                 </div>

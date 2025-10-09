@@ -7,6 +7,7 @@ import LoginPage from "./components/pages/Login";
 import Carrito from "./components/pages/Carrito"; 
 import Catalogo from "./components/pages/Catalogo";
 import AdminDashboard from "./components/organisms/AdminDashboard";
+import PortalPagos from "../src/components/pages/PortalPagos";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/admin" element={<AdminDashboard/>}/>
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/carrito" element={<Carrito />} />
+        <Route path="/pagos" element={<PortalPagos />} />
       </Routes>
     </BrowserRouter>
   );
