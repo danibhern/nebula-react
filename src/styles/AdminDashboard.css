@@ -8,18 +8,34 @@
     min-height: 100vh;
 }
 
-.sidebar-header{
-    padding: 25px 25px;
-    border-bottom: 1px solid rgb(255, 255, 255,0.2);
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.05);
-
+.sidebar-header {
+  padding: 5px 10px; /* Padding mínimo */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+  height: 90px; /* Altura fija un poco mayor */
+  display: flex;
+  align-items: center;
 }
 
-.sidebar-header h2{
-    font-size: 1rem;
-    font-size: 500;
-    letter-spacing: 2px
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.sidebar-logo {
+  width: 109px;  /* Imagen gigante */
+  height: 109px; /* Imagen gigante */
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sidebar-header h2 {
+  font-size: 1.1rem; /* Texto más compacto */
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.1;
 }
 
 .sidebar-menu{

@@ -110,7 +110,10 @@ export default function AdminDashboard({ user, onLogout }) {
       {/* Sidebar */}
       <div className="sidebar">
         <div className="sidebar-header">
-          <h2>Nebula Café</h2>
+          <div className="logo-container">
+            <img src="/img/nebula.png" alt="Nebula Café" className="sidebar-logo" />
+            <h2>Nebula Café</h2> 
+          /</div>
         </div>
         
         <div className="sidebar-menu">
