@@ -13,7 +13,10 @@ import {
   FaDownload,
   FaShoppingCart,
   FaBox,
-  FaUserFriends
+  FaUserFriends,
+  FaDollarSign,
+  FaClock,
+  FaStar
 } from 'react-icons/fa';
 import '../../styles/AdminDashboard.css';
 
@@ -45,7 +48,31 @@ export default function AdminDashboard({ user, onLogout }) {
       footer: 'Nuevos usuarios este mes: 120',
       icon: FaUserFriends,
       trend: 'positive'
-    }
+    },
+    {
+    id: 4,
+    title: 'Ventas Hoy',
+    value: '$12,450',
+    footer: 'Crecimiento: 15% ',
+    icon: FaDollarSign,
+    trend: 'positive'
+  },
+  {
+    id: 5,
+    title: 'Órdenes Pendientes',
+    value: '23',
+    footer: 'Tiempo promedio: 15 min',
+    icon: FaClock,
+    trend: 'negative'
+  },
+  {
+    id: 6,
+    title: 'Reseñas',
+    value: '4.8/5',
+    footer: '125 nuevas reseñas',
+    icon: FaStar,
+    trend: 'positive'
+  }
   ];
 
   // Secciones del dashboard

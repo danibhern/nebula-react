@@ -28,8 +28,18 @@ export default function InicioSesionForm() {
             };
             localStorage.setItem('user', JSON.stringify(userData));
             navigate('/perfil'); // Redirige al Perfil del cliente
+        
+        }else if(username === "emp1" && password === "emp123"){
+            const userData = {
+                name: username,
+                email: `${username}@nebula.com`,
+                role: 'Empleado Barista'
+            };
+            localStorage.setItem('user', JSON.stringify(userData));
+            navigate('/emp1'); 
+
         } else {
-            setError('Credenciales incorrectas. Usa: admin/admin123 o cliente/cliente123');
+            setError('Credenciales incorrectas. Usa: admin/admin123 o cliente/cliente123 o emp1/emp123');
         }
     };
 
