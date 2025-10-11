@@ -3,6 +3,7 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaMapMarkerAlt, FaFileAlt, FaShiel
 import AtomLink from '../atoms/AtomLink';
 import AtomButton from '../atoms/AtomButton';
 import "../../styles/Catalogo.css";
+import First from "../organisms/First.jsx";
 
 
 const productos = [
@@ -347,8 +348,8 @@ export default function Catalogo() {
           <div className="nav-links">
             <AtomLink to="/">Home</AtomLink>
             <AtomLink to="/about">Quienes Somos</AtomLink>
-            <AtomLink to="/menu">Menú</AtomLink>
             <AtomLink to="/catalogo">Catalogo</AtomLink>
+            <AtomLink to="/contacto">Contacto</AtomLink>
           </div>
         </div>
         <div id="carrito-icono">
