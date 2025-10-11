@@ -10,6 +10,7 @@ import AdminDashboard from "./components/organisms/AdminDashboard";
 import PortalPagos from "../src/components/pages/PortalPagos";
 import Perfil from "../src/components/pages/Perfil";
 import EmployeeDashboard from "./components/organisms/EmpDashboard";
+import Registro from "./components/organisms/Registro";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/about" element={<About />} /> 
         <Route path="/resenas" element={<Resenas />} />
         <Route path="/inicio_sesion" element={<LoginPage />} />
+        <Route path="/registro" element={<Registro/>} />
         <Route path="/admin" element={<AdminDashboard/>}/>
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/emp1" element={<EmployeeDashboard/>}/>
