@@ -1,0 +1,366 @@
+/* styles/Registro.css - Versión Rosa */
+.registro-container-rosa {
+    height: 107vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+
+.registro-fondo-rosa {
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 50%, #f48fb1 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: auto;
+}
+
+.registro-fondo-rosa::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e91e63' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    animation: float 20s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(-100px) translateY(-100px); }
+}
+
+.registro-card-rosa {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 40px 40px;
+    box-shadow: 0 25px 50px rgba(14, 2, 6, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 100%;
+    max-width: 700px;
+    height: 100vw; 
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.registro-card-rosa::-webkit-scrollbar {
+    width: 8px;
+}
+
+.registro-card-rosa::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #b788bd, #b85390);
+    border-radius: 10px;
+}
+
+.registro-header-rosa {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.logo-grande-rosa {
+    width: 190px;
+    height: 130px;
+    margin-bottom: 20px;
+    border-radius: 98px;
+    object-fit: contain;
+    background: linear-gradient(90deg, #b788bd, #b85390);
+    padding: 3px;
+    box-shadow: 0 15px 30px rgba(210, 12, 137, 0.3);
+    border: 4px solid white;
+}
+
+.registro-header-rosa h1 {
+    color: #b02193;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ce3fa8, #b51f72);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.registro-header-rosa p {
+    color: #454545;
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+.registro-form-rosa {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group-rosa {
+    position: relative;
+}
+
+.input-container-rosa {
+    position: relative;
+}
+
+.input-rosa {
+    width: 100%;
+    padding: 18px 20px;
+    border: 2px solid #f0f0f0;
+    border-radius: 15px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.input-rosa:focus {
+    border-color: #ab239b;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.1);
+    transform: translateY(-2px);
+}
+
+.input-rosa:focus + .floating-label-rosa,
+.input-rosa:not(:placeholder-shown) + .floating-label-rosa {
+    top: -10px;
+    left: 15px;
+    font-size: 0.8rem;
+    background: white;
+    padding: 0 8px;
+    color: #d03abe;
+    font-weight: 600;
+}
+
+.floating-label-rosa {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    font-size: 1rem;
+    color: #999;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    background: transparent;
+}
+
+.input-error-rosa {
+    border-color: #cd34b4 !important;
+    background: #fdf2f2 !important;
+}
+
+.input-error-rosa:focus {
+    box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1) !important;
+}
+
+.error-message-rosa {
+    color: #dc4194;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    display: block;
+    font-weight: 500;
+    padding-left: 5px;
+}
+
+.btn-registro-rosa {
+    background: linear-gradient(90deg, #b788bd, #b85390);
+    color: white;
+    border: none;
+    padding: 18px 30px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
+}
+
+.btn-registro-rosa:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(233, 30, 99, 0.4);
+    background: linear-gradient(135deg, #ab1474, #bd0899);
+}
+
+.btn-icon-rosa {
+    font-size: 1.2rem;
+}
+
+.errores-globales-rosa {
+    background: linear-gradient(135deg, #fdf2f2, #fffcfb);
+    border: 2px solid #e649ba;
+    border-radius: 25px;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.error-icon-rosa {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.errores-globales-rosa h4 {
+    color: #585353;
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+}
+
+.errores-globales-rosa p {
+    color: #413a39;
+    margin: 5px 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.registro-footer-rosa {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.registro-footer-rosa p {
+    color: #666;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.link-login-rosa {
+    color: #be1992;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.link-login-rosa:hover {
+    color: #e00ca7;
+}
+
+.link-login-rosa::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #f45388;
+    transition: width 0.3s ease;
+}
+
+.link-login-rosa:hover::after {
+    width: 100%;
+}
+
+footer {
+  background-color: #b85390;
+  color: #f0eee9;
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-section {
+  min-width: 200px;
+}
+
+.footer-section h3 {
+  border-bottom: 1.5px solid #b85390;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.8rem;
+}
+
+footer .footer-section ul li,
+footer .footer-section ul li a,
+footer .footer-section ul li i {
+  color: #e1cdda;
+}
+
+footer .footer-section ul li a {
+  color: #f0d9e8;
+  text-decoration: none;   
+  margin-right: 8px;
+  vertical-align: middle;
+  font-size: 1.1rem;
+  min-width: 20px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+footer .footer-section ul li a:hover,
+footer .footer-section ul li a:focus {
+  color: #ffffff;          /* cambia a blanco en hover */
+  text-decoration: none;   /* no vuelve a aparecer subrayado */
+  transform: translateX(3px); 
+}
+
+.footer-section a {
+  transition: color 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .registro-fondo-rosa {
+        padding: 10px;
+    }
+    
+    .registro-card-rosa {
+        padding: 40px 25px;
+        margin: 20px;
+    }
+    
+    .logo-grande-rosa {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .registro-header-rosa h1 {
+        font-size: 1.8rem;
+    }
+    
+    .input-rosa {
+        padding: 16px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .registro-card-rosa {
+        padding: 30px 20px;
+    }
+    
+    .logo-grande-rosa {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .registro-header-rosa h1 {
+        font-size: 1.6rem;
+    }
+    
+    .btn-registro-rosa {
+        padding: 16px 25px;
+        font-size: 1rem;
+    }
+}
