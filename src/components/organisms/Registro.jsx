@@ -1,4 +1,3 @@
-// components/pages/Registro.jsx
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import AtomButton from "../atoms/AtomButton";
