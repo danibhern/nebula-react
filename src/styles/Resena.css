@@ -1,4 +1,3 @@
-/* styles/Resena.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 * {
@@ -21,7 +20,6 @@ body, html {
   overflow: hidden;
 }
 
-/* Efectos de fondo decorativos */
 .resenas-container::before {
   content: '';
   position: absolute;
@@ -64,7 +62,6 @@ body, html {
   100% { transform: translateX(-100px) translateY(-100px); }
 }
 
-/* Header */
 .resenas-header {
   text-align: center;
   margin-bottom: 50px;
@@ -94,7 +91,6 @@ body, html {
   opacity: 0.9;
 }
 
-/* Estadísticas */
 .resenas-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -157,7 +153,6 @@ body, html {
   margin: 0 1px;
 }
 
-/* Botón agregar reseña */
 .agregar-reseña-section {
   text-align: center;
   margin-bottom: 40px;
@@ -201,7 +196,6 @@ body, html {
   background: linear-gradient(135deg, #ff7ba8, #d44d7a);
 }
 
-/* Formulario de reseña */
 .formulario-reseña {
   max-width: 600px;
   margin: 0 auto 50px auto;
@@ -327,7 +321,6 @@ body, html {
   line-height: 1.5;
 }
 
-/* Selector de calificación */
 .selector-calificacion {
   display: flex;
   gap: 12px;
@@ -409,7 +402,6 @@ body, html {
   background: linear-gradient(135deg, #ff7ba8, #d44d7a);
 }
 
-/* Lista de reseñas */
 .lista-resenas {
   max-width: 1000px;
   margin: 0 auto;
@@ -669,7 +661,6 @@ body, html {
   }
 }
 
-/* Efecto de carga para el botón */
 .btn-enviar-reseña.loading {
   pointer-events: none;
   opacity: 0.8;
