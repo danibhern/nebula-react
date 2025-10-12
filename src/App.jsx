@@ -11,6 +11,7 @@ import PortalPagos from "../src/components/pages/PortalPagos";
 import Perfil from "../src/components/pages/Perfil";
 import EmployeeDashboard from "./components/organisms/EmpDashboard";
 import Registro from "./components/organisms/Registro";
+import Contacto from "./components/pages/Contacto";
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/pagos" element={<PortalPagos />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/resenas" element={<Resenas />} />
       </Routes>
     </BrowserRouter>
   );

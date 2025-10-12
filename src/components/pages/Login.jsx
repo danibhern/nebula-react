@@ -18,9 +18,9 @@ export default function LoginPage() {
           <div className="nav-links">
             <AtomLink to="/">Home</AtomLink>
             <AtomLink to="/about">Quienes Somos</AtomLink>
-            <AtomLink to="/menu">Menú</AtomLink>
             <AtomLink to="/catalogo">Catalogo</AtomLink>
             <AtomLink to ="/resenas">Reseñas</AtomLink>
+            <AtomLink to="/contacto">Contacto</AtomLink>
           </div>
         </div>
         <AtomLink to="/inicio_sesion">

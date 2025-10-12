@@ -1,149 +1,257 @@
-import React, { useEffect, useState } from "react";
-import "../../styles/Resena.css"; // Asegúrate de que la ruta es correcta
+import React, { useState } from 'react';
+import First from '../organisms/First';
+import Footer from '../organisms/Footer';
+import AtomButton from '../atoms/AtomButton';
+import "../../styles/Resena.css";
 
-// Componente para las estrellas de calificación
-const StarRating = ({ rating, setRating, error }) => {
-  const [hoverValue, setHoverValue] = useState(undefined);
+// Datos de ejemplo para reseñas existentes
+const reseñasEjemplo = [
+  {
+    id: 1,
+    nombre: "Yesenia Jara",
+    fecha: "2024-01-15",
+    calificacion: 5,
+    comentario: "¡El mejor café que he probado! El ambiente es acogedor y el servicio excepcional. Volveré seguro.",
+    avatar: "👩‍💼"
+  },
+  {
+    id: 2,
+    nombre: "Pablo Martinez",
+    fecha: "2024-01-12",
+    calificacion: 4,
+    comentario: "Muy buen café y pasteles deliciosos. El personal es muy amable. Recomendado.",
+    avatar: "👨‍💼"
+  },
+  {
+    id: 3,
+    nombre: "Daniela Barrera",
+    fecha: "2024-01-10",
+    calificacion: 5,
+    comentario: "Me encanta el café especial que sirven aquí. Perfecto para trabajar o reunirse con amigos.",
+    avatar: "👩‍🎓"
+  }
+];
 
-  const handleMouseOver = (value) => {
-    setHoverValue(value);
+export default function Resenas() {
+  const [reseñas, setReseñas] = useState(reseñasEjemplo);
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [nuevaReseña, setNuevaReseña] = useState({
+    nombre: '',
+    calificacion: 5,
+    comentario: ''
+  });
+  const [enviado, setEnviado] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNuevaReseña(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  const handleMouseLeave = () => {
-    setHoverValue(undefined);
+  const handleCalificacionClick = (puntos) => {
+    setNuevaReseña(prev => ({
+      ...prev,
+      calificacion: puntos
+    }));
   };
-
-  return (
-    <div className="star-rating">
-      <label>Tu Calificación *</label>
-      {error && <span className="error"> {error}</span>}
-      <div className="stars-container">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <button
-            type="button"
-            key={star}
-            className={`star ${star <= (hoverValue || rating) ? "filled" : ""}`}
-            onClick={() => setRating(star)}
-            onMouseOver={() => handleMouseOver(star)}
-            onMouseLeave={handleMouseLeave}
-          >
-            ★
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// Componente principal DejaResena
-export default function DejaResena() {
-  const [resenas, setResenas] = useState([]);
-  const [nombre, setNombre] = useState("");
-  const [comentario, setComentario] = useState("");
-  const [rating, setRating] = useState(0);
-  const [errors, setErrors] = useState({});
-
-  // Cargar reseñas desde localStorage al montar el componente
-  useEffect(() => {
-    const stored = localStorage.getItem("resenas");
-    if (stored) {
-      setResenas(JSON.parse(stored));
-    }
-  }, []);
-
-  // Guardar en localStorage cuando las reseñas cambien
-  useEffect(() => {
-    localStorage.setItem("resenas", JSON.stringify(resenas));
-  }, [resenas]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    const newErrors = {};
-    if (!nombre.trim()) newErrors.nombre = "El nombre es obligatorio";
-    if (!comentario.trim()) newErrors.comentario = "El comentario es obligatorio";
-    if (rating === 0) newErrors.rating = "Selecciona una calificación";
-    
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-    
-    setErrors({});
-    const nuevaResena = {
-      id: Date.now(),
-      nombre,
-      comentario,
-      rating,
-      fecha: new Date().toLocaleDateString()
+    const reseñaCompleta = {
+      id: reseñas.length + 1,
+      nombre: nuevaReseña.nombre || "Cliente Anónimo",
+      fecha: new Date().toISOString().split('T')[0],
+      calificacion: parseInt(nuevaReseña.calificacion),
+      comentario: nuevaReseña.comentario,
+      avatar: "😊"
     };
 
-    setResenas([nuevaResena, ...resenas]);
-    setNombre("");
-    setComentario("");
-    setRating(0);
+    setReseñas(prev => [reseñaCompleta, ...prev]);
+    setEnviado(true);
+    setNuevaReseña({
+      nombre: '',
+      calificacion: 5,
+      comentario: ''
+    });
+
+    setTimeout(() => {
+      setEnviado(false);
+      setMostrarFormulario(false);
+    }, 3000);
+  };
+
+  const calcularPromedio = () => {
+    if (reseñas.length === 0) return 0;
+    const suma = reseñas.reduce((acc, reseña) => acc + reseña.calificacion, 0);
+    return (suma / reseñas.length).toFixed(1);
+  };
+
+  const renderEstrellas = (calificacion) => {
+    return (
+      <div className="estrellas">
+        {[1, 2, 3, 4, 5].map((estrella) => (
+          <span
+            key={estrella}
+            className={`estrella ${estrella <= calificacion ? 'activa' : ''}`}
+          >
+            ⭐
+          </span>
+        ))}
+      </div>
+    );
   };
 
   return (
-    <div className="resenas-container">
-      <h2>Comparte tu Experiencia Rosa </h2>
+    <>
       
-      <form onSubmit={handleSubmit} className="resena-form">
-        <div className="form-group">
-          <label>Tu nombre *</label>
-          <input
-            type="text"
-            placeholder="¿Cómo te llamas?"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            className={errors.nombre ? "error-field" : ""}
-          />
-          {errors.nombre && <span className="error">{errors.nombre}</span>}
+      <div className="resenas-container">
+        {/* Header */}
+        <div className="resenas-header">
+          <h1>Reseñas de Nuestros Clientes</h1>
+          <p>Comparte tu experiencia y descubre lo que opinan otros clientes</p>
         </div>
 
-        <StarRating 
-          rating={rating} 
-          setRating={setRating}
-          error={errors.rating}
-        />
-
-        <div className="form-group">
-          <label>Tu experiencia *</label>
-          <textarea
-            placeholder="Cuéntanos qué te pareció la cafetería, el ambiente, el café..."
-            value={comentario}
-            onChange={(e) => setComentario(e.target.value)}
-            rows="4"
-            className={errors.comentario ? "error-field" : ""}
-          />
-          {errors.comentario && <span className="error">{errors.comentario}</span>}
-        </div>
-
-        <button type="submit" className="submit-btn">
-          Publicar Reseña ✨
-        </button>
-      </form>
-
-      <div className="resenas-list">
-        <h3>Lo que dicen nuestros visitantes</h3>
-        {resenas.length === 0 ? (
-          <p className="sin-resenas">Sé el primero en dejar una reseña 🌟</p>
-        ) : (
-          resenas.map((r) => (
-            <div key={r.id} className="resena-card">
-              <div className="resena-header">
-                <strong>{r.nombre}</strong>
-                <span className="fecha">{r.fecha}</span>
-              </div>
-              <div className="rating-display">
-                {"★".repeat(r.rating)}{"☆".repeat(5 - r.rating)}
-                <span className="rating-text">({r.rating}/5)</span>
-              </div>
-              <p>{r.comentario}</p>
+        {/* Estadísticas */}
+        <div className="resenas-stats">
+          <div className="stat-card">
+            <div className="stat-number">{reseñas.length}</div>
+            <div className="stat-label">Reseñas Totales</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-number">{calcularPromedio()}</div>
+            <div className="stat-label">Calificación Promedio</div>
+            <div className="estrellas-pequenas">
+              {renderEstrellas(Math.round(calcularPromedio()))}
             </div>
-          ))
+          </div>
+          <div className="stat-card">
+            <div className="stat-number">
+              {reseñas.filter(r => r.calificacion === 5).length}
+            </div>
+            <div className="stat-label">Reseñas 5 Estrellas</div>
+          </div>
+        </div>
+
+        {/* Botón para agregar reseña */}
+        <div className="agregar-reseña-section">
+          <AtomButton 
+            className="btn-agregar-reseña"
+            onClick={() => setMostrarFormulario(!mostrarFormulario)}
+          >
+            {mostrarFormulario ? '✕ Cancelar' : '✍️ Escribir Mi Reseña'}
+          </AtomButton>
+        </div>
+
+        {/* Formulario de reseña */}
+        {mostrarFormulario && (
+          <div className="formulario-reseña">
+            <div className="formulario-card">
+              <h3>Comparte Tu Experiencia</h3>
+              
+              {enviado && (
+                <div className="mensaje-exito">
+                  ¡Gracias por tu reseña! Tu opinión ha sido publicada.
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="nombre">Tu Nombre (Opcional)</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value={nuevaReseña.nombre}
+                    onChange={handleInputChange}
+                    placeholder="¿Cómo te llamas?"
+                    className="input-reseña"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Tu Calificación</label>
+                  <div className="selector-calificacion">
+                    {[1, 2, 3, 4, 5].map((puntos) => (
+                      <button
+                        key={puntos}
+                        type="button"
+                        className={`puntuacion-btn ${
+                          puntos === nuevaReseña.calificacion ? 'seleccionada' : ''
+                        }`}
+                        onClick={() => handleCalificacionClick(puntos)}
+                      >
+                        <span className="estrella-btn">
+                          {puntos <= nuevaReseña.calificacion ? '⭐' : '☆'}
+                        </span>
+                        <span className="numero-puntos">{puntos}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="comentario">Tu Reseña *</label>
+                  <textarea
+                    id="comentario"
+                    name="comentario"
+                    value={nuevaReseña.comentario}
+                    onChange={handleInputChange}
+                    placeholder="Comparte tu experiencia en Café Nebula..."
+                    className="textarea-reseña"
+                    rows="4"
+                    required
+                  ></textarea>
+                </div>
+
+                <AtomButton type="submit" className="btn-enviar-reseña">
+                  Publicar Reseña
+                </AtomButton>
+              </form>
+            </div>
+          </div>
         )}
+
+        {/* Lista de reseñas */}
+        <div className="lista-resenas">
+          <h2>Opiniones de Clientes</h2>
+          
+          {reseñas.length === 0 ? (
+            <div className="sin-resenas">
+              <p>¡Sé el primero en dejar una reseña!</p>
+            </div>
+          ) : (
+            <div className="resenas-grid">
+              {reseñas.map((reseña) => (
+                <div key={reseña.id} className="reseña-card">
+                  <div className="reseña-header">
+                    <div className="reseña-avatar">
+                      {reseña.avatar}
+                    </div>
+                    <div className="reseña-info">
+                      <h4 className="reseña-nombre">{reseña.nombre}</h4>
+                      <span className="reseña-fecha">{reseña.fecha}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="reseña-calificacion">
+                    {renderEstrellas(reseña.calificacion)}
+                  </div>
+                  
+                  <p className="reseña-comentario">{reseña.comentario}</p>
+                  
+                  <div className="reseña-acciones">
+                    <button className="btn-accion">👍 Útil</button>
+                    <button className="btn-accion">💬 Responder</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

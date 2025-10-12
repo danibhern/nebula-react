@@ -326,13 +326,12 @@ export default function Carrito() {
                     <div className="nav-links">
                         <AtomLink to="/">Home</AtomLink>
                         <AtomLink to="/about">Quienes Somos</AtomLink>
-                        <AtomLink to="/menu">Menú</AtomLink>
                         <AtomLink to="/catalogo">Catálogo</AtomLink>
+                        <AtomLink to="/resenas">Reseñas</AtomLink>
+                        <AtomLink to="/contacto">Contacto</AtomLink>
+
                     </div>
                 </div>
-                <AtomLink to="/inicio_sesion">
-                    <AtomButton className="boton-login">Iniciar sesión</AtomButton>
-                </AtomLink>
                 <div id="carrito-icono">
                     🛒 <span id="contador">{calcularCantidadTotal()}</span>
                     <AtomLink to="/carrito">Ver Carrito</AtomLink>
