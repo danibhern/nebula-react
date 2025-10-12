@@ -19,7 +19,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} /> 
-        <Route path="/resenas" element={<Resenas />} />
         <Route path="/inicio_sesion" element={<LoginPage />} />
         <Route path="/registro" element={<Registro/>} />
         <Route path="/admin" element={<AdminDashboard/>}/>
