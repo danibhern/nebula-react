@@ -1,16 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import React from 'react';
 import AtomButton from '../atoms/AtomButton';
 import AtomLink from '../atoms/AtomLink';
 
-export default function InicioSesionForm() {
+export default function InicioSesion() {
     const navigate = useNavigate();
     const [error, setError] = useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
-        const username = e.target.nombre.value;
-        const password = e.target.pass.value;
+        const formData = new FormData(e.target);
+        const username = formData.get('nombre');
+        const password = formData.get('pass');
 
         if (username === "admin" && password === "admin123") {
             const userData = {
@@ -28,8 +30,7 @@ export default function InicioSesionForm() {
             };
             localStorage.setItem('user', JSON.stringify(userData));
             navigate('/perfil'); // Redirige al Perfil del cliente
-        
-        }else if(username === "emp1" && password === "emp123"){
+        } else if (username === "emp1" && password === "emp123") {
             const userData = {
                 name: username,
                 email: `${username}@nebula.com`,
@@ -37,7 +38,6 @@ export default function InicioSesionForm() {
             };
             localStorage.setItem('user', JSON.stringify(userData));
             navigate('/emp1'); 
-
         } else {
             setError('Credenciales incorrectas. Usa: admin/admin123 o cliente/cliente123 o emp1/emp123');
         }
