@@ -77,10 +77,6 @@ describe("Botones de Categoría en Catálogo", () => {
   });
 });
 
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import Catalogo from './Catalogo';
-import { BrowserRouter } from 'react-router-dom';
 
 describe("Filtros de precio mínimo y máximo en Catalogo", () => {
   beforeEach(() => {
