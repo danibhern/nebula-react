@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // 👈 Importa useNavigate
+import { useNavigate } from 'react-router-dom'; 
 import AtomLink from '../atoms/AtomLink';
 import AtomButton from '../atoms/AtomButton';
 import Footer from '../organisms/Footer.jsx';
@@ -17,7 +17,7 @@ export default function Carrito() {
     const autocompleteRef = useRef(null);
     const inputRef = useRef(null);
     const [scriptCargado, setScriptCargado] = useState(false);
-    const navigate = useNavigate(); // 👈 Hook para navegación
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         try {
@@ -72,7 +72,7 @@ export default function Carrito() {
 
         const script = document.createElement('script');
         script.id = 'google-places-script';
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAq3Wf3dbr2AOv05JQ21lToka1zUrYnN98&libraries=places&callback=initGoogleMaps`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9I4f73bxo-4ssOmXnn4mf_WulEY4fXk&libraries=places&callback=initGoogleMaps`;
         script.async = true;
         script.defer = true;
         
@@ -135,12 +135,10 @@ export default function Carrito() {
         const address = place.formatted_address.toLowerCase();
         const addressComponents = place.address_components;
 
-        // Buscar la región en los componentes de la dirección
         const regionComponent = addressComponents.find(component => 
             component.types.includes('administrative_area_level_1')
         );
 
-        // Buscar la comuna
         const comunaComponent = addressComponents.find(component => 
             component.types.includes('locality') || 
             component.types.includes('sublocality_level_1')
@@ -169,7 +167,6 @@ export default function Carrito() {
             }
         }
 
-        // Detección por palabras clave en la dirección completa
         if (address.includes('santiago') || address.includes('providencia') || 
             address.includes('las condes') || address.includes('ñuñoa') ||
             address.includes('macul') || address.includes('la florida') ||
