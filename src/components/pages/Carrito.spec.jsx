@@ -25,7 +25,6 @@ describe('Carrito - añadir y eliminar productos', () => {
     expect(mensajeConfirmacion).toBeInTheDocument();
   });
 
-
   it('elimina un producto del carrito', async () => {
     const mockCarrito = [
       {
@@ -49,10 +48,39 @@ describe('Carrito - añadir y eliminar productos', () => {
     const botonesEliminar = screen.getAllByRole('button', { name: /🗑️/i });
     fireEvent.click(botonesEliminar[0]);
 
-
     await waitFor(() => {
       expect(screen.queryByText(/Café Daroma/i)).toBeNull();
     });
+  });
+
+
+  it('muestra los productos en el carrito', async () => {
+    const mockCarrito = [
+      {
+        nombre: "Café Daroma",
+        descripcion: "Café en grano 250g",
+        precio: 5890,
+        img: "https://focusmood.coffee/cl/wp-content/uploads/2024/08/Envase-Arabico-Negro-1-600x450.png",
+        cantidad: 1,
+      },
+      {
+        nombre: "Manuel Caffe", 
+        descripcion: "Café molido 500g",
+        precio: 10000,
+        img: "https://manuelcaffe.cl/wp-content/uploads/2025/01/DOIPACK-Armonia_A_62e3ceb6-e998-47a6-b1ca-77804ae85a4e.png",
+        cantidad: 1,
+      }
+    ];
+    Storage.prototype.getItem = jest.fn(() => JSON.stringify(mockCarrito));
+
+    render(
+      <BrowserRouter>
+        <Carrito />
+      </BrowserRouter>
+    );
+    
+    expect(await screen.findByText("Café Daroma")).toBeInTheDocument();
+    expect(await screen.findByText("Manuel Caffe")).toBeInTheDocument();
   });
 
 });
