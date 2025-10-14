@@ -75,8 +75,7 @@ export default function Carrito() {
         script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAP9I4f73bxo-4ssOmXnn4mf_WulEY4fXk&libraries=places&callback=initGoogleMaps`;
         script.async = true;
         script.defer = true;
-        
-        // Función callback global
+  
         window.initGoogleMaps = () => {
             setScriptCargado(true);
         };
@@ -128,7 +127,6 @@ export default function Carrito() {
         }
     };
 
-    // Función para detectar región y comuna desde el objeto de Google Places
     const detectarRegionYComunaDesdePlace = (place) => {
         if (!place || !place.address_components) return { regionDetectada: 'desconocida', comunaDetectada: 'desconocida' };
 
