@@ -412,3 +412,301 @@ body, html {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+@media (max-width: 1023px) {
+    .contacto-content-rosa {
+        max-width: 90%;
+    }
+    
+    .contacto-header-rosa h1 {
+        font-size: 2.2rem;
+    }
+    
+    .form-row-rosa {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .mapa-section-rosa {
+        max-width: 90%;
+    }
+}
+
+/* Tablets medianas (768px - 967px) */
+@media (max-width: 967px) {
+    .contacto-container-rosa {
+        padding: 25px 15px;
+    }
+    
+    .contacto-header-rosa {
+        margin-bottom: 30px;
+    }
+    
+    .contacto-header-rosa h1 {
+        font-size: 2rem;
+    }
+    
+    .contacto-header-rosa p {
+        font-size: 1.05rem;
+    }
+    
+    .contacto-form-rosa {
+        padding: 25px;
+        border-radius: 18px;
+    }
+    
+    .contacto-form-rosa h2 {
+        font-size: 1.5rem;
+    }
+    
+    .mapa-section-rosa h2 {
+        font-size: 1.6rem;
+    }
+    
+    .mapa-section-rosa {
+        margin-top: 40px;
+    }
+}
+
+/* Tablets pequeñas (600px - 767px) */
+@media (max-width: 767px) {
+    .contacto-container-rosa {
+        padding: 20px 12px;
+    }
+    
+    .contacto-header-rosa h1 {
+        font-size: 1.9rem;
+    }
+    
+    .contacto-header-rosa p {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+    
+    .contacto-form-rosa {
+        padding: 22px;
+        border-radius: 16px;
+    }
+    
+    .contacto-form-rosa h2 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+    
+    .form-group-rosa {
+        margin-bottom: 18px;
+    }
+    
+    .input-contacto-rosa,
+    .select-contacto-rosa,
+    .textarea-contacto-rosa {
+        padding: 13px 15px;
+        font-size: 0.92rem;
+    }
+    
+    .btn-enviar-rosa {
+        padding: 15px 25px;
+        font-size: 0.98rem;
+    }
+    
+    .mapa-section-rosa h2 {
+        font-size: 1.5rem;
+    }
+    
+    .mapa-placeholder-rosa {
+        padding: 50px 20px;
+        font-size: 1.05rem;
+    }
+}
+
+/* Móviles grandes (480px - 599px) */
+@media (max-width: 599px) {
+    .contacto-container-rosa {
+        padding: 15px 10px;
+    }
+    
+    .contacto-header-rosa {
+        margin-bottom: 25px;
+    }
+    
+    .contacto-header-rosa h1 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .contacto-header-rosa p {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+    .contacto-content-rosa {
+        max-width: 95%;
+        margin-bottom: 40px;
+    }
+    
+    .contacto-form-rosa {
+        padding: 20px;
+        border-radius: 14px;
+    }
+    
+    .contacto-form-rosa h2 {
+        font-size: 1.3rem;
+        margin-bottom: 18px;
+    }
+    
+    .form-group-rosa label {
+        font-size: 0.88rem;
+        margin-bottom: 6px;
+    }
+    
+    .input-contacto-rosa,
+    .select-contacto-rosa,
+    .textarea-contacto-rosa {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+    
+    .textarea-contacto-rosa {
+        min-height: 100px;
+    }
+    
+    .btn-enviar-rosa {
+        padding: 14px 24px;
+        font-size: 0.95rem;
+        border-radius: 10px;
+        margin-top: 5px;
+    }
+    
+    .mensaje-exito-rosa {
+        padding: 14px;
+        font-size: 0.88rem;
+        border-radius: 10px;
+    }
+    
+    .mapa-section-rosa {
+        margin-top: 35px;
+        max-width: 95%;
+    }
+    
+    .mapa-section-rosa h2 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+    
+    .mapa-placeholder-rosa {
+        padding: 40px 15px;
+        font-size: 1rem;
+        border-radius: 14px;
+    }
+}
+
+/* Móviles medianos (400px - 479px) */
+@media (max-width: 479px) {
+    .contacto-container-rosa {
+        padding: 12px 8px;
+    }
+    
+    .contacto-header-rosa h1 {
+        font-size: 1.7rem;
+    }
+    
+    .contacto-header-rosa p {
+        font-size: 0.9rem;
+    }
+    
+    .contacto-form-rosa {
+        padding: 18px;
+        border-radius: 12px;
+    }
+    
+    .contacto-form-rosa h2 {
+        font-size: 1.25rem;
+    }
+    
+    .input-contacto-rosa,
+    .select-contacto-rosa,
+    .textarea-contacto-rosa {
+        padding: 11px 13px;
+        font-size: 0.88rem;
+    }
+    
+    .btn-enviar-rosa {
+        padding: 13px 22px;
+        font-size: 0.92rem;
+    }
+    
+    .mapa-section-rosa h2 {
+        font-size: 1.3rem;
+    }
+    
+    .mapa-placeholder-rosa {
+        padding: 35px 12px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Móviles pequeños (360px - 399px) */
+@media (max-width: 399px) {
+    .contacto-header-rosa h1 {
+        font-size: 1.6rem;
+    }
+    
+    .contacto-header-rosa p {
+        font-size: 0.88rem;
+    }
+    
+    .contacto-form-rosa {
+        padding: 16px;
+    }
+    
+    .contacto-form-rosa h2 {
+        font-size: 1.2rem;
+    }
+    
+    .input-contacto-rosa,
+    .select-contacto-rosa,
+    .textarea-contacto-rosa {
+        padding: 10px 12px;
+        font-size: 0.86rem;
+    }
+    
+    .btn-enviar-rosa {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .mapa-section-rosa h2 {
+        font-size: 1.25rem;
+    }
+    
+    .mapa-placeholder-rosa {
+        padding: 30px 10px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Móviles muy pequeños (320px - 359px) */
+@media (max-width: 359px) {
+    .contacto-container-rosa {
+        padding: 10px 5px;
+    }
+    
+    .contacto-header-rosa h1 {
+        font-size: 1.5rem;
+    }
+    
+    .contacto-form-rosa {
+        padding: 14px;
+    }
+    
+    .input-contacto-rosa,
+    .select-contacto-rosa,
+    .textarea-contacto-rosa {
+        padding: 9px 11px;
+    }
+    
+    .btn-enviar-rosa {
+        padding: 11px 18px;
+    }
+}
