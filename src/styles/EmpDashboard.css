@@ -625,14 +625,28 @@
   font-size: 0.85rem;
 }
 
-@media (max-width: 1024px) and (min-width: 769px) {
+@media (max-width: 1023px) {
     .employee-sidebar {
-        width: 240px;
+        width: 230px;
     }
     
     .employee-content {
-        margin-left: 240px;
-        padding: 25px;
+        margin-left: 230px;
+        padding: 22px;
+    }
+    
+    .sidebar-header {
+        height: 75px;
+        padding: 3px 7px;
+    }
+    
+    .sidebar-logo {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .sidebar-header h2 {
+        font-size: 0.98rem;
     }
     
     .employee-header h1 {
@@ -641,7 +655,7 @@
     
     .quick-stats {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 18px;
     }
     
     .stat-card {
@@ -649,40 +663,12 @@
     }
     
     .stat-info h3 {
-        font-size: 2rem;
-    }
-    
-    .tasks-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .schedule-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    .payroll-info {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    
-    .sidebar-header {
-        height: 80px;
-        padding: 4px 8px;
-    }
-    
-    .sidebar-logo {
-        width: 95px;
-        height: 95px;
-    }
-    
-    .sidebar-header h2 {
-        font-size: 1rem;
+        font-size: 1.9rem;
     }
 }
 
-/* Tabletas pequeñas (600px - 768px) */
-@media (max-width: 768px) and (min-width: 601px) {
+/* Tabletas medianas (768px - 967px) */
+@media (max-width: 967px) {
     .employee-container {
         flex-direction: column;
     }
@@ -701,7 +687,7 @@
     
     .sidebar-header {
         height: 70px;
-        padding: 3px 6px;
+        padding: 2px 6px;
     }
     
     .sidebar-logo {
@@ -724,9 +710,14 @@
         font-size: 1.7rem;
     }
     
+    .employee-badge {
+        padding: 9px 18px;
+        font-size: 0.88rem;
+    }
+    
     .quick-stats {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        gap: 16px;
     }
     
     .stat-card {
@@ -749,41 +740,71 @@
         align-items: flex-start;
     }
     
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .today-schedule,
+    .pending-tasks,
+    .schedule-section,
+    .tasks-section,
+    .payroll-section {
+        padding: 22px;
+    }
+    
+    .schedule-card {
+        padding: 18px;
+        gap: 16px;
+    }
+    
+    .schedule-info h3 {
+        font-size: 1.3rem;
+    }
+    
     .tasks-container {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 16px;
+    }
+    
+    .task-card {
+        padding: 20px;
+        flex-direction: row;
+        text-align: left;
+        gap: 16px;
     }
     
     .schedule-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-    
-    .payroll-info {
-        grid-template-columns: 1fr;
         gap: 15px;
     }
     
+    .payroll-info {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    
+    .payroll-card {
+        padding: 22px 18px;
+    }
+    
+    .btn {
+        padding: 11px 18px;
+        font-size: 0.88rem;
+    }
+    
     .menu-item {
-        padding: 12px 16px;
+        padding: 11px 15px;
         margin: 4px 8px;
     }
     
     .session-section {
-        padding: 15px;
+        padding: 16px;
     }
 }
 
-/* Móviles grandes (480px - 600px) */
-@media (max-width: 600px) and (min-width: 481px) {
-    .employee-sidebar {
-        width: 100%;
-        position: relative;
-        height: auto;
-    }
-    
+/* Tabletas pequeñas (600px - 767px) */
+@media (max-width: 767px) {
     .employee-content {
-        margin-left: 0;
         padding: 18px;
     }
     
@@ -793,18 +814,12 @@
     }
     
     .sidebar-logo {
-        width: 75px;
-        height: 75px;
+        width: 80px;
+        height: 80px;
     }
     
     .sidebar-header h2 {
         font-size: 0.9rem;
-    }
-    
-    .employee-header {
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 20px;
     }
     
     .employee-header h1 {
@@ -818,14 +833,14 @@
     
     .quick-stats {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 14px;
     }
     
     .stat-card {
         padding: 16px;
         flex-direction: row;
         text-align: left;
-        gap: 15px;
+        gap: 16px;
     }
     
     .stat-icon {
@@ -837,7 +852,7 @@
     }
     
     .stat-info p {
-        font-size: 0.9rem;
+        font-size: 0.92rem;
     }
     
     .section-header h2 {
@@ -854,46 +869,93 @@
     
     .schedule-card {
         padding: 16px;
-        gap: 15px;
+        gap: 14px;
     }
     
     .schedule-info h3 {
         font-size: 1.2rem;
     }
     
+    .schedule-info p {
+        font-size: 0.95rem;
+    }
+    
+    .add-task-form {
+        padding: 18px;
+    }
+    
+    .task-input {
+        padding: 11px 14px;
+        font-size: 0.92rem;
+    }
+    
+    .task-actions {
+        flex-direction: row;
+        gap: 10px;
+    }
+    
     .tasks-container {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 14px;
     }
     
     .task-card {
-        padding: 20px;
+        padding: 18px;
         flex-direction: row;
         text-align: left;
         gap: 15px;
     }
     
+    .task-content h3 {
+        font-size: 1.05rem;
+    }
+    
+    .task-content p {
+        font-size: 0.88rem;
+    }
+    
     .schedule-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-    
-    .schedule-day {
-        padding: 20px 15px;
-    }
-    
-    .payroll-info {
         grid-template-columns: 1fr;
         gap: 12px;
     }
     
+    .schedule-day {
+        padding: 20px 16px;
+    }
+    
+    .schedule-day h3 {
+        font-size: 1.15rem;
+    }
+    
+    .schedule-hours {
+        font-size: 1.25rem;
+    }
+    
+    .payroll-info {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    
     .payroll-card {
-        padding: 20px 15px;
+        padding: 20px 16px;
+    }
+    
+    .payroll-card h3 {
+        font-size: 1.15rem;
+    }
+    
+    .payroll-date,
+    .payroll-hours {
+        font-size: 1.35rem;
+    }
+    
+    .payroll-total {
+        font-size: 1.6rem;
     }
     
     .btn {
         padding: 10px 16px;
-        font-size: 0.85rem;
+        font-size: 0.86rem;
     }
     
     .menu-item {
@@ -901,39 +963,52 @@
         margin: 3px 6px;
     }
     
+    .menu-icon {
+        font-size: 1.05rem;
+        margin-right: 12px;
+    }
+    
     .menu-item span {
         font-size: 0.9rem;
     }
     
     .session-section {
-        padding: 12px;
+        padding: 14px;
     }
     
     .user-avatar {
-        width: 40px;
-        height: 40px;
+        width: 42px;
+        height: 42px;
+    }
+    
+    .user-details h4 {
+        font-size: 0.92rem;
+    }
+    
+    .user-details p {
+        font-size: 0.82rem;
     }
     
     .logout-btn {
-        padding: 8px 12px;
+        padding: 9px 14px;
         font-size: 0.85rem;
     }
 }
 
-/* Móviles pequeños (480px y menos) */
-@media (max-width: 480px) {
+/* Móviles grandes (480px - 599px) */
+@media (max-width: 599px) {
     .employee-content {
-        padding: 15px 12px;
+        padding: 16px 14px;
     }
     
     .sidebar-header {
         height: 60px;
-        padding: 2px 4px;
+        padding: 1px 4px;
     }
     
     .sidebar-logo {
-        width: 65px;
-        height: 65px;
+        width: 70px;
+        height: 70px;
     }
     
     .sidebar-header h2 {
@@ -941,9 +1016,8 @@
     }
     
     .employee-header {
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 18px;
+        gap: 12px;
+        margin-bottom: 22px;
     }
     
     .employee-header h1 {
@@ -951,25 +1025,22 @@
     }
     
     .employee-badge {
-        padding: 6px 14px;
-        font-size: 0.8rem;
+        padding: 7px 14px;
+        font-size: 0.82rem;
     }
     
     .quick-stats {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        margin-bottom: 30px;
+        gap: 12px;
+        margin-bottom: 28px;
     }
     
     .stat-card {
         padding: 15px;
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
+        gap: 14px;
     }
     
     .stat-icon {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
     }
     
     .stat-info h3 {
@@ -977,11 +1048,11 @@
     }
     
     .stat-info p {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
     
     .section-header {
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }
     
     .section-header h2 {
@@ -993,20 +1064,17 @@
     .schedule-section,
     .tasks-section,
     .payroll-section {
-        padding: 18px 15px;
+        padding: 18px 16px;
         border-radius: 12px;
     }
     
     .schedule-card {
         padding: 15px;
-        flex-direction: column;
-        text-align: center;
         gap: 12px;
-        border-radius: 15px;
     }
     
     .schedule-info h3 {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
     }
     
     .schedule-info p {
@@ -1014,7 +1082,7 @@
     }
     
     .add-task-form {
-        padding: 15px;
+        padding: 16px;
     }
     
     .task-input {
@@ -1028,15 +1096,12 @@
     }
     
     .tasks-container {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 12px;
     }
     
     .task-card {
-        padding: 18px;
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
+        padding: 16px;
+        gap: 14px;
     }
     
     .task-content h3 {
@@ -1048,12 +1113,11 @@
     }
     
     .schedule-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 10px;
     }
     
     .schedule-day {
-        padding: 18px 12px;
+        padding: 18px 14px;
     }
     
     .schedule-day h3 {
@@ -1065,12 +1129,11 @@
     }
     
     .payroll-info {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 12px;
     }
     
     .payroll-card {
-        padding: 18px 12px;
+        padding: 18px 14px;
     }
     
     .payroll-card h3 {
@@ -1088,13 +1151,12 @@
     
     .btn {
         padding: 9px 14px;
-        font-size: 0.82rem;
-        width: 100%;
+        font-size: 0.84rem;
     }
     
     .menu-item {
-        padding: 8px 12px;
-        margin: 2px 4px;
+        padding: 9px 12px;
+        margin: 2px 5px;
     }
     
     .menu-icon {
@@ -1107,17 +1169,16 @@
     }
     
     .session-section {
-        padding: 10px;
+        padding: 12px;
     }
     
     .user-avatar {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+        width: 38px;
+        height: 38px;
     }
     
     .user-details h4 {
-        font-size: 0.9rem;
+        font-size: 0.88rem;
     }
     
     .user-details p {
@@ -1125,8 +1186,95 @@
     }
     
     .logout-btn {
-        padding: 7px 10px;
-        font-size: 0.8rem;
+        padding: 8px 12px;
+        font-size: 0.82rem;
     }
 }
 
+/* Móviles medianos (400px - 479px) */
+@media (max-width: 479px) {
+    .employee-content {
+        padding: 14px 12px;
+    }
+    
+    .sidebar-header {
+        height: 55px;
+    }
+    
+    .sidebar-logo {
+        width: 65px;
+        height: 65px;
+    }
+    
+    .sidebar-header h2 {
+        font-size: 0.8rem;
+    }
+    
+    .employee-header h1 {
+        font-size: 1.4rem;
+    }
+    
+    .employee-badge {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .quick-stats {
+        gap: 10px;
+    }
+    
+    .stat-card {
+        padding: 14px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .stat-icon {
+        font-size: 1.8rem;
+    }
+    
+    .stat-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .section-header h2 {
+        font-size: 1.25rem;
+    }
+    
+    .today-schedule,
+    .pending-tasks,
+    .schedule-section,
+    .tasks-section,
+    .payroll-section {
+        padding: 16px 14px;
+    }
+    
+    .schedule-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .task-actions {
+        flex-direction: column;
+    }
+    
+    .task-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .schedule-day {
+        padding: 16px 12px;
+    }
+    
+    .payroll-card {
+        padding: 16px 12px;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}

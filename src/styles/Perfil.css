@@ -573,70 +573,515 @@
   color: #b85390;
 }
 
-/* Responsive - Igual al admin dashboard */
 @media (max-width: 768px) {
-  .perfil-sidebar {
-    width: 70px;
-    overflow: hidden;
-  }
+    .app-container {
+        flex-direction: column;
+    }
 
-  .sidebar-header h2, 
-  .menu-item span, 
-  .session-section h3,
-  .user-details {
-    display: none;
-  }
+    .perfil-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
 
-  .menu-item {
-    justify-content: center;
-    padding: 18px 15px;
-  }
+    .sidebar-header {
+        padding: 20px;
+        text-align: center;
+    }
 
-  .menu-icon {
-    margin-right: 0;
-    font-size: 1.3rem;
-  }
+    .sidebar-header h2 {
+        font-size: 1.1rem;
+    }
 
-  .session-section {
-    padding: 15px 10px;
-  }
+    .perfil-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px 0;
+    }
 
-  .user-info {
-    justify-content: center;
-  }
+    .menu-item {
+        flex: 0 0 auto;
+        padding: 12px 15px;
+        margin: 5px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        border-radius: 8px;
+        text-align: center;
+        flex-direction: column;
+        gap: 5px;
+    }
 
-  .user-avatar {
-    margin-right: 0;
-  }
+    .menu-item:hover,
+    .menu-item.activo {
+        border-left: none;
+        border-bottom: 3px solid #ffaf00;
+    }
 
-  .perfil-main-content {
-    padding: 20px;
-  }
+    .menu-icon {
+        margin-right: 0;
+        font-size: 1.2rem;
+    }
 
-  .overview-cards,
-  .dashboard-sections {
-    grid-template-columns: 1fr;
-  }
+    .menu-item span {
+        font-size: 0.8rem;
+    }
+
+    .session-section {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .user-info {
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .user-avatar {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .perfil-main-content {
+        padding: 20px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    .header h1 {
+        font-size: 1.6rem;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+
+    .overview-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card-value {
+        font-size: 1.7rem;
+    }
+
+    .dashboard-sections {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .section-card {
+        padding: 20px;
+    }
+
+    .section-content {
+        padding: 25px;
+    }
+
+    .direcciones-grid,
+    .metodos-pago-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .info-display .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .compra-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .compra-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}
+
+/* ==================== RESPONSIVE 480px ==================== */
+@media (max-width: 480px) {
+    .perfil-sidebar {
+        padding: 0;
+    }
+
+    .sidebar-header {
+        padding: 15px;
+    }
+
+    .sidebar-header h2 {
+        font-size: 1rem;
+    }
+
+    .perfil-menu {
+        padding: 10px 0;
+    }
+
+    .menu-item {
+        padding: 10px 12px;
+        margin: 3px;
+        font-size: 0.8rem;
+    }
+
+    .menu-icon {
+        font-size: 1rem;
+    }
+
+    .session-section {
+        padding: 12px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .user-details h4 {
+        font-size: 0.9rem;
+    }
+
+    .user-details p {
+        font-size: 0.8rem;
+    }
+
+    .logout-btn {
+        padding: 7px 12px;
+        font-size: 0.8rem;
+    }
+
+    .perfil-main-content {
+        padding: 15px;
+    }
+
+    .header {
+        margin-bottom: 20px;
+        padding: 10px 0;
+    }
+
+    .header h1 {
+        font-size: 1.4rem;
+    }
+
+    .header-actions {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 15px;
+    }
+
+    .overview-cards {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .card-header {
+        margin-bottom: 15px;
+    }
+
+    .card-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .card-value {
+        font-size: 1.6rem;
+    }
+
+    .dashboard-sections {
+        gap: 15px;
+    }
+
+    .section-card {
+        padding: 18px;
+    }
+
+    .section-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .section-content {
+        padding: 20px;
+    }
+
+    .section-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .info-display .info-item {
+        padding: 12px 0;
+    }
+
+    .info-display .info-item label,
+    .info-display .info-item span {
+        font-size: 0.9rem;
+    }
+
+    .info-form .form-group input {
+        padding: 10px 12px;
+    }
+
+    .direccion-card,
+    .metodo-pago-card {
+        padding: 18px;
+    }
+
+    .direccion-header h3,
+    .metodo-header h3 {
+        font-size: 1rem;
+    }
+
+    .direccion-actions,
+    .metodo-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btn-secundario,
+    .btn-eliminar {
+        width: 100%;
+        text-align: center;
+    }
+
+    .compra-card {
+        padding: 18px;
+    }
+
+    .compra-header strong {
+        font-size: 1rem;
+    }
+
+    .producto-item {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+
+@media (max-width: 320px) {
+    .perfil-sidebar {
+        padding: 0;
+    }
+
+    .sidebar-header {
+        padding: 12px 10px;
+    }
+
+    .sidebar-header h2 {
+        font-size: 0.9rem;
+    }
+
+    .perfil-menu {
+        padding: 8px 0;
+    }
+
+    .menu-item {
+        padding: 8px 10px;
+        margin: 2px;
+        font-size: 0.75rem;
+        min-width: 70px;
+    }
+
+    .menu-icon {
+        font-size: 0.9rem;
+    }
+
+    .session-section {
+        padding: 10px;
+    }
+
+    .user-info {
+        padding: 8px 0;
+    }
+
+    .user-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    .logout-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+    }
+
+    .perfil-main-content {
+        padding: 12px 10px;
+    }
+
+    .header {
+        margin-bottom: 15px;
+        padding: 8px 0;
+    }
+
+    .header h1 {
+        font-size: 1.3rem;
+    }
+
+    .btn {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+
+    .overview-cards {
+        gap: 10px;
+    }
+
+    .card {
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .card-header {
+        margin-bottom: 12px;
+    }
+
+    .card-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .card-title {
+        font-size: 0.9rem;
+    }
+
+    .card-value {
+        font-size: 1.5rem;
+    }
+
+    .card-footer {
+        font-size: 0.8rem;
+    }
+
+    .dashboard-sections {
+        gap: 12px;
+    }
+
+    .section-card {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .section-card h3 {
+        font-size: 1rem;
+        gap: 8px;
+    }
+
+    .section-card p {
+        font-size: 0.85rem;
+    }
+
+    .section-content {
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    .section-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .info-display .info-item {
+        padding: 10px 0;
+    }
+
+    .info-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .info-form .form-group input {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
+    .direcciones-grid,
+    .metodos-pago-grid {
+        gap: 12px;
+    }
+
+    .direccion-card,
+    .metodo-pago-card {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .badge-principal {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+    }
+
+    .compra-card {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .estado {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+
+    .fecha,
+    .seguimiento {
+        font-size: 0.8rem;
+    }
+
+    .total {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-item {
+        min-height: 44px; 
+    }
+    
+    .btn {
+        min-height: 44px; 
+    }
+    
+    input, select, textarea {
+        font-size: 16px; 
+    }
 }
 
 @media (max-width: 480px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
-  .header-actions {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .btn {
-    padding: 8px 12px;
-    font-size: 0.8rem;
-  }
-
-  .perfil-main-content {
-    padding: 15px;
-  }
+    .card:hover,
+    .section-card:hover,
+    .direccion-card:hover,
+    .metodo-pago-card:hover,
+    .compra-card:hover {
+        transform: none; 
+    }
 }
