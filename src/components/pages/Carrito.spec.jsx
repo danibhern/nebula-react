@@ -9,7 +9,7 @@ beforeEach(() => {
   Storage.prototype.setItem = jest.fn();
 });
 
-describe('Carrito - añadir y eliminar productos', () => {
+describe('Se añade producto al carrito', () => {
 
   it('añade un producto al carrito desde Catalogo', async () => {
     render(
@@ -25,7 +25,7 @@ describe('Carrito - añadir y eliminar productos', () => {
     expect(mensajeConfirmacion).toBeInTheDocument();
   });
 
-  it('elimina un producto del carrito', async () => {
+  it('Elimina un producto del carrito', async () => {
     const mockCarrito = [
       {
         nombre: "Café Daroma",
@@ -54,7 +54,7 @@ describe('Carrito - añadir y eliminar productos', () => {
   });
 
 
-  it('muestra los productos en el carrito', async () => {
+  it('Muestra los productos en el carrito', async () => {
     const mockCarrito = [
       {
         nombre: "Café Daroma",
