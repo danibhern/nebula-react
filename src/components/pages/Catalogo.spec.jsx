@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 describe("Botones de Categoría en Catálogo", () => {
   beforeEach(() => {
-    // Mock localStorage para el carrito
     Storage.prototype.getItem = jest.fn(() => JSON.stringify([]));
     Storage.prototype.setItem = jest.fn();
   });
@@ -34,12 +33,12 @@ describe("Botones de Categoría en Catálogo", () => {
     const botonCafes = screen.getByText("☕ Ver Cafés Premium");
     fireEvent.click(botonCafes);
 
-    // Verificar que se muestran cafés
+    
     expect(screen.getByText("Café Daroma")).toBeInTheDocument();
     expect(screen.getByText("Manuel Caffe")).toBeInTheDocument();
     expect(screen.getByText("Café Nestle Bonka")).toBeInTheDocument();
 
-    // Verificar que NO se muestran insumos
+    
     expect(screen.queryByText("Kit Basico Barista")).toBeNull();
     expect(screen.queryByText("Prensa Francesa")).toBeNull();
   });
@@ -54,12 +53,12 @@ describe("Botones de Categoría en Catálogo", () => {
     const botonInsumos = screen.getByText("🛠️ Ver Insumos de Café");
     fireEvent.click(botonInsumos);
 
-    // Verificar que se muestran insumos
+  
     expect(screen.getByText("Kit Basico Barista")).toBeInTheDocument();
     expect(screen.getByText("Prensa Francesa")).toBeInTheDocument();
     expect(screen.getByText("Jarra de 20 Oz")).toBeInTheDocument();
 
-    // Verificar que NO se muestran cafés
+   
     expect(screen.queryByText("Café Daroma")).toBeNull();
     expect(screen.queryByText("Manuel Caffe")).toBeNull();
   });
@@ -71,9 +70,8 @@ describe("Botones de Categoría en Catálogo", () => {
       </BrowserRouter>
     );
 
-    // Verificar que ambas categorías están visibles inicialmente
-    expect(screen.getByText("Café Daroma")).toBeInTheDocument(); // Café
-    expect(screen.getByText("Kit Basico Barista")).toBeInTheDocument(); // Insumo
+    expect(screen.getByText("Café Daroma")).toBeInTheDocument(); 
+    expect(screen.getByText("Kit Basico Barista")).toBeInTheDocument(); 
   });
 });
 
