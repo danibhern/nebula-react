@@ -11,7 +11,7 @@ export default function Carrito() {
     const [loading, setLoading] = useState(true);
     const [region, setRegion] = useState('');
     const [direccion, setDireccion] = useState('');
-    const [comuna, setComuna] = useState(''); // 👈 Nueva variable para comuna
+    const [comuna, setComuna] = useState(''); 
     const [mostrarFormEnvio, setMostrarFormEnvio] = useState(false);
     const [cargandoDireccion, setCargandoDireccion] = useState(false);
     const autocompleteRef = useRef(null);
@@ -43,21 +43,18 @@ export default function Carrito() {
         }
     }, [carrito, loading]);
 
-    // Inicializar Google Places Autocomplete
     useEffect(() => {
         if (mostrarFormEnvio && !scriptCargado) {
             loadGooglePlacesScript();
         }
         
         if (scriptCargado && mostrarFormEnvio && inputRef.current) {
-            // Pequeño delay para asegurar que el DOM esté listo
             setTimeout(() => {
                 initAutocomplete();
             }, 100);
         }
         
         return () => {
-            // Limpiar el autocomplete cuando el componente se desmonte
             if (autocompleteRef.current) {
                 window.google.maps.event.clearInstanceListeners(autocompleteRef.current);
             }
@@ -259,7 +256,7 @@ export default function Carrito() {
         return carrito.reduce((total, item) => total + (item.cantidad || 1), 0);
     };
 
-    // 👈 NUEVA FUNCIÓN: Redirigir al portal de pagos
+
     const redirigirAPortalPagos = () => {
         if (carrito.length === 0) {
             alert('El carrito está vacío');
@@ -277,7 +274,6 @@ export default function Carrito() {
             return;
         }
 
-        // Navegar al portal de pagos con los datos necesarios
         navigate('/pagos', { 
             state: { 
                 montoTotal: calcularTotalFinal(),

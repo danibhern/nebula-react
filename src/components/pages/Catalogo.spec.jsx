@@ -76,7 +76,7 @@ describe("Botones de Categoría en Catálogo", () => {
 });
 
 
-describe("Filtros de precio mínimo y máximo en Catalogo", () => {
+describe("Filtros para precios en Catalogo", () => {
   beforeEach(() => {
     Storage.prototype.getItem = jest.fn(() => JSON.stringify([]));
     Storage.prototype.setItem = jest.fn();
