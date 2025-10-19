@@ -37,11 +37,11 @@ import "../../styles/AdminDashboard.css";
 
 export default function AdminDashboard({ user, onLogout }) {
   const [activeMenu, setActiveMenu] = useState('dashboard');
-  const [viewMode, setViewMode] = useState('list'); // 'list', 'view', 'edit', 'new', 'receipt'
+  const [viewMode, setViewMode] = useState('list'); 
   const [selectedItem, setSelectedItem] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // ========== DATOS DE EJEMPLO ==========
+
   const overviewData = [
     { id: 1, title: 'Ventas Hoy', value: '$12,450', footer: 'Crecimiento: 15%', icon: FaDollarSign, trend: 'positive' },
     { id: 2, title: 'Órdenes Pendientes', value: '23', footer: 'Tiempo promedio: 15 min', icon: FaClock, trend: 'negative' },
@@ -101,7 +101,6 @@ export default function AdminDashboard({ user, onLogout }) {
     { id: 3, user: 'Carlos López', product: 'Sandwich Club', quantity: 1, total: 25.90, date: '2024-01-14' }
   ];
 
-  // Menú sin la opción de Roletas
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: FaTachometerAlt },
     { id: 'orders', label: 'Órdenes', icon: FaClipboardList },
@@ -113,7 +112,7 @@ export default function AdminDashboard({ user, onLogout }) {
     { id: 'profile', label: 'Perfil', icon: FaUser }
   ];
 
-  // ========== FUNCIONES PRINCIPALES ==========
+
   const handleMenuClick = (menuId) => {
     setActiveMenu(menuId);
     setViewMode('list');
@@ -157,7 +156,7 @@ export default function AdminDashboard({ user, onLogout }) {
     }
   };
 
-  // ========== COMPONENTES REUTILIZABLES ==========
+
   const DataTable = ({ data, columns, onEdit, onView, onDelete, searchPlaceholder }) => {
     const filteredData = data.filter(item =>
       Object.values(item).some(value =>
@@ -934,7 +933,6 @@ export default function AdminDashboard({ user, onLogout }) {
     }
   };
 
-  // ========== RENDER PRINCIPAL ==========
   const currentMenu = menuItems.find(item => item.id === activeMenu);
 
   return (
