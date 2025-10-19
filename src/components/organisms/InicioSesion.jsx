@@ -21,7 +21,7 @@ export default function InicioSesion() {
                 role: 'Administrador'
             };
             localStorage.setItem('user', JSON.stringify(userData));
-            navigate('/admin'); // Redirige al AdminDashboard
+            navigate('/admin'); 
         } else if (username === "cliente" && password === "cliente123") {
             const userData = {
                 name: username,
@@ -29,7 +29,7 @@ export default function InicioSesion() {
                 role: 'Cliente'
             };
             localStorage.setItem('user', JSON.stringify(userData));
-            navigate('/perfil'); // Redirige al Perfil del cliente
+            navigate('/perfil'); 
         } else if (username === "emp1" && password === "emp123") {
             const userData = {
                 name: username,

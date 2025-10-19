@@ -74,7 +74,6 @@ export default function Registro() {
         const hasErrors = Object.values(errors).some((err) => err !== '');
         if (hasErrors) return;
 
-        // Crear usuario
         const userData = {
             username: formData.email.split('@')[0],
             name: formData.nombre,
@@ -120,7 +119,6 @@ export default function Registro() {
             <div className="registro-container-rosa">
                 <div className="registro-fondo-rosa">
                     <section className="registro-card-rosa">
-                        {/* Header con logo grande */}
                         <div className="registro-header-rosa">
                             <img src="/img/nebula.png" alt="Nebula Café" className="logo-grande-rosa" />
                             <h1>Únete a Nebula Café</h1>

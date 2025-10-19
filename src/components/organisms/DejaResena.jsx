@@ -4,7 +4,6 @@ import Footer from '../organisms/Footer';
 import AtomButton from '../atoms/AtomButton';
 import "../../styles/Resena.css";
 
-// Datos de ejemplo para reseñas existentes
 const reseñasEjemplo = [
   {
     id: 1,
@@ -108,13 +107,12 @@ export default function Resenas() {
     <>
       
       <div className="resenas-container">
-        {/* Header */}
         <div className="resenas-header">
           <h1>Reseñas de Nuestros Clientes</h1>
           <p>Comparte tu experiencia y descubre lo que opinan otros clientes</p>
         </div>
 
-        {/* Estadísticas */}
+
         <div className="resenas-stats">
           <div className="stat-card">
             <div className="stat-number">{reseñas.length}</div>
@@ -135,7 +133,6 @@ export default function Resenas() {
           </div>
         </div>
 
-        {/* Botón para agregar reseña */}
         <div className="agregar-reseña-section">
           <AtomButton 
             className="btn-agregar-reseña"
@@ -145,7 +142,6 @@ export default function Resenas() {
           </AtomButton>
         </div>
 
-        {/* Formulario de reseña */}
         {mostrarFormulario && (
           <div className="formulario-reseña">
             <div className="formulario-card">
@@ -214,7 +210,6 @@ export default function Resenas() {
           </div>
         )}
 
-        {/* Lista de reseñas */}
         <div className="lista-resenas">
           <h2>Opiniones de Clientes</h2>
           

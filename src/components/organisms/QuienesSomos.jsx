@@ -6,10 +6,8 @@ export default function QuienesSomos() {
             <Container fluid className="px-0">
                 <Row className="justify-content-center mx-0">
                     <Col lg={10} className="px-0">
-                        {/* Título */}
                         <h2 className="quienes-somos-title">Quienes Somos</h2>
 
-                        {/* Texto principal */}
                         <div className="contenedor">
                             <p> 
                                 En <strong>Cafetería Nebula</strong> creemos que el café es más que una bebida: 
@@ -19,7 +17,6 @@ export default function QuienesSomos() {
                             </p>
                         </div>
 
-                        {/* Misión y Visión */}
                         <div className="bloques">
                             <div className="caja">
                                 <h3>Misión</h3>

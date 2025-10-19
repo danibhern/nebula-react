@@ -27,7 +27,6 @@ export default function EmployeeDashboard({ user, onLogout }) {
   const [newTask, setNewTask] = useState('');
   const [showAddTask, setShowAddTask] = useState(false);
 
-  // Datos específicos del empleado
   const employeeData = {
     schedule: [
       { day: 'Lunes', hours: '8:00 - 16:00', type: 'Turno Mañana' },
@@ -43,7 +42,6 @@ export default function EmployeeDashboard({ user, onLogout }) {
     }
   };
 
-  // Menú del empleado
   const menuItems = [
     { id: 'dashboard', label: 'Mi Panel', icon: FaUser },
     { id: 'schedule', label: 'Mi Horario', icon: FaCalendar },
@@ -51,7 +49,7 @@ export default function EmployeeDashboard({ user, onLogout }) {
     { id: 'payroll', label: 'Mi Nómina', icon: FaMoneyBill }
   ];
 
-  // Funciones para tareas
+
   const toggleTask = (taskId) => {
     setTasks(tasks.map(task => 
       task.id === taskId ? { ...task, completed: !task.completed } : task
@@ -75,19 +73,16 @@ export default function EmployeeDashboard({ user, onLogout }) {
     setTasks(tasks.filter(task => task.id !== taskId));
   };
 
-  // Función para solicitar cambio de horario
   const requestScheduleChange = () => {
     alert('Solicitud de cambio de horario enviada al administrador');
   };
 
-  // Función para ver detalles de pago
   const viewPayDetails = () => {
     alert(`Detalles de nómina:\nPróximo pago: ${employeeData.payInfo.nextPayment}\nHoras esta semana: ${employeeData.payInfo.hoursThisWeek}\nTotal: ${employeeData.payInfo.totalEarned}`);
   };
 
   return (
     <div className="employee-container">
-      {/* Sidebar del Empleado */}
       <div className="employee-sidebar">
         <div className="sidebar-header">
           <div className="logo-container">
@@ -126,8 +121,7 @@ export default function EmployeeDashboard({ user, onLogout }) {
           </button>
         </div>
       </div>
-      
-      {/* Contenido Principal del Empleado */}
+
       <div className="employee-content">
         <div className="employee-header">
           <h1>
@@ -143,7 +137,6 @@ export default function EmployeeDashboard({ user, onLogout }) {
         
         {activeMenu === 'dashboard' && (
           <div className="employee-dashboard">
-            {/* Resumen Rápido */}
             <div className="quick-stats">
               <div className="stat-card">
                 <FaClock className="stat-icon" />
@@ -171,7 +164,6 @@ export default function EmployeeDashboard({ user, onLogout }) {
               </div>
             </div>
 
-            {/* Horario de Hoy */}
             <div className="today-schedule">
               <div className="section-header">
                 <h2>Mi Horario de Hoy</h2>
@@ -191,7 +183,6 @@ export default function EmployeeDashboard({ user, onLogout }) {
               </div>
             </div>
 
-            {/* Tareas Pendientes */}
             <div className="pending-tasks">
               <div className="section-header">
                 <h2>Tareas Pendientes</h2>

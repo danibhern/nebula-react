@@ -12,7 +12,7 @@ export default function Reserva_Form() {
   const [fieldErrors, setFieldErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Validaciones
+
   const validateField = (name, value) => {
     switch (name) {
       case 'nombre':
@@ -60,7 +60,7 @@ export default function Reserva_Form() {
     console.log('Formulario enviado con éxito:', formData);
     alert('Reserva enviada con éxito ✅');
 
-    // 🔄 Limpiar formulario
+
     setFormData({
       nombre: '',
       email: '',
@@ -72,7 +72,6 @@ export default function Reserva_Form() {
     setFieldErrors({});
   };
 
-  // 👇 Se muestran todos los errores juntos al final
   const errorMessages = Object.values(fieldErrors).filter((e) => e);
 
   return (
@@ -141,7 +140,6 @@ export default function Reserva_Form() {
 
           <button type="submit">Reservar</button>
 
-          {/* 🔴 Mensajes de error generales debajo del botón */}
           {isSubmitted && errorMessages.length > 0 && (
             <div id="errores-globales">
               {errorMessages.map((msg, i) => (
@@ -159,7 +157,6 @@ export default function Reserva_Form() {
     </a>
   </h2>
   <div className="instagram-grid">
-    {/* Nota: Reemplaza los enlaces "#" por los enlaces reales de tus publicaciones de Instagram cuando los tengas */}
     <a href="https://www.instagram.com/p/xxx1" target="_blank" rel="noopener noreferrer">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO05Pqzb_Xf_U6Mcx2vX-wRpNRrAwfvUTGug&s" alt="Nebula Cafe interior" />
     </a>
