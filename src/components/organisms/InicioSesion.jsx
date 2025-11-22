@@ -1,45 +1,35 @@
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import React from 'react';
 import AtomButton from '../atoms/AtomButton';
 import AtomLink from '../atoms/AtomLink';
+// NOTA: Se eliminó la importación directa de 'login' y se reemplazó por la prop onLogin
 
-export default function InicioSesion() {
-    const navigate = useNavigate();
+
+export default function InicioSesion({ onLogin }) { // Recibe onLogin como prop
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => { 
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const username = formData.get('nombre');
-        const password = formData.get('pass');
+        setError('');
+        setIsLoading(true);
 
-        if (username === "admin" && password === "admin123") {
-            const userData = {
-                name: username,
-                email: `${username}@nebula.com`,
-                role: 'Administrador'
-            };
-            localStorage.setItem('user', JSON.stringify(userData));
-            navigate('/admin'); 
-        } else if (username === "cliente" && password === "cliente123") {
-            const userData = {
-                name: username,
-                email: `${username}@nebula.com`,
-                role: 'Cliente'
-            };
-            localStorage.setItem('user', JSON.stringify(userData));
-            navigate('/perfil'); 
-        } else if (username === "emp1" && password === "emp123") {
-            const userData = {
-                name: username,
-                email: `${username}@nebula.com`,
-                role: 'Empleado Barista'
-            };
-            localStorage.setItem('user', JSON.stringify(userData));
-            navigate('/emp1'); 
-        } else {
-            setError('Credenciales incorrectas. Usa: admin/admin123 o cliente/cliente123 o emp1/emp123');
+        // Captura de valores usando los nombres de input que ya tenías
+        const username = e.target.nombre.value; 
+        const password = e.target.pass.value;
+
+        try {
+            // Llama a la función pasada desde la página (LoginPage)
+            await onLogin(username, password); 
+            // Si es exitoso, la redirección ocurre en el padre.
+
+        } catch (err) {
+            // Este error fue lanzado desde LoginPage
+            let errorMessage = err.message || 'Error de conexión. Intente más tarde.';
+            setError(errorMessage);
+
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -56,8 +46,13 @@ export default function InicioSesion() {
                         <label htmlFor="pass">Contraseña</label>
                         <input type="password" name="pass" id="pass" placeholder="Contraseña" required />
                     </div>
-                    {error && <div className="error-message">{error}</div>}
-                    <AtomButton type="submit" className="button">Iniciar Sesion</AtomButton>
+                    
+                    {/* Mostrar error */}
+                    {error && <div className="error-message text-red-600 bg-red-100 p-2 rounded mt-2">{error}</div>}
+                    
+                    <AtomButton type="submit" className="button" disabled={isLoading}>
+                        {isLoading ? 'Iniciando...' : 'Iniciar Sesion'}
+                    </AtomButton>
                     <div className="links-container">
                         <AtomLink to="/registro">Registrarse</AtomLink>
                         <AtomLink to="/olvido_contraseña">Olvidé mi contraseña</AtomLink>
