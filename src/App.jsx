@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { getCurrentUser, login as authLogin, logout as authLogout } from '../src/services/authServices';
+import { getCurrentUser, login as authLogin, logout as authLogout } from '../src/services/authService';
 import './App.css'; 
 
 // Importa tus Componentes de Página
