@@ -6,10 +6,10 @@ import Reserva_Form from '../organisms/Reserva_Form'
 import Footer from '../organisms/Footer'
 
 
-export default function Home() {
+export default function Home({ auth }) {
   return (
     <>
-    <First/>
+    <First auth={auth} />
     <Second/>
     <Promo_mes/>
     <Reserva_Form/>

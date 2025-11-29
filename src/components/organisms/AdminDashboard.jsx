@@ -907,7 +907,7 @@ export default function AdminDashboard({ auth }) {
   };
 
   return (
-    <div className="admin-dashboard-layout">
+    <div className="admin-dashboard">
       {/* Sidebar */}
       <div className="sidebar">
         <div className="sidebar-header">
@@ -938,7 +938,7 @@ export default function AdminDashboard({ auth }) {
 
       {/* Main Content */}
       <div className="main-content">
-        <header className="main-header">
+        <header className="dashboard-header">
           <h2>{menuItems.find(item => item.id === activeMenu)?.label}</h2>
           <div className="user-info">
             <FaUser />

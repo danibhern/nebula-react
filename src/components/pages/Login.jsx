@@ -16,28 +16,45 @@ export default function LoginPage({ auth }) {
     const handleLoginSubmit = async (username, password) => {
         try {
             // Llama a la función de login del estado global (App.jsx)
-            const userData = await auth.login(username, password); 
-            
-            // Redirección basada en rol
-            const role = userData.roles[0];
-            switch (role) {
-                case 'ROLE_ADMIN': 
-                    navigate('/admin', { replace: true });
-                    break;
-                case 'ROLE_EMPLOYEE': // Basado en tu App.jsx
-                    navigate('/emp1', { replace: true });
-                    break;
-                case 'ROLE_USER': 
-                default:
-                    navigate('/perfil', { replace: true }); 
+            const userData = await auth.login(username, password);
+
+            // Obtener roles de la respuesta o fallback a localStorage (por seguridad)
+            let roles = userData?.roles;
+            if (!roles || roles.length === 0) {
+                try {
+                    roles = JSON.parse(localStorage.getItem('userRoles')) || [];
+                } catch (e) {
+                    roles = [];
+                }
             }
+
+            // Normalizar: manejar casos donde el backend devuelva 'ADMIN' en vez de 'ROLE_ADMIN'
+            const hasAdmin = roles.some(r => /ROLE_ADMIN|ADMIN/i.test(r));
+            const hasEmployee = roles.some(r => /ROLE_EMPLOYEE|EMPLOYEE/i.test(r));
+
+            if (hasAdmin) {
+                console.log('LoginPage: detected roles ->', roles);
+                console.log('LoginPage: navigating to /admin (full reload)');
+                // Forzar navegación completa para evitar race-conditions con el estado global
+                setTimeout(() => { window.location.href = '/admin'; }, 0);
+                return;
+            }
+            if (hasEmployee) {
+                console.log('LoginPage: detected roles ->', roles);
+                console.log('LoginPage: navigating to /emp1 (full reload)');
+                setTimeout(() => { window.location.href = '/emp1'; }, 0);
+                return;
+            }
+
+            // Por defecto, ir al perfil (recarga completa)
+            setTimeout(() => { window.location.href = '/perfil'; }, 0);
 
         } catch (error) {
             // Propagamos el error al formulario para que muestre el mensaje
             if (error && error.status === 401) {
                  throw new Error("Credenciales inválidas. Inténtalo de nuevo.");
             }
-            throw error; 
+            throw error;
         }
     };
 

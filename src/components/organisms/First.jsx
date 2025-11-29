@@ -4,7 +4,7 @@ import AtomLink from '../atoms/AtomLink';
 import AtomLogo from '../atoms/AtomLogo';
 import AtomButton from '../atoms/AtomButton';
 
-export default function First() {
+export default function First({ auth }) {
   return (
     <section id="first">
       <nav>
@@ -20,9 +20,14 @@ export default function First() {
             <AtomLink to="/contacto">Contacto</AtomLink>
           </div>
         </div>
-        <AtomLink to="/inicio_sesion">
-          <AtomButton className="boton-login">Iniciar sesión</AtomButton>
-        </AtomLink>
+        {/* Mostrar botón de Login o Logout según estado de autenticación */}
+        {auth && auth.isAuthenticated ? (
+          <AtomButton className="boton-login" onClick={auth.logout}>Cerrar sesión</AtomButton>
+        ) : (
+          <AtomLink to="/inicio_sesion">
+            <AtomButton className="boton-login">Iniciar sesión</AtomButton>
+          </AtomLink>
+        )}
       </nav>
     </section>
   );

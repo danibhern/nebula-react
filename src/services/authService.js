@@ -1,4 +1,5 @@
 import api from './api';
+import axios from 'axios';
 
 // --- Claves para localStorage (Mantenemos la persistencia) ---
 const TOKEN_KEY = 'userToken'; 
@@ -12,24 +13,68 @@ export const login = async (username, password) => {
             password 
         });
 
-        const { accessToken, roles, username: currentUser } = response.data; 
+    // El backend puede devolver el token con distintos nombres (token, accessToken, jwt)
+    const tokenFromBackend = response.data?.accessToken || response.data?.token || response.data?.jwt || null;
+        const roles = response.data?.roles || response.data?.authorities || [];
+        const currentUser = response.data?.username || response.data?.name || null;
+
+    // DEBUG: registrar lo que devuelve el backend y lo que intentaremos guardar
+    console.log('authService.login response.data =', response.data);
+    console.log('authService will store:', { tokenFromBackend, roles, currentUser });
+
+        if (!tokenFromBackend) {
+            // Si no hay token, tratamos como error de autenticación
+            throw { status: 401, message: 'No se recibió token del backend' };
+        }
 
         // 1. Guardar el token (Requisito 3 - Integración JWT)
-        localStorage.setItem(TOKEN_KEY, accessToken); 
-        
+        localStorage.setItem(TOKEN_KEY, tokenFromBackend);
+
         // 2. Guardar los roles y el nombre de usuario (Requisito 6 - Restricción por Roles)
-        localStorage.setItem(ROLES_KEY, JSON.stringify(roles)); 
-        localStorage.setItem(USERNAME_KEY, currentUser); 
-        
-        return { 
-            isAuthenticated: true, 
+        localStorage.setItem(ROLES_KEY, JSON.stringify(roles));
+        localStorage.setItem(USERNAME_KEY, currentUser);
+
+        return {
+            isAuthenticated: true,
             roles: roles,
-            username: currentUser 
+            username: currentUser
         };
 
     } catch (error) {
-        // Propaga el error para el manejo en el frontend
-        throw error.response || error;
+        // Si no hay response, es un error de red/CORS (Network Error).
+        // Intentamos un reintento directo al backend (evita proxy/dev-server issues).
+        if (!error.response) {
+            const BACKEND_FULL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080/api';
+            try {
+                console.warn('authService: proxy failed, retrying direct request to', BACKEND_FULL);
+                const direct = await axios.post(`${BACKEND_FULL}/auth/signin`, { username, password }, { headers: { 'Content-Type': 'application/json' }, timeout: 10000 });
+
+                const tokenFromBackend = direct.data?.accessToken || direct.data?.token || direct.data?.jwt || null;
+                const roles = direct.data?.roles || direct.data?.authorities || [];
+                const currentUser = direct.data?.username || direct.data?.name || null;
+
+                if (!tokenFromBackend) {
+                    throw { status: 401, message: 'No se recibió token del backend (direct retry)' };
+                }
+
+                localStorage.setItem(TOKEN_KEY, tokenFromBackend);
+                localStorage.setItem(ROLES_KEY, JSON.stringify(roles));
+                localStorage.setItem(USERNAME_KEY, currentUser);
+
+                return {
+                    isAuthenticated: true,
+                    roles: roles,
+                    username: currentUser
+                };
+            } catch (directErr) {
+                console.error('authService direct retry failed:', directErr.message || directErr);
+                // Lanzamos un error amigable para la UI
+                throw { message: 'Error de conexión con el servidor. Asegúrate de que el backend esté corriendo en http://localhost:8080 y vuelve a intentarlo.' };
+            }
+        }
+
+        // Propaga el error del servidor (4xx/5xx) al frontend
+        throw error.response || { message: error.message || 'Error desconocido' };
     }
 };
 
