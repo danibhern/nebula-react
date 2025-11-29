@@ -174,6 +174,56 @@
   background: linear-gradient(130deg, #ed82da, #fc99cb);
 }
 
+/* Mapear clases usadas en AdminDashboard.jsx (menu-nav / menu-item) */
+.menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* ligeramente más separación para mayor legibilidad */
+  padding: 8px 0;
+  align-items: flex-start; /* keep items at the top */
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px; /* un poco más grande para mejor clic objetivo */
+  background: none;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color var(--transition-normal);
+  border-left: 4px solid transparent;
+  gap: 14px; /* más espacio entre icono y texto */
+  font-size: 1rem; /* ligeramente más grande */
+  font-weight: 600;
+  margin: 0; /* quitar márgenes laterales para evitar separación extra */
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  height: 50px; /* altura fija para evitar saltos */
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  /* removed horizontal translation to avoid layout shift when clicking */
+}
+
+.menu-item.active {
+  background: rgba(255, 255, 255, 0.18);
+  border-left-color: var(--white);
+  /* keep position stable when active to avoid changing spacing */
+}
+
+.menu-icon {
+  font-size: 1.125rem; /* iconos un poco más grandes */
+  width: 34px;
+  opacity: 0.95;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+/* icon scaling removed to avoid layout shifts on hover/active */
+
 .nav-item {
   display: flex;
   align-items: center;
@@ -265,6 +315,11 @@
   border-top: 1px solid rgba(255, 255, 255, 0.0);
   background: rgba(255, 255, 255, 0.08);
   background: linear-gradient(110deg, #f98ad0, #ff82c1)
+}
+
+/* Ensure footer sits at bottom when sidebar is column-flex */
+.sidebar-footer {
+  margin-top: auto;
 }
 
 .user-info {

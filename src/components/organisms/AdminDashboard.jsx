@@ -930,7 +930,7 @@ export default function AdminDashboard({ auth }) {
         </nav>
 
         <div className="sidebar-footer">
-          <button className="btn-logout" onClick={auth.logout}> {/* 🚨 CORRECCIÓN */}
+          <button className="logout-btn" onClick={auth.logout}> {/* 🚨 CORRECCIÓN */}
             <FaSignOutAlt /> Cerrar Sesión
           </button>
         </div>
