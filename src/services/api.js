@@ -1,78 +1,76 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+// Use proxy in development by default (relative path); allow overriding with REACT_APP_API_URL
+const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
 
 const api = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    timeout: 10000,
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  timeout: 20000,
 });
+// Do not send cookies/credentials by default from the browser
+api.defaults.withCredentials = false;
 
-api.interceptors.request.use(
-    (config) => {
-        // Lista de endpoints públicos que NO requieren token
-        const publicEndpoints = [
-            '/reservas',
-            '/reservas/create', 
-            '/reservas/public',
-            '/auth/register',
-            '/contactos',
-            '/resenas'
-        ];
-        
-        // Verificar si la URL actual coincide con algún endpoint público
-        const isPublicEndpoint = publicEndpoints.some(endpoint => 
-            config.url?.includes(endpoint)
-        );
+// Public endpoints that should NOT include Authorization header
+// Add auth endpoints so we don't attach an existing (possibly invalid) token
+// to signin/signup requests which can confuse the backend auth filters.
+const PUBLIC_PATHS = ['/productos', '/productos/', '/categorias', '/categorias/', '/auth', '/auth/', '/auth/signin', '/auth/signup'];
 
-        console.log(`API Request -> ${config.method?.toUpperCase() || 'GET'} ${config.url}`);
-        console.log(`🔐 Endpoint público: ${isPublicEndpoint ? 'SÍ' : 'NO'}`);
-
-        // Si es un endpoint público, NO agregar token
-        if (isPublicEndpoint) {
-            console.log('✅ Solicitud sin token - Endpoint público');
-            return config;
-        }
-
-        // Para endpoints protegidos, buscar y agregar token
-        const token = localStorage.getItem('userToken');
-
-        if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`;
-            console.log('🔑 Authorization header agregado');
-        } else {
-            console.warn('⚠️ No se encontró token de autenticación para endpoint protegido');
-        }
-        
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
+function normalizeRequestPath(config) {
+  let requestPath = config.url || '';
+  try {
+    if (/^https?:\/\//i.test(requestPath)) {
+      requestPath = new URL(requestPath).pathname;
+    } else {
+      // If url is relative and baseURL is present, strip baseURL
+      const base = config.baseURL || API_BASE_URL || '';
+      if (requestPath.startsWith(base)) {
+        requestPath = requestPath.slice(base.length) || '/';
+      }
     }
+  } catch (e) {
+    // fallback to given url
+    requestPath = config.url || requestPath;
+  }
+  if (!requestPath.startsWith('/')) requestPath = '/' + requestPath;
+  return requestPath;
+}
+// Simple request interceptor: attach token if present
+api.interceptors.request.use(
+  (config) => {
+    // Avoid sending Authorization for public catalog endpoints to prevent 401
+    const path = normalizeRequestPath(config);
+    const isPublic = PUBLIC_PATHS.some(p => path === p || path.startsWith(p));
+
+    if (isPublic) {
+      // ensure no Authorization header and no credentials are sent
+      if (config.headers) delete config.headers['Authorization'];
+      config.withCredentials = false;
+      return config;
+    }
+
+    const token = localStorage.getItem('userToken');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
 );
 
+// Simple response handling
 api.interceptors.response.use(
-    (response) => {
-        return response; 
-    },
-    (error) => {
-        if (!error.response) {
-            console.error('API Network or CORS error:', error.message || error);
-            return Promise.reject(error);
-        }
-
-        // Solo manejar errores 401/403 para endpoints protegidos
-        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-            console.log('Sesión expirada o no autorizada. Forzando logout...');
-            
-            localStorage.removeItem('userToken');
-            localStorage.removeItem('userRoles'); 
-            // window.location.href = '/login'; 
-        }
-        return Promise.reject(error);
+  (response) => response,
+  (error) => {
+    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+      // clear stored auth on unauthorized
+      localStorage.removeItem('userToken');
+      localStorage.removeItem('userRoles');
     }
+    return Promise.reject(error);
+  }
 );
 
 export default api;
