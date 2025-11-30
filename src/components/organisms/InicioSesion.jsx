@@ -39,8 +39,14 @@ export default function InicioSesion({ onLogin }) { // Recibe onLogin como prop
                 <img src="/img/nebula.png" alt="Logo Nebula Café" className="logo-ini" />
                 <form onSubmit={handleSubmit}>
                     <div className="row">
-                        <label htmlFor="nombre">Usuario</label>
-                        <input type="text" name="nombre" id="nombre" placeholder="Usuario" required />
+                        <label htmlFor="nombre">Correo</label>
+                        <input
+                            type="email"
+                            name="nombre"
+                            id="nombre"
+                            placeholder="Ingresa tu correo"
+                            required
+                        />
                     </div>
                     <div className="row">
                         <label htmlFor="pass">Contraseña</label>

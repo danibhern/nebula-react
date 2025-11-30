@@ -12,6 +12,8 @@ import {
   FaShieldAlt 
 } from 'react-icons/fa';
 import '../../styles/Registro.css';
+import api from '../../services/api';
+import { login as authLogin } from '../../services/authService';
 
 export default function Registro() {
     const navigate = useNavigate();
@@ -25,6 +27,8 @@ export default function Registro() {
 
     const [fieldErrors, setFieldErrors] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [serverError, setServerError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -61,9 +65,10 @@ export default function Registro() {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitted(true);
+        setServerError(null);
 
         const errors = {};
         Object.keys(formData).forEach((key) => {
@@ -74,22 +79,43 @@ export default function Registro() {
         const hasErrors = Object.values(errors).some((err) => err !== '');
         if (hasErrors) return;
 
-        const userData = {
-            username: formData.email.split('@')[0],
-            name: formData.nombre,
+    // Construir los datos mínimos que espera el backend
+    // Usar el email completo como username para evitar colisiones y permitir login por correo
+    const username = formData.email;
+        const payload = {
+            username: username,
             email: formData.email,
-            telefono: formData.telefono,
-            role: 'cliente',
-            fechaRegistro: new Date().toISOString()
+            password: formData.clave
         };
 
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        users.push(userData);
-        localStorage.setItem('users', JSON.stringify(users));
-        localStorage.setItem('user', JSON.stringify(userData));
+        setIsLoading(true);
+        try {
+            // Llamada al backend para crear el usuario en la BD
+            const resp = await api.post('/auth/signup', payload);
 
-        alert('¡Registro exitoso! ✅ Bienvenido a Nebula Café');
-        navigate('/perfil');
+            // Si backend respondió OK, intentamos login automático
+            try {
+                await authLogin(username, formData.clave);
+                // Redirigir al perfil ya autenticado
+                navigate('/perfil');
+                return;
+            } catch (loginErr) {
+                // Si el login automático falla, llevar al usuario al login con mensaje
+                console.warn('Auto-login tras signup falló:', loginErr);
+                alert(resp.data?.message || 'Registro exitoso. Por favor inicia sesión.');
+                navigate('/inicio_sesion');
+                return;
+            }
+
+        } catch (err) {
+            console.error('Registro error:', err);
+            // Intentar extraer mensaje del backend
+            const msg = err?.response?.data?.message || err?.message || 'Error al registrarse';
+            setServerError(msg);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const errorMessages = Object.values(fieldErrors).filter((e) => e);
@@ -126,6 +152,11 @@ export default function Registro() {
                         </div>
 
                         <form onSubmit={handleSubmit} className="registro-form-rosa">
+                            {serverError && (
+                                <div className="server-error-rosa" role="alert">
+                                    {serverError}
+                                </div>
+                            )}
                             <div className="form-group-rosa">
                                 <div className="input-container-rosa">
                                     <input
@@ -201,8 +232,8 @@ export default function Registro() {
                                 {fieldErrors.confirmarClave && <span className="error-message-rosa">{fieldErrors.confirmarClave}</span>}
                             </div>
 
-                            <button type="submit" className="btn-registro-rosa">
-                                Crear Mi Cuenta
+                            <button type="submit" className="btn-registro-rosa" disabled={isLoading}>
+                                {isLoading ? 'Registrando...' : 'Crear Mi Cuenta'}
                                 <span className="btn-icon-rosa">✨</span>
                             </button>
 

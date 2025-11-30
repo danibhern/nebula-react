@@ -82,7 +82,15 @@ export default function Perfil() {
     useEffect(() => {
         const userData = localStorage.getItem('user');
         if (userData) {
-            setUsuario(JSON.parse(userData));
+            const parsed = JSON.parse(userData);
+            setUsuario(parsed);
+            // Inicializar datos de perfil visibles usando los datos reales del usuario
+            setDatosUsuario(prev => ({
+                ...prev,
+                nombre: parsed.username || parsed.name || prev.nombre,
+                email: parsed.email || prev.email,
+                telefono: parsed.telefono || prev.telefono
+            }));
         } else {
             navigate('/inicio_sesion');
         }
@@ -195,12 +203,19 @@ export default function Perfil() {
                     <div className="session-section">
                         <div className="user-info">
                             <div className="user-avatar">
-                                {usuario.name.charAt(0).toUpperCase()}
-                            </div>
-                            <div className="user-details">
-                                <h4>{usuario.name}</h4>
-                                <p>{usuario.role}</p>
-                            </div>
+                                    {(usuario?.email || usuario?.username || usuario?.name || '').charAt(0).toUpperCase()}
+                                </div>
+                                <div className="user-details">
+                                    <h4>{usuario?.email || usuario?.username || usuario?.name || 'Usuario'}</h4>
+                                    {usuario?.username && usuario.username !== usuario.email && (
+                                        <small className="muted">{usuario.username}</small>
+                                    )}
+                                    <p>{
+                                        usuario?.roles && usuario.roles.length > 0
+                                        ? (String(usuario.roles[0]).replace('ROLE_',''))
+                                        : (usuario?.role || 'Cliente')
+                                    }</p>
+                                </div>
                         </div>
                         <button 
                             className="logout-btn"

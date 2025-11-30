@@ -15,8 +15,10 @@ export const login = async (username, password) => {
 
     // El backend puede devolver el token con distintos nombres (token, accessToken, jwt)
     const tokenFromBackend = response.data?.accessToken || response.data?.token || response.data?.jwt || null;
-        const roles = response.data?.roles || response.data?.authorities || [];
-        const currentUser = response.data?.username || response.data?.name || null;
+    const roles = response.data?.roles || response.data?.authorities || [];
+    const currentUser = response.data?.username || response.data?.name || null;
+    const currentEmail = response.data?.email || null;
+    const currentId = response.data?.id || null;
 
     // DEBUG: registrar lo que devuelve el backend y lo que intentaremos guardar
     console.log('authService.login response.data =', response.data);
@@ -31,8 +33,11 @@ export const login = async (username, password) => {
         localStorage.setItem(TOKEN_KEY, tokenFromBackend);
 
         // 2. Guardar los roles y el nombre de usuario (Requisito 6 - Restricción por Roles)
-        localStorage.setItem(ROLES_KEY, JSON.stringify(roles));
-        localStorage.setItem(USERNAME_KEY, currentUser);
+    localStorage.setItem(ROLES_KEY, JSON.stringify(roles));
+    localStorage.setItem(USERNAME_KEY, currentUser);
+    // Guardar objeto user completo para que componentes (Perfil) puedan mostrar datos
+    const userObj = { id: currentId, username: currentUser, email: currentEmail, roles };
+    localStorage.setItem('user', JSON.stringify(userObj));
 
         return {
             isAuthenticated: true,
@@ -52,6 +57,8 @@ export const login = async (username, password) => {
                 const tokenFromBackend = direct.data?.accessToken || direct.data?.token || direct.data?.jwt || null;
                 const roles = direct.data?.roles || direct.data?.authorities || [];
                 const currentUser = direct.data?.username || direct.data?.name || null;
+                const currentEmail = direct.data?.email || null;
+                const currentId = direct.data?.id || null;
 
                 if (!tokenFromBackend) {
                     throw { status: 401, message: 'No se recibió token del backend (direct retry)' };
@@ -60,6 +67,8 @@ export const login = async (username, password) => {
                 localStorage.setItem(TOKEN_KEY, tokenFromBackend);
                 localStorage.setItem(ROLES_KEY, JSON.stringify(roles));
                 localStorage.setItem(USERNAME_KEY, currentUser);
+                const userObj = { id: currentId, username: currentUser, email: currentEmail, roles };
+                localStorage.setItem('user', JSON.stringify(userObj));
 
                 return {
                     isAuthenticated: true,
