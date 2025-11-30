@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-// Leer URL del backend desde variable de entorno para facilitar entornos
-// .env (REACT_APP_API_URL) debe contener por ejemplo: http://localhost:8080/api
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
 const api = axios.create({
@@ -9,48 +7,66 @@ const api = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    timeout: 10000, // 10s timeout to fail fast and reveal network issues
+    timeout: 10000,
 });
 
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('userToken'); 
+        // Lista de endpoints públicos que NO requieren token
+        const publicEndpoints = [
+            '/reservas',
+            '/reservas/create', 
+            '/reservas/public',
+            '/auth/register'
+        ];
+        
+        // Verificar si la URL actual coincide con algún endpoint público
+        const isPublicEndpoint = publicEndpoints.some(endpoint => 
+            config.url?.includes(endpoint)
+        );
 
-        // DEBUG: log request URL and method to help investigar "Network Error"
-        try {
-            console.log(`API Request -> ${config.method?.toUpperCase() || 'GET'} ${config.baseURL || ''}${config.url}`);
-        } catch (e) { /* ignore logging errors */ }
+        console.log(`API Request -> ${config.method?.toUpperCase() || 'GET'} ${config.url}`);
+        console.log(`🔐 Endpoint público: ${isPublicEndpoint ? 'SÍ' : 'NO'}`);
+
+        // Si es un endpoint público, NO agregar token
+        if (isPublicEndpoint) {
+            console.log('✅ Solicitud sin token - Endpoint público');
+            return config;
+        }
+
+        // Para endpoints protegidos, buscar y agregar token
+        const token = localStorage.getItem('userToken');
 
         if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`; 
+            config.headers['Authorization'] = `Bearer ${token}`;
+            console.log('🔑 Authorization header agregado');
+        } else {
+            console.warn('⚠️ No se encontró token de autenticación para endpoint protegido');
         }
+        
         return config;
     },
     (error) => {
         return Promise.reject(error);
     }
-)
+);
 
 api.interceptors.response.use(
     (response) => {
         return response; 
     },
     (error) => {
-        // Si no hay response significa que la petición no llegó al backend (Network / CORS)
         if (!error.response) {
             console.error('API Network or CORS error:', error.message || error);
             return Promise.reject(error);
         }
 
+        // Solo manejar errores 401/403 para endpoints protegidos
         if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-            
-            // Si el token expiró o no es válido, forzamos el cierre de sesión.
             console.log('Sesión expirada o no autorizada. Forzando logout...');
             
-            // Llama a la lógica de cierre de sesión (eliminar token, redirigir al login)
             localStorage.removeItem('userToken');
             localStorage.removeItem('userRoles'); 
-            // NOTA: Aquí deberías redirigir al usuario al formulario de login
             // window.location.href = '/login'; 
         }
         return Promise.reject(error);
