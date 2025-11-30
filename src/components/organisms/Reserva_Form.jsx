@@ -186,8 +186,33 @@ export default function Reserva_Form() {
 
       {/* Tu sección del blog permanece igual */}
       <section className="blog-nebula">
-        {/* ... mismo código del blog ... */}
+        <h2>
+          <i className="fab fa-instagram" aria-hidden="true"></i> Síguenos en{' '}
+          <a href="https://www.instagram.com/nebula-cafe" target="_blank" rel="noopener noreferrer" className="instagram-handle">
+            @nebula-cafe
+          </a>
+        </h2>
+        <div className="instagram-grid">
+          <a href="https://www.instagram.com/p/xxx1" target="_blank" rel="noopener noreferrer">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO05Pqzb_Xf_U6Mcx2vX-wRpNRrAwfvUTGug&s" alt="Nebula Cafe interior" />
+          </a>
+          <a href="https://www.instagram.com/p/xxx2" target="_blank" rel="noopener noreferrer">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQln2k7AzZua3qO5IdumU4J9a6AUCCwEwSItg&s" alt="Nebula Cafe clientes" />
+          </a>
+          <a href="https://www.instagram.com/p/xxx3" target="_blank" rel="noopener noreferrer">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-8JXSmxNW0XYMylsLxEL67vNc0wbjovBm8Q&s" alt="Nebula Cafe productos" />
+          </a>
+          <a href="https://www.instagram.com/p/xxx4" target="_blank" rel="noopener noreferrer">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJl4G18Lak8Plldc7voWIv24P2HhnZVFSZGg&s" alt="Nebula Cafe ambiente" />
+          </a>
+          <a href="https://www.instagram.com/p/xxx5" target="_blank" rel="noopener noreferrer">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnbWYr-6mpNxooSq_jiU1Gw-ZNDOJBYK1P_g&s" alt="Nebula Cafe eventos" />
+          </a>
+          <a href="https://www.instagram.com/p/xxx6" target="_blank" rel="noopener noreferrer">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw5GSwk-vinyGtyekbrZVsKZ1RNiLgXoOk5g&s" alt="Nebula Cafe equipo" />
+          </a>
+        </div>
       </section>
-    </section>
+      </section>
   );
 }
