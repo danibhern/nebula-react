@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import First from '../organisms/First';
 import Footer from '../organisms/Footer';
 import AtomButton from '../atoms/AtomButton';
+import { contactService } from '../../services/contactService';
 import "../../styles/Contacto.css";
 
 export default function Contacto() {
@@ -14,6 +15,8 @@ export default function Contacto() {
   });
 
   const [mensajeEnviado, setMensajeEnviado] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,25 +24,54 @@ export default function Contacto() {
       ...prevState,
       [name]: value
     }));
+    if (error) setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Datos del formulario:', formData);
-    
-    setMensajeEnviado(true);
-    
-    setFormData({
-      nombre: '',
-      email: '',
-      telefono: '',
-      asunto: '',
-      mensaje: ''
-    });
+    setLoading(true);
+    setError('');
 
-    setTimeout(() => {
-      setMensajeEnviado(false);
-    }, 5000);
+    try {
+      // Preparar datos para el backend
+      const contactoData = {
+        nombre: formData.nombre,
+        email: formData.email,
+        telefono: formData.telefono,
+        asunto: formData.asunto,
+        descripcion: formData.mensaje // Mapear "mensaje" a "descripcion"
+      };
+
+      console.log('Enviando contacto:', contactoData);
+
+      // Usar el servicio para crear el contacto
+      const response = await contactService.crearContacto(contactoData);
+      
+      console.log('Contacto creado:', response);
+      
+      // Éxito
+      setMensajeEnviado(true);
+      
+      // Resetear formulario
+      setFormData({
+        nombre: '',
+        email: '',
+        telefono: '',
+        asunto: '',
+        mensaje: ''
+      });
+
+      // Ocultar mensaje después de 5 segundos
+      setTimeout(() => {
+        setMensajeEnviado(false);
+      }, 5000);
+
+    } catch (error) {
+      console.error('Error al crear contacto:', error);
+      setError(error.message || 'Error al enviar el mensaje. Por favor, intenta nuevamente.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,7 +90,13 @@ export default function Contacto() {
             
             {mensajeEnviado && (
               <div className="mensaje-exito-rosa">
-                ¡Gracias por tu mensaje! Te contactaremos pronto.
+                ✅ ¡Gracias por tu mensaje! Te contactaremos pronto.
+              </div>
+            )}
+
+            {error && (
+              <div className="mensaje-error-rosa">
+                ❌ {error}
               </div>
             )}
 
@@ -73,6 +111,7 @@ export default function Contacto() {
                   onChange={handleChange}
                   className="input-contacto-rosa"
                   required
+                  disabled={loading}
                 />
               </div>
 
@@ -87,6 +126,7 @@ export default function Contacto() {
                     onChange={handleChange}
                     className="input-contacto-rosa"
                     required
+                    disabled={loading}
                   />
                 </div>
 
@@ -99,6 +139,7 @@ export default function Contacto() {
                     value={formData.telefono}
                     onChange={handleChange}
                     className="input-contacto-rosa"
+                    disabled={loading}
                   />
                 </div>
               </div>
@@ -112,6 +153,7 @@ export default function Contacto() {
                   onChange={handleChange}
                   className="select-contacto-rosa"
                   required
+                  disabled={loading}
                 >
                   <option value="">Selecciona un asunto</option>
                   <option value="consulta">Consulta General</option>
@@ -133,11 +175,17 @@ export default function Contacto() {
                   className="textarea-contacto-rosa"
                   placeholder="Escribe tu mensaje aquí..."
                   required
+                  disabled={loading}
+                  rows="6"
                 ></textarea>
               </div>
 
-              <AtomButton type="submit" className="btn-enviar-rosa">
-                📧 Enviar Mensaje
+              <AtomButton 
+                type="submit" 
+                className={`btn-enviar-rosa ${loading ? 'btn-loading' : ''}`}
+                disabled={loading}
+              >
+                {loading ? '⏳ Enviando...' : '📧 Enviar Mensaje'}
               </AtomButton>
             </form>
           </div>

@@ -17,7 +17,8 @@ api.interceptors.request.use(
             '/reservas',
             '/reservas/create', 
             '/reservas/public',
-            '/auth/register'
+            '/auth/register',
+            '/contactos'
         ];
         
         // Verificar si la URL actual coincide con algún endpoint público
