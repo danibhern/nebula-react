@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+// Prefer explicit env var for API URL; fall back to the backend on port 9080
+// so the dev frontend talks to the backend at http://localhost:9080/api by default.
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:9080/api';
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
