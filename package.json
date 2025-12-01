@@ -2,7 +2,7 @@
   "name": "nebula-react",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://3.236.95.240:9080",
+  "proxy": "http://44.211.235.244:9080",
 
   "dependencies": {
     "bootstrap": "^5.3.8",

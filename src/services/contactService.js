@@ -5,7 +5,7 @@ export const contactService = {
     crearContacto: async (contactoData) => {
         try {
             console.log('📤 Enviando datos a la API:', contactoData);
-            console.log('🔗 URL:', `${process.env.REACT_APP_API_URL || 'http://3.236.95.240:9080/api'}/contactos`);
+            console.log('🔗 URL:', `${process.env.REACT_APP_API_URL || 'http://44.211.235.244:9080/api'}/contactos`);
             
             const response = await api.post('/contactos', contactoData);  // ← CORREGIDO: agregado /api/
             
