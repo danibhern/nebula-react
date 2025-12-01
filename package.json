@@ -2,7 +2,7 @@
   "name": "nebula-react",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:9080",
   "dependencies": {
     "bootstrap": "^5.3.8",
     "lucide-react": "^0.554.0",
