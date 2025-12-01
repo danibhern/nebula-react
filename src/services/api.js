@@ -1,22 +1,27 @@
 import axios from 'axios';
 
-// Use proxy in development by default (relative path); allow overriding with REACT_APP_API_URL
-const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
+// URL directa a tu backend en la nube
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://3.236.95.240:9080/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 20000,
+  timeout: 30000, // Aumenté a 30 segundos
 });
-// Do not send cookies/credentials by default from the browser
+
+// El resto de tu código SE MANTIENE IGUAL
 api.defaults.withCredentials = false;
 
-// Public endpoints that should NOT include Authorization header
-// Add auth endpoints so we don't attach an existing (possibly invalid) token
-// to signin/signup requests which can confuse the backend auth filters.
-const PUBLIC_PATHS = ['/productos', '/productos/', '/categorias', '/categorias/', '/auth', '/auth/', '/auth/signin', '/auth/signup'];
+const PUBLIC_PATHS = [
+    '/productos', '/productos/', 
+    '/categorias', '/categorias/', 
+    '/auth', '/auth/', '/auth/signin', '/auth/signup',
+    '/contactos', '/contactos/',
+    '/reservas', '/reservas/',
+    '/resenas', '/resenas/'
+];
 
 function normalizeRequestPath(config) {
   let requestPath = config.url || '';

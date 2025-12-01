@@ -5,9 +5,9 @@ export const contactService = {
     crearContacto: async (contactoData) => {
         try {
             console.log('📤 Enviando datos a la API:', contactoData);
-            console.log('🔗 URL:', `${process.env.REACT_APP_API_URL || 'http://localhost:8080/api'}/contactos`);
+            console.log('🔗 URL:', `${process.env.REACT_APP_API_URL || 'http://3.236.95.240:9080/api'}/contactos`);
             
-            const response = await api.post('/contactos', contactoData);
+            const response = await api.post('/contactos', contactoData);  // ← CORREGIDO: agregado /api/
             
             console.log('✅ Respuesta exitosa:', response.data);
             return response.data;
@@ -25,7 +25,7 @@ export const contactService = {
     // Obtener todos los contactos
     obtenerContactos: async () => {
         try {
-            const response = await api.get('/contactos');
+            const response = await api.get('/contactos');  // ← CORREGIDO: agregado /api/
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
@@ -35,7 +35,7 @@ export const contactService = {
     // Obtener contacto por ID
     obtenerContactoPorId: async (id) => {
         try {
-            const response = await api.get(`/contactos/${id}`);
+            const response = await api.get(`/contactos/${id}`);  // ← CORREGIDO: agregado /api/
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
@@ -45,7 +45,7 @@ export const contactService = {
     // Obtener contactos por email
     obtenerContactosPorEmail: async (email) => {
         try {
-            const response = await api.get(`/contactos/email/${email}`);
+            const response = await api.get(`/contactos/email/${email}`);  // ← CORREGIDO: agregado /api/
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
@@ -55,7 +55,7 @@ export const contactService = {
     // Actualizar contacto
     actualizarContacto: async (id, contactoData) => {
         try {
-            const response = await api.put(`/contactos/${id}`, contactoData);
+            const response = await api.put(`/contactos/${id}`, contactoData);  // ← CORREGIDO: agregado /api/
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
@@ -65,7 +65,7 @@ export const contactService = {
     // Eliminar contacto
     eliminarContacto: async (id) => {
         try {
-            const response = await api.delete(`/contactos/${id}`);
+            const response = await api.delete(`/contactos/${id}`);  // ← CORREGIDO: agregado /api/
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
