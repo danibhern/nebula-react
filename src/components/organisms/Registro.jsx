@@ -13,7 +13,6 @@ import {
 } from 'react-icons/fa';
 import '../../styles/Registro.css';
 import api from '../../services/api';
-import { login as authLogin } from '../../services/authService';
 
 export default function Registro() {
     const navigate = useNavigate();
@@ -70,6 +69,7 @@ export default function Registro() {
         setIsSubmitted(true);
         setServerError(null);
 
+        // Validar todos los campos
         const errors = {};
         Object.keys(formData).forEach((key) => {
             errors[key] = validateField(key, formData[key]);
@@ -79,37 +79,27 @@ export default function Registro() {
         const hasErrors = Object.values(errors).some((err) => err !== '');
         if (hasErrors) return;
 
-    // Construir los datos mínimos que espera el backend
-    // Usar el email completo como username para evitar colisiones y permitir login por correo
-    const username = formData.email;
+        // Preparar payload
+        const username = formData.email;
         const payload = {
-            username: username,
+            username,
             email: formData.email,
             password: formData.clave
         };
 
         setIsLoading(true);
         try {
-            // Llamada al backend para crear el usuario en la BD
+            // Llamada al backend
             const resp = await api.post('/auth/signup', payload);
 
-            // Si backend respondió OK, intentamos login automático
-            try {
-                await authLogin(username, formData.clave);
-                // Redirigir al perfil ya autenticado
-                navigate('/perfil');
-                return;
-            } catch (loginErr) {
-                // Si el login automático falla, llevar al usuario al login con mensaje
-                console.warn('Auto-login tras signup falló:', loginErr);
-                alert(resp.data?.message || 'Registro exitoso. Por favor inicia sesión.');
-                navigate('/inicio_sesion');
-                return;
-            }
+            // Mostrar mensaje de éxito
+            alert(resp.data?.message || 'Registro exitoso. Por favor inicia sesión.');
+
+            // Redirigir al login
+            navigate('/inicio_sesion');
 
         } catch (err) {
             console.error('Registro error:', err);
-            // Intentar extraer mensaje del backend
             const msg = err?.response?.data?.message || err?.message || 'Error al registrarse';
             setServerError(msg);
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -119,7 +109,7 @@ export default function Registro() {
     };
 
     const errorMessages = Object.values(fieldErrors).filter((e) => e);
-    
+
     return (
         <>
             <section id="first">

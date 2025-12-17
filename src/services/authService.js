@@ -42,7 +42,7 @@ export const login = async (username, password) => {
 
     } catch (error) {
         if (!error.response) {
-            const BACKEND_FULL = process.env.REACT_APP_BACKEND_URL || 'http://44.211.235.244:9080';
+            const BACKEND_FULL = process.env.REACT_APP_BACKEND_URL || 'http://3.238.106.247:9080/';
             try {
                 console.warn('authService: proxy failed, retrying direct request to', BACKEND_FULL);
                 const direct = await axios.post(`${BACKEND_FULL}/auth/signin`, { username, password }, { headers: { 'Content-Type': 'application/json' }, timeout: 10000 });
@@ -70,7 +70,7 @@ export const login = async (username, password) => {
                 };
             } catch (directErr) {
                 console.error('authService direct retry failed:', directErr.message || directErr);
-                throw new Error('Error de conexión con el servidor. Asegúrate de que el backend esté corriendo en http://44.211.235.244:9080 y vuelve a intentarlo.');
+                throw new Error('Error de conexión con el servidor. Asegúrate de que el backend esté corriendo en http://3.238.106.247:9080/ y vuelve a intentarlo.');
             }
         }
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // URL directa a tu backend en la nube
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://44.211.235.244:9080/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://3.238.106.247:9080/api';
 
 
 const api = axios.create({
