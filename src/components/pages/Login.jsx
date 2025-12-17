@@ -10,39 +10,27 @@ export default function LoginPage({ auth }) {
     const navigate = useNavigate();
 
     const handleLoginSubmit = async (username, password) => {
-        try {
-            const userData = await auth.login(username, password);
+  try {
+    const userData = await auth.login(username, password);
 
-            // Mapear roles a strings
-            const roles = (userData.roles || []).map(r => r.name || r);
+    const roles = (userData.roles || []).map(r => r.name || r);
 
-            // Guardar en authState y localStorage
-            auth.setAuthState({
-                isAuthenticated: true,
-                username: userData.username,
-                roles,
-                loading: false
-            });
-            localStorage.setItem('userToken', userData.token);
-            localStorage.setItem('username', userData.username);
-            localStorage.setItem('userRoles', JSON.stringify(roles));
+    localStorage.setItem('userToken', userData.token);
+    localStorage.setItem('username', userData.username);
+    localStorage.setItem('userRoles', JSON.stringify(roles));
 
-            // Redirección según rol
-            if (roles.includes('ROLE_ADMIN')) {
-                navigate('/admin', { replace: true });
-            } else if (roles.includes('ROLE_MODERATOR') || roles.includes('ROLE_EMPLOYEE')) {
-                navigate('/emp1', { replace: true });
-            } else {
-                navigate('/perfil', { replace: true });
-            }
+    if (roles.includes('ROLE_ADMIN')) {
+      navigate('/admin', { replace: true });
+    } else if (roles.includes('ROLE_EMPLOYEE')) {
+      navigate('/emp1', { replace: true });
+    } else {
+      navigate('/perfil', { replace: true });
+    }
 
-        } catch (error) {
-            if (error?.status === 401) {
-                throw new Error("Credenciales inválidas. Inténtalo de nuevo.");
-            }
-            throw error;
-        }
-    };
+  } catch (error) {
+    alert('Credenciales inválidas');
+  }
+};
 
     return (
         <>
